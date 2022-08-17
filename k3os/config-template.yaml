@@ -1,0 +1,31 @@
+hostname: voodoo.buc.sh
+ssh_authorized_keys:
+- to_be_replaced
+k3os:
+  password: to_be_replaced
+  data_sources:
+  - cdrom
+  modules:
+  - kvm
+  - nvme
+  sysctl:
+    kernel.printk: "4 4 1 7"
+    kernel.kptr_restrict: "1"
+  labels:
+    hostname: voodoo 
+  k3s_args:
+  - server
+  - "--cluster-init"
+  - "--cluster-cidr=172.16.0.0/16"
+  - "--service-cidr=172.17.0.0/16"
+write_files:
+- path: /var/lib/connman/service-main.config
+  content: "see notwork.config" 
+
+- path: /usr/local/bin/update_manifests.sh
+  permissions: '0755'
+  content: "See update_manifest.sh"
+
+- path: /var/lib/rancher/k3s/server/manifests/sealed-secret-key.yaml
+  content: "see sealed-secret.yaml" 
+
