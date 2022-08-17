@@ -6,15 +6,15 @@ metadata:
 spec:
   repo: https://mojo26000.github.io/pihole-kubernetes
   chart: pihole
-  targetNamespace: pihole
+  targetNamespace: default
   valuesContent: |-
     image:
       tag: "2022.07"
     dnsHostPort:
-      enabled: false
+      enabled: true
     serviceDns:
       mixedService: true
-      type: NodePort
+      type: ClusterIP
       nodePort: 53
     serviceDhcp:
       enabled: false
@@ -34,4 +34,4 @@ spec:
       - address=/kvm.buc.sh/10.0.0.13
       - address=/voodoo.buc.sh/10.0.0.16
       customCnameEntries:
-      - cname=pihole.buc.sh,voodoo.buc.sh 
+      - cname=pihole.buc.sh,voodoo.buc.sh
