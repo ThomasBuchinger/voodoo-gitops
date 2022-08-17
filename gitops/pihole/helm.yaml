@@ -26,7 +26,7 @@ spec:
       - pihole.buc.sh
       - pihole.10.0.0.16.nip.io
     admin:
-      existingSecret: admin
+      existingSecret: pihole-admin
       passwordKey: password
     dnsmasq:
       customEntries:
