@@ -1,0 +1,28 @@
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wastebin
+spec:
+  rules:
+  - host: paste.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wastebin
+            port:
+              number: 80
+  - host: paste.10.0.0.16.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wastebin
+            port:
+              number: 80
