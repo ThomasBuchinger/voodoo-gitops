@@ -29,3 +29,6 @@ write_files:
 - path: /var/lib/rancher/k3s/server/manifests/sealed-secret-key.yaml
   content: "see sealed-secret.yaml" 
 
+- path: /etc/periodic/hourly/update_manifests
+  content: |
+    /usr/local/bin/update_manifests.sh main

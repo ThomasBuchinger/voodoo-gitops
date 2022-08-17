@@ -15,7 +15,6 @@ spec:
     serviceDns:
       mixedService: true
       type: ClusterIP
-      nodePort: 53
     serviceDhcp:
       enabled: false
     # serviceWeb: {}
