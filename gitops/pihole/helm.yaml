@@ -4,7 +4,7 @@ metadata:
   name: pihole
   namespace: kube-system
 spec:
-  repo: https://mojo26000.github.io/pihole-kubernetes
+  repo: https://mojo2600.github.io/pihole-kubernetes
   chart: pihole
   targetNamespace: default
   valuesContent: |-
