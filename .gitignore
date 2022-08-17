@@ -1,6 +1,5 @@
 password.txt
 id_rsa.pub
 sealed.key
-sealed.crt
 
 out/

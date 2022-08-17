@@ -33,4 +33,9 @@ http://10.0.0.11:8000/config.yaml
 * `k3os/network.config`: Network config
 * `k3os/update_manifests.sh` Download this repo and copy the content is gitops/ into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
 
+## Kubeseal
+
+```bash
+kubeseal --cert sealed.crt 
+```
 
