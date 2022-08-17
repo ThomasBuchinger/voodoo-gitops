@@ -9,7 +9,7 @@ spec:
   targetNamespace: default
   valuesContent: |-
     image:
-      tag: "2022.07"
+      tag: "latest"
     dnsHostPort:
       enabled: true
     serviceDns:
@@ -28,9 +28,13 @@ spec:
       existingSecret: pihole-admin
       passwordKey: password
     dnsmasq:
-      customEntries:
+      customDnsEntries:
       - address=/nas.buc.sh/10.0.0.19
       - address=/kvm.buc.sh/10.0.0.13
       - address=/voodoo.buc.sh/10.0.0.16
+      - address=/kube.buc.sh/10.0.0.20
+      - address=/prod.buc.sh/10.0.0.30
+      - address=/bastion.buc.sh/10.0.0.19
       customCnameEntries:
       - cname=pihole.buc.sh,voodoo.buc.sh
+      - cname=wireguard.buc.sh,voodoo.buc.sh
