@@ -1,0 +1,57 @@
+# Declaring the user list
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: external-access
+  namespace: kube-system
+spec:
+  basicAuth:
+    secret: cloudflare-access
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nas
+spec:
+  type: ExternalName
+  externalName: nas.10.0.0.19.nip.io
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kvm
+spec:
+  type: ExternalName
+  externalName: kvm.10.0.0.13.nip.io
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: external-access
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: external-access@kubernetescrd
+spec:
+  rules:
+  - host: nas-external.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nas
+            port:
+              number: 8080
+  - host: kvm-external.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kvm
+            port:
+              number: 9090

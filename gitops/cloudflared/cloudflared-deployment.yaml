@@ -18,7 +18,7 @@ spec:
       - name: cloudflared
         image: cloudflare/cloudflared:latest
         env:
-          - name: CF_TOKEN
+          - name: TUNNEL_TOKEN
             valueFrom:
               secretKeyRef:
                 name: cloudflared
@@ -27,5 +27,3 @@ spec:
           - tunnel
           - --no-autoupdate
           - run
-          - --token
-          - "${CF_TOKEN}"
