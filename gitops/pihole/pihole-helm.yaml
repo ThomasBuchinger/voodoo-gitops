@@ -37,4 +37,5 @@ spec:
       - address=/bastion.buc.sh/10.0.0.19
       customCnameEntries:
       - cname=pihole.buc.sh,voodoo.buc.sh
+      - cname=paste.buc.sh,voodoo.buc.sh
       - cname=wireguard.buc.sh,voodoo.buc.sh

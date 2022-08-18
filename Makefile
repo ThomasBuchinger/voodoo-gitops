@@ -1,8 +1,10 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
 
-.PHONY: config.yaml check-files generate-secrets
-config.yaml: check-files generate_secret
+.PHONY: build config.yaml check-files generate_sealedsecret kubeseal
+build: config.yaml kubeseal
+
+config.yaml: check-files generate_sealedsecret
 	cp -f k3os/config-template.yaml $(OUTPUT_DIR)/config.yaml
 	yq eval $(YQ_ARGS) '.ssh_authorized_keys[0] = load_str("id_rsa.pub")'                       $(OUTPUT_DIR)/config.yaml
 	yq eval $(YQ_ARGS) '.k3os.password = load_str("password.txt")'                              $(OUTPUT_DIR)/config.yaml
@@ -19,8 +21,11 @@ check-files:
 	test -f sealed.crt
 	test -f sealed.key
 
-generate_secret:
+generate_sealedsecret:
 	cp k3os/sealed_secrets-template.yaml $(OUTPUT_DIR)/sealed_secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.key" = load_str("sealed.key")'  $(OUTPUT_DIR)/sealed_secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.crt" = load_str("sealed.crt")'  $(OUTPUT_DIR)/sealed_secret.yaml
 
+kubeseal:
+	@which kubeseal
+	kubeseal --cert sealed.crt -o yaml -f secrets/pihole-admin.yaml > gitops/pihole/pihole-admin.yaml

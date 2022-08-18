@@ -1,5 +1,8 @@
 password.txt
 id_rsa.pub
 sealed.key
+secrets/
+!secrets/.gitkeep
 
 out/
+

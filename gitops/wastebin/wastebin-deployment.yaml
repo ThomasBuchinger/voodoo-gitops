@@ -27,7 +27,7 @@ metadata:
   name: wastebin
 spec:
   selector:
-    app.kubernetes.io/name: MyApp
+    app.kubernetes.io/name: wastebin
   ports:
     - protocol: TCP
       port: 80
