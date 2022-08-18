@@ -21,7 +21,7 @@ spec:
           - name: CF_TOKEN
             valueFrom:
               secretKeyRef:
-                name: cloudflared-token
+                name: cloudflared
                 key: token
         args:
           - tunnel
