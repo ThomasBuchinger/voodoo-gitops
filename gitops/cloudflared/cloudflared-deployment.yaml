@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared
+  labels:
+    app.kubernetes.io/name: cloudflared
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cloudflared
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cloudflared
+    spec:
+      containers:
+      - name: cloudflared
+        image: cloudflare/cloudflared:2022.8.2
+        env:
+          - name: CF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: cloudflared-token
+                key: token
+        args:
+          - tunnel
+          - --no-autoupdate
+          - run
+          - --token
+          - $CF_TOKEN
