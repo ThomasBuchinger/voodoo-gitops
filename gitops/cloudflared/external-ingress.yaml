@@ -15,17 +15,16 @@ metadata:
   name: nas
 spec:
   type: ClusterIP
-  ClusterIP: None
+  clusterIP: None
   ports:
   - name: web
     port: 8080
-    targetPort: 8080
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
   name: nas
-Subsets:
+subsets:
 - addresses:
   - ip: 10.0.0.19
   ports:
