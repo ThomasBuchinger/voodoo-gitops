@@ -9,93 +9,60 @@ spec:
     secret: cloudflare-access
 
 ---
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
   name: nas
 spec:
-  type: ClusterIP
-  clusterIP: None
+  type: ExternalName
   ports:
-  - name: web
-    port: 8080
+    - name: http
+      port: 8080
+      targetPort: 8080
+  externalName: 10.0.0.19
 ---
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: nas
-  labels:
-    kubernetes.io/service-name: nas
-addressType: IPv4
-ports:
-  - name: web
-    protocol: TCP
-    port: 8080
-endpoints:
-  - addresses:
-      - "10.0.0.16"
-    conditions:
-      ready: true
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kvm
 spec:
-  type: ClusterIP
-  ClusterIP: None
-  ports:
-  - name: admin
-    port: 9090
-    targetPort: 9090
----
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
-metadata:
-  name: kvm
-  labels:
-    kubernetes.io/service-name: kvm
-addressType: IPv4
-ports:
-  - name: admin
-    protocol: TCP
-    port: 9090
-endpoints:
-  - addresses:
-      - "10.0.0.13"
-    conditions:
-      ready: true
+  entryPoints:
+    - https
+  routes:
+    - match: Host(`nas-external.buc.sh`)
+      kind: Rule
+      priority: 1
+      services:
+        - name: nas
+          port: 8080
 
 
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: external-access
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: external-access@kubernetescrd
-spec:
-  rules:
-  - host: nas-external.buc.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nas
-            port:
-              number: 8080
-  - host: kvm-external.buc.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kvm
-            port:
-              number: 9090
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: external-access
+#   annotations:
+#     traefik.ingress.kubernetes.io/router.middlewares: external-access@kubernetescrd
+# spec:
+#   rules:
+#   - host: nas-external.buc.sh
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: nas
+#             port:
+#               number: 8080
+#   - host: kvm-external.buc.sh
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: kvm
+#             port:
+#               number: 9090
