@@ -28,4 +28,4 @@ spec:
           - --no-autoupdate
           - run
           - --token
-          - $CF_TOKEN
+          - "${CF_TOKEN}"
