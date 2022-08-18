@@ -1,7 +1,17 @@
+BRANCH=${1:-main}
 tmp=$(mktemp -d)
-cd $tmp
-curl -o voodoo-gitops.zip -L https://github.com/ThomasBuchinger/voodoo-gitops/archive/refs/heads/main.zip
-unzip voodoo-gitops.zip -d gitops
 
-#mkdir -p /var/lib/rancher/k3s/server/manifests/gitops/
-rsync -a --delete gitops /var/lib/rancher/k3s/server/manifests/
+
+echo "Download Archive..."
+cd $tmp
+status_code=$(curl --write-out '%{http_code}' -O -L https://github.com/ThomasBuchinger/voodoo-gitops/archive/refs/heads/${BRANCH}.zip)
+if [ "200" != "$status_code" ]; then
+  echo "Unable to download ZIP for '${BRANCH}'. HTTP Status: ${status_code}"
+  exit 1
+fi
+
+unzip "${BRANCH}.zip" > /dev/null
+
+echo "Copying Manifests..."
+mkdir -p /var/lib/rancher/k3s/server/manifests/gitops/
+rsync -avh --delete "voodoo-gitops-${BRANCH}/gitops" "/var/lib/rancher/k3s/server/manifests/"
