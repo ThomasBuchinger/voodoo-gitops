@@ -11,5 +11,4 @@ spec:
         allowExternalNameServices: true
       kubernetesIngress:
         allowExternalNameServices: true
-    experimental:
-      kubernetesGateway: true
+
