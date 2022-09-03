@@ -68,14 +68,42 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: okd-console-nodeport-service
+  name: okd-console
 spec:
   selector:
     app: console
-  type: NodePort # nodePort configuration
+  type: ClusterIP
   ports:
     - name: http
       port: 9000
       targetPort: 9000
-      nodePort: 30056
       protocol: TCP
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: okd-console
+spec:
+  rules:
+  - host: console.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: okd-console
+            port:
+              number: 9000
+  - host: console.10.0.0.16.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: okd-console
+            port:
+              number: 9000
