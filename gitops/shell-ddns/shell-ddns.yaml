@@ -11,14 +11,14 @@ spec:
         spec:
           containers:
           - name: shell-ddns-client
-            image: busybox:latest
+            image: alpine:latest
             imagePullPolicy: IfNotPresent
             envFrom:
             - configMapRef:
                 name: ddns-config
             - secretRef:
                 name: ddns-config-secrets
-            command: 
+            command:
             - /bin/bash
             - -c
             - "curl https://raw.githubusercontent.com/ThomasBuchinger/shell-ddns-client/main/ddns-client.sh | /bin/bash"
