@@ -1,25 +1,25 @@
-# Declaring the user list
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: external-access
-  namespace: kube-system
-spec:
-  basicAuth:
-    secret: cloudflare-access
+# # Declaring the user list
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: external-access
+#   namespace: kube-system
+# spec:
+#   basicAuth:
+#     secret: cloudflare-access
 
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: nas
-spec:
-  type: ExternalName
-  ports:
-    - name: http
-      port: 8080
-      targetPort: 8080
-  externalName: 10.0.0.19
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: nas
+# spec:
+#   type: ExternalName
+#   ports:
+#     - name: http
+#       port: 8080
+#       targetPort: 8080
+#   externalName: 10.0.0.19
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: IngressRoute
@@ -37,32 +37,32 @@ spec:
 #           port: 8080
 
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: external-access
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: external-access@kubernetescrd
-spec:
-  rules:
-  - host: nas-external.buc.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nas
-            port:
-              number: 8080
-  - host: kvm-external.buc.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kvm
-            port:
-              number: 9090
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: external-access
+#   annotations:
+#     traefik.ingress.kubernetes.io/router.middlewares: external-access@kubernetescrd
+# spec:
+#   rules:
+#   - host: nas-external.buc.sh
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: nas
+#             port:
+#               number: 8080
+#   - host: kvm-external.buc.sh
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: kvm
+#             port:
+#               number: 9090
