@@ -20,15 +20,17 @@ k3os:
   - "--service-cidr=172.17.0.0/16"
 write_files:
 - path: /var/lib/connman/service-main.config
-  content: "see notwork.config" 
+  content: "see network.config"
 
 - path: /usr/local/bin/update_manifests.sh
   permissions: '0755'
   content: "See update_manifest.sh"
 
 - path: /var/lib/rancher/k3s/server/manifests/sealed-secret-key.yaml
-  content: "see sealed-secret.yaml" 
+  content: "see sealed-secret.yaml"
 
-- path: /etc/periodic/hourly/update_manifests
-  content: |
-    /usr/local/bin/update_manifests.sh main
+- path: /etc/periodic/hourly/cron_update_manifests.sh
+  content: see cron_update_manifests.sh
+
+- path: /etc/periodic/daily/cron_update_images.sh
+  content: see cron_update_images.sh

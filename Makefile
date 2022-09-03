@@ -1,5 +1,6 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
+SECRETS = gitops/pihole/pihole-admin-sealed.yaml gitops/cloudflared/cloudflared-token-sealed.yaml gitops/cloudflared/cloudflare-access-sealed.yaml gitops/shell-ddns/ddns-secrets-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
 build: config.yaml kubeseal
@@ -11,6 +12,8 @@ config.yaml: check-files generate_sealedsecret
 	yq eval $(YQ_ARGS) '.write_files[0].content = load_str("k3os/network.config")'              $(OUTPUT_DIR)/config.yaml
 	yq eval $(YQ_ARGS) '.write_files[1].content = load_str("k3os/update_manifests.sh")'         $(OUTPUT_DIR)/config.yaml
 	yq eval $(YQ_ARGS) '.write_files[2].content = load_str("$(OUTPUT_DIR)/sealed_secret.yaml")' $(OUTPUT_DIR)/config.yaml
+	yq eval $(YQ_ARGS) '.write_files[3].content = load_str("k3os/cron_update_manifests.sh")'    $(OUTPUT_DIR)/config.yaml
+	yq eval $(YQ_ARGS) '.write_files[3].content = load_str("k3os/cron_update_images.sh")'       $(OUTPUT_DIR)/config.yaml
 
 check-files:
 	@which yq
@@ -26,6 +29,10 @@ generate_sealedsecret:
 	yq eval $(YQ_ARGS) '.stringData."tls.key" = load_str("sealed.key")'  $(OUTPUT_DIR)/sealed_secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.crt" = load_str("sealed.crt")'  $(OUTPUT_DIR)/sealed_secret.yaml
 
-kubeseal:
-	@which kubeseal
-	kubeseal --cert sealed.crt -o yaml -f secrets/pihole-admin.yaml > gitops/pihole/pihole-admin.yaml
+kubeseal:  $(SECRETS)
+	@echo "Updated Secrets"
+
+$(SECRETS): gitops/%-sealed.yaml: secrets/%.yaml
+	@which kubeseal > /dev/null
+	@echo "Encrypt '$@' from file '$<'"
+	kubeseal --cert sealed.crt -o yaml -f $< > $@

@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ddns-update
+spec:
+  # Update hourly
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: shell-ddns-client
+            image: redhat/ubi9:latest
+            imagePullPolicy: IfNotPresent
+            envFrom:
+            - configMapRef:
+                name: ddns-config
+            - secretRef:
+                name: ddns-config-secrets
+            command:
+            - /bin/bash
+            - -c
+            - "curl https://raw.githubusercontent.com/ThomasBuchinger/shell-ddns-client/main/ddns-client.sh | /bin/bash"
+          restartPolicy: OnFailure
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ddns-config
+data:
+  DDNS_MODE: lazy-update
+  DDNS_HOSTNAMES: ng7a
+  DDNS_DOMAIN: buc.sh
+  DDNS_PROVIDER: cloudflare
+  DDNS_CF_AUTHTYPE: token
