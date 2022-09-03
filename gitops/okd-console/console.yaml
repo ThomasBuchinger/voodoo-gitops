@@ -87,7 +87,7 @@ metadata:
   name: okd-console
 spec:
   rules:
-  - host: console.buc.sh
+  - host: voodoo-console.buc.sh
     http:
       paths:
       - path: /
@@ -97,7 +97,7 @@ spec:
             name: okd-console
             port:
               number: 9000
-  - host: console.10.0.0.16.nip.io
+  - host: voodoo-console.10.0.0.16.nip.io
     http:
       paths:
       - path: /
