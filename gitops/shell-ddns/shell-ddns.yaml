@@ -30,7 +30,7 @@ kind: ConfigMap
 metadata:
   name: ddns-config
 data:
-  DDNS_MODE: check
+  DDNS_MODE: lazy-update
   DDNS_HOSTNAMES: lab
   DDNS_DOMAIN: buc.sh
   DDNS_CF_AUTHTYPE: token
