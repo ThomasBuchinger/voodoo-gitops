@@ -1,5 +1,6 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
+SECRETS = gitops/pihole/pihole-admin-sealed.yaml gitops/cloudflared/cloudflared-token-sealed.yaml gitops/cloudflared/cloudflare-access-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
 build: config.yaml kubeseal
@@ -26,6 +27,10 @@ generate_sealedsecret:
 	yq eval $(YQ_ARGS) '.stringData."tls.key" = load_str("sealed.key")'  $(OUTPUT_DIR)/sealed_secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.crt" = load_str("sealed.crt")'  $(OUTPUT_DIR)/sealed_secret.yaml
 
-kubeseal:
-	@which kubeseal
-	kubeseal --cert sealed.crt -o yaml -f secrets/pihole-admin.yaml > gitops/pihole/pihole-admin.yaml
+kubeseal:  $(SECRETS)
+	@echo "Updated Secrets"
+
+$(SECRETS): gitops/%-sealed.yaml: secrets/%.yaml
+	@which kubeseal > /dev/null
+	@echo "Encrypt '$@' from file '$<'"
+	kubeseal --cert sealed.crt -o yaml -f $< > $@
