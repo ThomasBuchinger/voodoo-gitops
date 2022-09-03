@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: shell-ddns-client
-            image: alpine:latest
+            image: debian:latest
             imagePullPolicy: IfNotPresent
             envFrom:
             - configMapRef:
