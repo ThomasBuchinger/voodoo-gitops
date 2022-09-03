@@ -20,7 +20,7 @@ k3os:
   - "--service-cidr=172.17.0.0/16"
 write_files:
 - path: /var/lib/connman/service-main.config
-  content: "see notwork.config"
+  content: "see network.config"
 
 - path: /usr/local/bin/update_manifests.sh
   permissions: '0755'

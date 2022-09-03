@@ -4,7 +4,7 @@ This repoitory sets up and configures the voodoo board. A SBC running various sm
 
 ## Installation
 
-K3os is installed via a cloudinit(-ish?) configuration file. [See k4os docs](https://github.com/rancher/k3os/blob/master/README.md#configuration). The full configuration file is generated via a Makefile.
+K3os is installed via a cloudinit(-ish?) configuration file. [See k3os docs](https://github.com/rancher/k3os/blob/master/README.md#configuration). The full configuration file is generated via a Makefile.
 
 To complete the Setup, boot the k3os-amd64.iso as Live-System (e.g. via PiKVM). Copy the generated `config.yaml` to the system and run `sudo k3os install`
 

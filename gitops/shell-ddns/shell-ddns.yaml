@@ -3,8 +3,8 @@ kind: CronJob
 metadata:
   name: ddns-update
 spec:
-  #schedule: "0 3 * * *"
-  schedule: "* * * * *"
+  # Update hourly
+  schedule: "0 * * * *"
   jobTemplate:
     spec:
       template:
@@ -31,7 +31,7 @@ metadata:
   name: ddns-config
 data:
   DDNS_MODE: lazy-update
-  DDNS_HOSTNAMES: lab
+  DDNS_HOSTNAMES: ng7a
   DDNS_DOMAIN: buc.sh
   DDNS_PROVIDER: cloudflare
   DDNS_CF_AUTHTYPE: token
