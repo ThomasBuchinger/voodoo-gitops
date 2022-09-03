@@ -1,6 +1,6 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
-SECRETS = gitops/pihole/pihole-admin-sealed.yaml gitops/cloudflared/cloudflared-token-sealed.yaml gitops/cloudflared/cloudflare-access-sealed.yaml gitops/shell-ddns/ddns-config-secrets.yaml
+SECRETS = gitops/pihole/pihole-admin-sealed.yaml gitops/cloudflared/cloudflared-token-sealed.yaml gitops/cloudflared/cloudflare-access-sealed.yaml gitops/shell-ddns/ddns-secrets-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
 build: config.yaml kubeseal
