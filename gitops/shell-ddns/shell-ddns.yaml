@@ -18,7 +18,10 @@ spec:
                 name: ddns-config
             - secretRef:
                 name: ddns-config-secrets
-            command: "curl https://raw.githubusercontent.com/ThomasBuchinger/shell-ddns-client/main/ddns-client.sh | /bin/bash"
+            command: 
+            - /bin/bash
+            - -c
+            - "curl https://raw.githubusercontent.com/ThomasBuchinger/shell-ddns-client/main/ddns-client.sh | /bin/bash"
           restartPolicy: OnFailure
 
 ---
