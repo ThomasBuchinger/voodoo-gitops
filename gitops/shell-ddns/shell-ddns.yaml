@@ -33,4 +33,5 @@ data:
   DDNS_MODE: lazy-update
   DDNS_HOSTNAMES: lab
   DDNS_DOMAIN: buc.sh
+  DDNS_PROVIDER: cloudflare
   DDNS_CF_AUTHTYPE: token
