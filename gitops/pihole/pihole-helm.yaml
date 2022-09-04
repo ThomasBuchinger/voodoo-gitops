@@ -39,5 +39,6 @@ spec:
       - cname=pihole.buc.sh,voodoo.buc.sh
       - cname=paste.buc.sh,voodoo.buc.sh
       - cname=s3.buc.sh,voodoo.buc.sh
+      - cname=vault.buc.sh,voodoo.buc.sh
       - cname=wireguard.buc.sh,voodoo.buc.sh
       - cname=voodoo-console.buc.sh,voodoo.buc.sh
