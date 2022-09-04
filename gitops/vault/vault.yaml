@@ -1,7 +1,7 @@
 apiVersion: "vault.banzaicloud.com/v1alpha1"
 kind: Vault
 metadata:
-  name: vault-dev
+  name: vault
 spec:
   size: 1
   image: docker.io/library/vault:latest

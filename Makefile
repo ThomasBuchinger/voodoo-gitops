@@ -4,7 +4,8 @@ SECRETS = gitops/pihole/pihole-admin-sealed.yaml \
 					gitops/cloudflared/cloudflared-token-sealed.yaml \
 					gitops/cloudflared/cloudflare-access-sealed.yaml \
 					gitops/shell-ddns/ddns-secrets-sealed.yaml \
-					gitops/vault/vault-s3-sealed.yaml
+					gitops/vault/vault-s3-sealed.yaml \
+					gitops/vault/vault-unseal-keys-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
 build: config.yaml kubeseal
