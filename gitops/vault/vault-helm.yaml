@@ -9,7 +9,8 @@ spec:
   targetNamespace: default
   valuesContent: |-
     injector:
-      metrics: true
+      metrics:
+        enabled: true
       image:
         tag: "latest"
       agentImage:
