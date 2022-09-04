@@ -54,7 +54,7 @@ spec:
           #   disable_ssl = "true"
           # }
           storage "file" {
-            path = /tmp/vault
+            path = "/tmp/vault"
           }
           # Example configuration for using auto-unseal, using Google Cloud KMS. The
           # GKMS keys must already exist, and the cluster must have a service account
