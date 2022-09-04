@@ -53,8 +53,13 @@ spec:
   # See https://www.vaultproject.io/docs/configuration/ for more information.
   config:
     storage:
-      file:
-        path: "/vault/file"
+      s3:
+        bucket: vault
+        endpoint: s3.buc.sh:9000
+        s3_force_path_style: true
+
+      # file:
+      #   path: "/vault/file"
     listener:
       tcp:
         address: "0.0.0.0:8200"
@@ -96,6 +101,16 @@ spec:
       value: debug
     - name: VAULT_STORAGE_FILE
       value: "/vault/file"
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: access_key
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: secret_key
 
   # Marks presence of Istio, which influences things like port namings
   istioEnabled: false
