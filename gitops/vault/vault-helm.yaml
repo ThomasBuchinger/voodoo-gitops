@@ -20,8 +20,10 @@ spec:
       ingress:
         enabled: true
         hosts:
-        - vault.buc.sh
-        - vault.10.0.0.16.nip.io
+        - name: vault.buc.sh
+          path: /
+        - name: vault.10.0.0.16.nip.io
+          path: /
       extraSecretEnvironmentVars:
       - envName: AWS_ACCESS_KEY_ID
         secretName: vault-s3
