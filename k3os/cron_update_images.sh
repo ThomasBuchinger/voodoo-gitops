@@ -4,3 +4,6 @@ k3s crictl pull cloudflare/cloudflared:latest
 k3s crictl pull redhat/ubi9:latest
 k3s crictl pull quay.io/openshift/origin-console:latest
 k3s crictl pull bitnami/node-exporter:latest
+k3s crictl pull ghcr.io/banzaicloud/bank-vaults:latest
+k3s crictl pull docker.io/library/vault:latest
+k3s crictl pull prom/statsd-exporter:latest
