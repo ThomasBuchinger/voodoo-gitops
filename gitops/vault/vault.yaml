@@ -55,8 +55,9 @@ spec:
     storage:
       s3:
         bucket: vault
-        endpoint: s3.buc.sh:9000
+        endpoint: 10.0.0.19:9000
         s3_force_path_style: true
+        disable_ssl: true
 
       # file:
       #   path: "/vault/file"
