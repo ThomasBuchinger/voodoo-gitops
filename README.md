@@ -16,7 +16,7 @@ make
 firewall-cmd --add-port 8000/tcp
 python -m http.server
 
-# On K3os run
+# On K3os run (login rancher/rancher)
 sudo k3os install
 
 http://10.0.0.11:8000/config.yaml
