@@ -126,6 +126,7 @@ spec:
         data:
           data:
             mysecret: "${env `SECRET_MYTEST`}"
+            mySecondSecret: "${ .Env.SECRET_MYTEST }"
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
