@@ -120,13 +120,6 @@ spec:
         description: General secrets.
         options:
           version: 2
-    startupSecrets:
-      - type: kv
-        path: secret/data/saas/test
-        data:
-          data:
-            mysecret: "${env `SECRET_MYTEST`}"
-            mySecondSecret: "${ .Env.SECRET_MYTEST }"
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
@@ -143,8 +136,6 @@ spec:
         secretKeyRef:
           name: vault-s3
           key: secret_key
-    - name: SECRET_MYTEST
-      value: test-value
 
   # Marks presence of Istio, which influences things like port namings
   istioEnabled: false
