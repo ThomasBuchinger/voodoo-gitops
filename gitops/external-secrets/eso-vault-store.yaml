@@ -8,19 +8,7 @@ spec:
       server: "http://vault:8200"
       path: "secret"
       version: "v2"
-      # # Instead of caBundle you can also specify a caProvider
-      # # this will retrieve the cert from a Secret or ConfigMap
-      # caProvider:
-      #   # Can be Secret or ConfigMap
-      #   type: "Secret"
-      #   # This is mandatory for ClusterSecretStore and not relevant for SecretStore
-      #   namespace: "my-cert-secret-namespace"
-      #   name: "my-cert-secret"
-      #   key: "cert-key"
       auth:
         kubernetes:
           mountPath: "kubernetes"
-          role: "default"
-          serviceAccountRef:
-            name: "default"
-            namespace: "default"
+          role: "reader"
