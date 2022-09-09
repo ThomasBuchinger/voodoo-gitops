@@ -95,7 +95,7 @@ spec:
           - name: default
             bound_service_account_names: ["vault-secrets-webhook", "vault", "default"]
             bound_service_account_namespaces: ["vault-infra", "default"]
-            policies: ["secret_reader"]
+            policies: ["secret_reader", "default"]
             ttl: 1h
       - type: approle
         roles:
