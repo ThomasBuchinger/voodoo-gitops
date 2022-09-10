@@ -77,15 +77,15 @@ spec:
   externalConfig:
     policies:
       - name: secret_editor
-        rules: path "secret/*" {
+        rules: path "secret/**" {
           capabilities = ["create", "read", "update", "delete", "list"]
           }
       - name: secret_writer
-        rules: path "secret/*" {
+        rules: path "secret/**" {
           capabilities = ["create", "update", "list"]
           }
       - name: secret_reader
-        rules: path "secret/*" {
+        rules: path "secret/**" {
           capabilities = ["create", "read", "list"]
           }
     auth:
