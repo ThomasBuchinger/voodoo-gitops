@@ -4,10 +4,11 @@ kind: Kustomization
 resources:
 - vault-ingress.yaml
 - vault-rbac.yaml
-- vault-content.yaml
+- vault-content-cloudflare-sealed.yaml
+- vault-content-github-sealed.yaml
 - vault-s3-sealed.yaml
 - vault-unseal-keys-sealed.yaml
 - vault.yaml
 
 patches:
-- patch-vault-content
+- patch-vault-content.yaml
