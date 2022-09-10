@@ -10,5 +10,5 @@ resources:
 - vault-unseal-keys-sealed.yaml
 - vault.yaml
 
-patches:
+patchesStrategicMerge:
 - patch-vault-content.yaml
