@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cloudflared.yaml
+  - external-secrets.yaml
+  - ingress.yaml
+  - node-exporter.yaml
+  - okd-console.yaml
+  - pihole.yaml
+  - sealed-secrets.yaml
+  - shell-ddns.yaml
+  - vault.yaml
+  - wastebin.yaml
