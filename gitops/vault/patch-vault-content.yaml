@@ -26,7 +26,13 @@ spec:
             cred_admin_password: "${env `cred_admin_password`}"
             cred_user_user: "${env `cred_user_user`}"
             cred_user_password: "${env `cred_user_password`}"
-
+      - type: kv
+        path: secret/data/cluster/minio/bucket-vault
+        data:
+          data:
+            access_key: "${env `minio_vault_secret_key`}"
+            secret_key: "${env `minio_vault_secret_key`}"
+      
   envsConfig:
     - name: cf_tunnel_token
       valueFrom:
@@ -51,26 +57,36 @@ spec:
     - name: cred_description
       valueFrom:
         secretKeyRef:
-          name: vault-content-static-cred
+          name: common-secrets
           key: cred_description
     - name: cred_admin_user
       valueFrom:
         secretKeyRef:
-          name: vault-content-static-cred
+          name: common-secrets
           key: cred_admin_user
     - name: cred_admin_password
       valueFrom:
         secretKeyRef:
-          name: vault-content-static-cred
+          name: common-secrets
           key: cred_admin_password
     - name: cred_user_user
       valueFrom:
         secretKeyRef:
-          name: vault-content-static-cred
+          name: common-secrets
           key: cred_user_user
     - name: cred_user_password
       valueFrom:
         secretKeyRef:
-          name: vault-content-static-cred
+          name: common-secrets
           key: cred_user_password
+    - name: minio_vault_access_key
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: access_key
+    - name: minio_vault_secret_key
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: secret_key
 

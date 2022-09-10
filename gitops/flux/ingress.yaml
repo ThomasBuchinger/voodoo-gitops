@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: ingress
+  name: static
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/ingress
+  path: ./gitops/static
   prune: true
   sourceRef:
     kind: GitRepository

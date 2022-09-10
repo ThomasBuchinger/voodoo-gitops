@@ -4,6 +4,9 @@ SECRETS = gitops/pihole/pihole-admin-sealed.yaml \
 					gitops/cloudflared/cloudflared-token-sealed.yaml \
 					gitops/cloudflared/cloudflare-access-sealed.yaml \
 					gitops/shell-ddns/ddns-secrets-sealed.yaml \
+					gitops/static/common-secrets-sealed.yaml \
+					gitops/vault/vault-content-cloudflare-sealed.yaml \
+					gitops/vault/vault-content-github-sealed.yaml \
 					gitops/vault/vault-s3-sealed.yaml \
 					gitops/vault/vault-unseal-keys-sealed.yaml
 

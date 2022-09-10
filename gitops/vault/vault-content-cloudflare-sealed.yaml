@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: vault-content-cloudflare
+  namespace: default
+spec:
+  encryptedData:
+    cf_apikey_dnsedit: AgBf3Fv/3Ffxi7QDXXKxlQODJjgGSImIfYVix8P4N8oNVwHr2DR5XUysrzBstDeu/xK9pfJGWP+AwaLv4SxT97QCpIQ3UVaU63vytVZNkOGrbbdm3XqvVC+ReOsAPu1xroVEEu/fFsRQpRD65apEJUytu2RtKSh6LpUyJYuNrtXBivVbjKc9qhvu64KU1h0DBcftpNlPHbzqihv6o5QcAqkr2k06rWPQR+puakn0QrC+qmBZ5nfepk+/1MX73QfyUr+Jb6/kfHygUnaf3qTNCQhwoda1D6i4d/F7tL+kVlgtYX4BqTMInYf5z11z3DwkKYq5yHiuoIQ5UwNzN5AnPIY8ZvwvjOCnr4b5xZS1Blj0iSlfzyL4aGo79wHLR8eh4Fb7C4f1sxkDbmFlYwfr9KfJoqRTaBZAo2co44NRdqySi2h0zAhfyExr5dgFFofrf9oEJMl71Lp1wEWSdgIRxUsSTuphFKNH5ZYQiXr333efVED2C4jW3UZZBG1A1OhHSvIMMWTuTrWXq+CPRcshbKHw+Efxu2kO6qa5K3QI+VrXJGmMcIcOSVh8xHukRdlfwqs/ibm98JSwybaoNDJj0FVHQupgqHPz53x/Htx0FTTa0qKqptHqZkKlMvaVQQEhzRsNwwZxGo7NWSRD+p89AFz1vH5wi0zka0sBTsLBvhJIPoz38Ii4s+7D//CdnficMrxoVzalYy8=
+    cf_tunnel_token: AgBZJNH8+t9SbacnotIWDGrcQ8Y+HgU5RHjsQDtEqTvs/GTfDy6jL8qXS/xoGzzowjmJy9e5jSQw+sSF1pfeXsLZJN2AS6jMe3mH24S1gqIHL9+D3LNGz/rr2CfI2mGsBLNlPtoSahMxhL8DgzPYHbF59zkrdSiVf5Rb+U/cGBQdlTy+zrFzvuLdTFqIOsuANJ+Q0sOop/06/REvy2ZreoqUF/U/DCQSru1zhlsf+Q6C2dzY3yVcTies0tDBFNI8C8kETKvaPsMn+LTAcm8qAZ7bVdgud6zGlawxaOwnEiUUY0nVzxUhdP/CrPhqtoQPXO6DJJi22NsBAabGoE42RakpskuBGxxkU16i8UqxzFx/kISCt2HGo4Mko05tb0pjWaMj5P1upCsJruacUA7KzBMSDI3BqG4F+NsW1eJn0WKlw8ylSMosTpYX4BS+cwSnaSqNBJlfCBzeKIJkT1lM8kYtCV03YGDg7W7LtNyhzoDTqoiPY+//ICGDu+BQudJQTMOVvroVL+GmeD6FfJgevHR4tWjxyt2REkvje4O69KltDlh+yI+Q53Cyol8wMvKhbLyKWGXM2trXVtUo1XOMUbuKoCmH4CZJ3MrODk5YA/L2vNQLfv74tQ0BqvYtOAeK+Plb4fpHY9A3cTjvLNWJu0o85rqiP2lUX5RKquG+Aizci8NdkDunSx0W/UzB089R029Z6DgLp5M=
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      labels:
+        vault.buc.sh/vault-path: secret/saas/cloudflare
+      name: vault-content-cloudflare
+      namespace: default
+
