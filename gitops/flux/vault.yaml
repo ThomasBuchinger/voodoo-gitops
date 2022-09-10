@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/vault/vault-banzaicloud-helm.yaml
+  path: ./gitops/vault/operator
   prune: true
   sourceRef:
     kind: GitRepository
