@@ -16,27 +16,34 @@ make
 firewall-cmd --add-port 8000/tcp
 python -m http.server
 
-# On K3os run (login rancher/rancher)
+# On K3os run (login rancher + ssh-key)
 sudo k3os install
 
 http://10.0.0.11:8000/config.yaml
 ```
 
-## Input files
+## K3os Config
 
-* `password.txt` Add the password for the 'rancher'-user here
-* `id_rsa.pub` Add an SSH key to login with the rancher user remotely
-* ``sealed.key`/`sealed.crt` Sealed Secrets private Key
-
-## Other files
-
+Input files for K3os config.yaml
+* `./password.txt` Add the password for the 'rancher'-user here
+* `./id_rsa.pub` Add an SSH key to login with the rancher user remotely
+* ``./sealed.key`/`./sealed.crt` Sealed Secrets private Key
 * `k3os/network.config`: Network config
 * `k3os/update_manifests.sh` Download this repo and copy the content is gitops/ into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
-* `secrets/` contains the plain text Kubernetes Secrets before sealing them with kubeseal
 
-## Kubeseal
+## Applications
+All applcations are handled by fluxcd
+
+### Secrets Management
+Secrets are handled via a combination of vault and SealedSecrets.
+
+* The plain secrets are stored in `secrets/<app-dir>/<secret>.yaml`. This path os obviously not pushed to git
+* The Makefile encrypts the secrets using `kubeseal` and stores them in `gitops/<app-dir>/<secret>-sealed.yaml`
+* (TODO): A component in the cluster stores those secrets into vault, along with any Cert-Manager certificates
+* The External-Secrets-Otperator fetches the Secrets from vault and creates the actual Secret
 
 ```bash
-kubeseal --cert sealed.crt 
+# to update Secrets run
+make kubeseal
 ```
 
