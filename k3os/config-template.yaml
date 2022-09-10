@@ -12,7 +12,7 @@ k3os:
     kernel.printk: "4 4 1 7"
     kernel.kptr_restrict: "1"
   labels:
-    hostname: voodoo 
+    hostname: voodoo
   k3s_args:
   - server
   - "--cluster-init"
@@ -22,15 +22,16 @@ write_files:
 - path: /var/lib/connman/service-main.config
   content: "see network.config"
 
-- path: /usr/local/bin/update_manifests.sh
-  permissions: '0755'
-  content: "See update_manifest.sh"
-
 - path: /var/lib/rancher/k3s/server/manifests/sealed-secret-key.yaml
   content: "see sealed-secret.yaml"
 
-- path: /etc/periodic/hourly/cron_update_manifests.sh
-  content: see cron_update_manifests.sh
+- path: /usr/local/bin/install_flux.sh
+  permissions: '0755'
+  content: "See update_flux.sh"
 
 - path: /etc/periodic/daily/cron_update_images.sh
+  permissions: '0755'
   content: see cron_update_images.sh
+
+run_cmd:
+- /usr/local/bin/install_flux.sh

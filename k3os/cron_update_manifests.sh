@@ -1,1 +1,0 @@
-/usr/local/bin/update_manifests.sh main
