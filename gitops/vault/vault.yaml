@@ -120,6 +120,14 @@ spec:
         description: General secrets.
         options:
           version: 2
+    startupSecrets:
+      - type: kv
+        path: secret/data/test
+        data:
+          data:
+            mySecret: hello
+            dollar: "${env `FOO`}"
+            go: "{{FOO}}"
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
@@ -136,6 +144,8 @@ spec:
         secretKeyRef:
           name: vault-s3
           key: secret_key
+    - name: FOO
+      value: bar
 
   # Marks presence of Istio, which influences things like port namings
   istioEnabled: false
