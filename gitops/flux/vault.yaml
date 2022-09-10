@@ -2,12 +2,29 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: vault-operator
+  namespace: flux-system
+spec:
+  interval: 15m0s
+  path: ./gitops/vault/vault-banzaicloud-helm.yaml
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: voodoo-gitops
+  targetNamespace: default
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: vault
   namespace: flux-system
 spec:
   interval: 15m0s
   path: ./gitops/vault
   prune: true
+  dependsOn:
+  - name: vault-operator
   sourceRef:
     kind: GitRepository
     name: voodoo-gitops
