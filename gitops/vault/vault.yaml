@@ -120,22 +120,13 @@ spec:
         description: General secrets.
         options:
           version: 2
-    startupSecrets:
-      - type: kv
-        path: secret/data/test
-        data:
-          data:
-            mySecret: hello
-            dollar: "${env `FOO`}"
-            go: "{{FOO}}"
+    startupSecrets: []
   
-  envsConfig:
-    - name: FOO
-      value: bar
+  envsConfig: []
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
-      value: debug
+      value: info
     - name: VAULT_STORAGE_FILE
       value: "/vault/file"
     - name: AWS_ACCESS_KEY_ID

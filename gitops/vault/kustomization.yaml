@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- vault-ingress.yaml
+- vault-rbac.yaml
+- vault-content.yaml
+- vault-s3-sealed.yaml
+- vault-unseal-keys-sealed.yaml
+- vault.yaml
+
+patches:
+- patch-vault-content
