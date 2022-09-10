@@ -39,54 +39,65 @@ spec:
         secretKeyRef:
           name: vault-content-cloudflare
           key: cf_tunnel_token
+          optional: true
     - name: cf_apikey_dnsedit
       valueFrom:
         secretKeyRef:
           name: vault-content-cloudflare
           key: cf_apikey_dnsedit
+          optional: true
     - name: github_username
       valueFrom:
         secretKeyRef:
           name: vault-content-github
           key: github_username
+          optional: true
     - name: github_apikey_image_updater
       valueFrom:
         secretKeyRef:
           name: vault-content-github
           key: github_apikey_image_updater
+          optional: true
     - name: cred_description
       valueFrom:
         secretKeyRef:
           name: common-secrets
           key: cred_description
+          optional: true
     - name: cred_admin_user
       valueFrom:
         secretKeyRef:
           name: common-secrets
           key: cred_admin_user
+          optional: true
     - name: cred_admin_password
       valueFrom:
         secretKeyRef:
           name: common-secrets
           key: cred_admin_password
+          optional: true
     - name: cred_user_user
       valueFrom:
         secretKeyRef:
           name: common-secrets
           key: cred_user_user
+          optional: true
     - name: cred_user_password
       valueFrom:
         secretKeyRef:
           name: common-secrets
           key: cred_user_password
+          optional: true
     - name: minio_vault_access_key
       valueFrom:
         secretKeyRef:
           name: vault-s3
           key: access_key
+          optional: true
     - name: minio_vault_secret_key
       valueFrom:
         secretKeyRef:
           name: vault-s3
           key: secret_key
+          optional: true
 
