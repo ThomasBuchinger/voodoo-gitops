@@ -1,0 +1,11 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: vault
+  namespace: kube-system
+spec:
+  repo: https://kubernetes-charts.banzaicloud.com
+  chart: vault-operator
+  targetNamespace: default
+  valuesContent: |-
+    # Nothing to configure

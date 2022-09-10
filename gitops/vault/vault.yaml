@@ -1,0 +1,141 @@
+apiVersion: "vault.banzaicloud.com/v1alpha1"
+kind: Vault
+metadata:
+  name: vault
+spec:
+  size: 1
+  image: docker.io/library/vault:latest
+  bankVaultsImage: ghcr.io/banzaicloud/bank-vaults:latest
+
+  # Vault Pods , Services and TLS Secret annotations
+  vaultAnnotations:
+    type/instance: "vault"
+
+  # Vault Configurer Pods and Services annotations
+  vaultConfigurerAnnotations:
+    type/instance: "vaultconfigurer"
+
+  # Vault Pods , Services and TLS Secret labels
+  vaultLabels:
+    example.com/log-format: "json"
+
+  # Vault Configurer Pods and Services labels
+  vaultConfigurerLabels:
+    example.com/log-format: "string"
+
+  # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
+  serviceAccount: vault
+
+  # Specify the Service's type where the Vault Service is exposed
+  # Please note that some Ingress controllers like https://github.com/kubernetes/ingress-gce
+  # forces you to expose your Service on a NodePort
+  serviceType: ClusterIP
+
+  # Use local disk to store Vault file data, see config section.
+  volumes:
+    - name: vault-file
+      emptyDir: {}
+
+  volumeMounts:
+    - name: vault-file
+      mountPath: /vault/file
+
+  # Describe where you would like to store the Vault unseal keys and root token.
+  unsealConfig:
+    options:
+      # The preFlightChecks flag enables unseal and root token storage tests
+      # This is true by default
+      preFlightChecks: true
+    kubernetes:
+      secretNamespace: default
+
+  # A YAML representation of a final vault config file.
+  # See https://www.vaultproject.io/docs/configuration/ for more information.
+  config:
+    storage:
+      s3:
+        bucket: vault
+        endpoint: 10.0.0.19:39010
+        s3_force_path_style: true
+        disable_ssl: true
+
+      # file:
+      #   path: "/vault/file"
+    listener:
+      tcp:
+        address: "0.0.0.0:8200"
+        # Uncommenting the following line and deleting tls_cert_file and tls_key_file disables TLS
+        tls_disable: true
+        # tls_cert_file: /vault/tls/server.crt
+        # tls_key_file: /vault/tls/server.key
+    telemetry:
+      prometheus_retention_time: "30s"
+      disable_hostname: true
+    ui: true
+
+  # See: https://github.com/banzaicloud/bank-vaults#example-external-vault-configuration for more details.
+  externalConfig:
+    policies:
+      - name: secret_editor
+        rules: path "secret/*" {
+          capabilities = ["create", "read", "update", "delete", "list"]
+          }
+      - name: secret_writer
+        rules: path "secret/*" {
+          capabilities = ["create", "update", "list"]
+          }
+      - name: secret_reader
+        rules: path "secret/*" {
+          capabilities = ["create", "read", "list"]
+          }
+    auth:
+      - type: kubernetes
+        roles:
+          # Configure kubernetes authentication for external secrets operator
+          - name: reader
+            bound_service_account_names: ["external-secrets"]
+            bound_service_account_namespaces: ["defaut"]
+            policies: ["secret_reader", "default"]
+            ttl: 1h
+      - type: approle
+        roles:
+          - name: reader
+            policies: secret_reader
+            secret_id_ttl: 10m
+            token_num_uses: 10
+            token_ttl: 20m
+            token_max_ttl: 30m
+            secret_id_num_uses: 40
+          - name: editor
+            policies: secret_editor
+            secret_id_ttl: 10m
+            token_num_uses: 10
+            token_ttl: 20m
+            token_max_ttl: 30m
+            secret_id_num_uses: 40
+
+    secrets:
+      - path: secret
+        type: kv
+        description: General secrets.
+        options:
+          version: 2
+
+  vaultEnvsConfig:
+    - name: VAULT_LOG_LEVEL
+      value: debug
+    - name: VAULT_STORAGE_FILE
+      value: "/vault/file"
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: access_key
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: vault-s3
+          key: secret_key
+
+  # Marks presence of Istio, which influences things like port namings
+  istioEnabled: false
