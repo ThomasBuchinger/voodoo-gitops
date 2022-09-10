@@ -12,5 +12,5 @@ spec:
         kubernetes:
           mountPath: "kubernetes"
           role: "reader"
-          serviceAccount:
+          serviceAccountRef:
             name: external-secrets
