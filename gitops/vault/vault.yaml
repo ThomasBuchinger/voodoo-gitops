@@ -132,7 +132,7 @@ spec:
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
-      value: info
+      value: debug
     - name: VAULT_STORAGE_FILE
       value: "/vault/file"
     - name: AWS_ACCESS_KEY_ID
