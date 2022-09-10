@@ -128,6 +128,10 @@ spec:
             mySecret: hello
             dollar: "${env `FOO`}"
             go: "{{FOO}}"
+  
+  sidecarEnvsConfig:
+    - name: FOO
+      value: bar
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
@@ -144,8 +148,6 @@ spec:
         secretKeyRef:
           name: vault-s3
           key: secret_key
-    - name: FOO
-      value: bar
 
   # Marks presence of Istio, which influences things like port namings
   istioEnabled: false
