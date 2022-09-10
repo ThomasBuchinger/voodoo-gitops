@@ -95,7 +95,13 @@ spec:
           - name: reader
             bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
             bound_service_account_namespaces: ["defaut"]
-            policies: ["secret_reader", "default"]
+            policies: ["secret_reader"]
+            ttl: 1h
+          # Configure kubernetes authentication for external secrets operator
+          - name: editor
+            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+            bound_service_account_namespaces: ["defaut"]
+            policies: ["secret_editor"]
             ttl: 1h
       - type: approle
         roles:
