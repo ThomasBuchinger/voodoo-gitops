@@ -8,7 +8,7 @@ spec:
   interval: 1m0s
   url: https://github.com/thomasbuchinger/voodoo-gitops
   ref:
-    branch: to_be_replaced
+    branch: flux
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
