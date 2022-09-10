@@ -129,7 +129,7 @@ spec:
             dollar: "${env `FOO`}"
             go: "{{FOO}}"
   
-  sidecarEnvsConfig:
+  envsConfig:
     - name: FOO
       value: bar
 
