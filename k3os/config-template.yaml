@@ -34,4 +34,4 @@ write_files:
   content: see cron_update_images.sh
 
 run_cmd:
-- /usr/local/bin/install_flux.sh flux
+- /usr/local/bin/install_flux.sh
