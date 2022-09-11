@@ -1,11 +1,11 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: vault
+  name: vault-secrets-webhook
   namespace: kube-system
 spec:
   repo: https://kubernetes-charts.banzaicloud.com
-  chart: vault-webhook
+  chart: vault-secrets-webhook
   targetNamespace: default
   valuesContent: |-
     # Nothing to configure
