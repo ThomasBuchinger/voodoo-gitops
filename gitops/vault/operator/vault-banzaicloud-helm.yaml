@@ -8,4 +8,7 @@ spec:
   chart: vault-operator
   targetNamespace: default
   valuesContent: |-
-    # Nothing to configure
+    replicaeCount: 1
+    debug: true
+    metrics:
+      enabled: true

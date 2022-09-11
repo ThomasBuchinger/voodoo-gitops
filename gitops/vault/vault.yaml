@@ -99,7 +99,7 @@ spec:
             ttl: 1h
           # Configure kubernetes authentication for external secrets operator
           - name: editor
-            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+            bound_service_account_names: ["vault-secrets-webhook"]
             bound_service_account_namespaces: ["default"]
             policies: ["secret_editor", "default"]
             ttl: 1h
