@@ -93,9 +93,15 @@ spec:
         roles:
           # Configure kubernetes authentication for external secrets operator
           - name: reader
-            bound_service_account_names: ["external-secrets"]
-            bound_service_account_namespaces: ["defaut"]
+            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+            bound_service_account_namespaces: ["default"]
             policies: ["secret_reader", "default"]
+            ttl: 1h
+          # Configure kubernetes authentication for external secrets operator
+          - name: editor
+            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+            bound_service_account_namespaces: ["default"]
+            policies: ["secret_editor", "default"]
             ttl: 1h
       - type: approle
         roles:
@@ -120,6 +126,9 @@ spec:
         description: General secrets.
         options:
           version: 2
+    startupSecrets: []
+  
+  envsConfig: []
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL

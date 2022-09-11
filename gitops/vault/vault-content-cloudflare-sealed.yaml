@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: vault-content-cloudflare
+  namespace: default
+spec:
+  encryptedData:
+    cf_apikey_dnsedit: AgApZ2mAi6y5oVZZPnynFZip82+bf2rIkHeknM8Z7xzWzHyUIA9hjd2JJoXve2QMBQCT++rcRagcnjR/wlVKYt0di0HF+6ylvua4eFbl31OXSaIjVkVAdoZQFq6kGTnmftZgWC4yFTlfAgJvN8Q81VFdMkd7dn/AK8qPNorumAUfM9JjUWWIXDDK4RzLRE+nhgYwcfGtaiNE6IRVdFxnK9eKKDlC9Eg7C/U/59DjR6owC5B6Wi94iqsKC96+syCEr04q1shhU/4Bt53uj0E6IQuM61JkwdliGZrlis8lDkokR+ZD+ptwIEsCN/xZo0jT9DH5c1qpEszlY/sXbK5pjqMQljkLL+XeG3+jEA8pbWrLpsF9gmMjVVeVdTuA1IvBAwXS8GU520KiuZpxbccQpn2VYRYbg1BHnf8LktUCHYX/mZrh46OFE8o6MX7D0/OtUV9er8GTLHrLs7Snu/AHWxm6G7vY+pDFV9m4NNSgFetw0+18lO4PVR8pZx1zxQDWEsQwQsMm4Swsd+aP+18u3KrFfw8AmG2fFPQGaKnhRk/m2L9VABWalzJ5I4tRnUZFE0aVbl7Q17qaTzcpqwCPN6vTunbxDm+X+yn2uMDIq/rNKtUKwVR6mLmXoz56pt1ZcptCFxqdabqtAhQwW0GqDPaSlcBWQemXGju080q0JfdlBB2g6VQm3kwfNtOh6zDQtcP7LrRXtsqQSQh2AW5QcQCUJ/uqx+C5+NyoxbYSyZV9Ue6JkeRHVk07
+    cf_tunnel_token: AgAfC3Ig52pD2QW7juFf/pIPlgHE/uwNWv+dhY06pET4WzHAQ0Uy/oM+S9GdTsn1ya4YgojdGuJXWNb5Qi7E0ZRPySAZNrlPr7PMDCwCJTzvXk1ILGkufuB5SFtX0IBrUAKrk9gUNK7hpsLFncxwCMZWWGTQ81CAR/MGwhxvlVfXe1cWbIsbQG1qJoQmHcAI52TqMJYxDrWiOCraHWtym8VvcQOZvE11DVCcd4gRFhv2VsnwqSIm1WbC0gJmorFqjUyXP0r3tXGxP8dU/7KfgDj3ZWSnlIaEBZ1YaqM/Pt5jMK51f1basCOppOhCJNjDXpyl5aOsGoRfBQxInXWN9qjMRjGPxpjHDcg2e5ZGSEVtLh9FDB8yVqFLnoYZ72Vqtfypj6UqVfvU4qa//BqrUOM/J1D1YoCOlcwGnM5yH/ou0ufnxWbEn4RKqpkVjS5sxFl1LErI2okTtFtTOQ12h7Iwl09uqS+bNGvK+uoLMjNdqrlHNJv8dxdsimQBfMBmhzFrM7TWDPWqZKFEi5K9no1QMXrprEDeUmbWdxp1Ni7P7+Ou/HHcTAHUzphb/wu+lZQt+7secZ1Z79mUj02cvnrpj6ZM1HgtJTg+AdumN+FDh60piu4a9YXIufAw36abkGUgjFYh5c/gBoJniZvmT/9hM9Vv3Ba7mYESK0tTd6yQ5zvm3PcZEd+8/o2Vaa0clz5Sr+G/WQM9+w0ZUewy3P/C1rh0eq9Zv/FJ2HbquISytsZadfx1AMFj/YH+9K5OuMtFMXrccbdwLOU8d/M7joDu3eflH2C2byiqeHl6S4E0CH9SX31Nk1oxSdg+3GBVfo/T3QPcJP2LjbY5h6W8bQaU7TOGpnCFNH//Y/wXuLizu4Ou6qMKmF7MPj21v/y4gYsyEKDAOT6doxXsQ+9LcqIsXj7xFFDmv7w8wLl4khYr49qCshXWWXCI
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      labels:
+        vault.buc.sh/vault-path: secret.saas.cloudflare
+      name: vault-content-cloudflare
+      namespace: default
+
