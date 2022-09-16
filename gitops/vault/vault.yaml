@@ -110,7 +110,7 @@ spec:
           - name: terraform
             bound_service_account_names: ["tf-runner"]
             bound_service_account_namespaces: ["flux-system"]
-            policies: ["root", "default"]
+            policies: ["admin", "default"]
             ttl: 1h
       - type: approle
         roles:
