@@ -1,0 +1,23 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha1
+kind: Terraform
+metadata:
+  name: vault-config
+  namespace: flux-system
+spec:
+  interval: 1m
+  approvePlan: "auto"
+  path: gitops/vault-config/terraform
+  sourceRef:
+    kind: GitRepository
+    name: voodoo-gitops
+    namespace: flux-system
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tf-vars
+data:
+  foo: bar
+
+
