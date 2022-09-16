@@ -27,9 +27,9 @@ http://10.0.0.11:8000/config.yaml
 Input files for K3os config.yaml
 * `./password.txt` Add the password for the 'rancher'-user here
 * `./id_rsa.pub` Add an SSH key to login with the rancher user remotely
-* ``./sealed.key`/`./sealed.crt` Sealed Secrets private Key
+* `./sealed.key` and `./sealed.crt` Sealed Secrets private Key
 * `k3os/network.config`: Network config
-* `k3os/update_manifests.sh` Download this repo and copy the content is gitops/ into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
+* `k3os/install_flux.sh` Download flus installation files from this repo and copy them into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
 
 ## Applications
 All applcations are handled by fluxcd
