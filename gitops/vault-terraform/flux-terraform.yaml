@@ -11,12 +11,20 @@ spec:
     kind: GitRepository
     name: voodoo-gitops
     namespace: flux-system
+  varsFrom:
+  - kind: Secret
+    name: vault-unseal-keys
+    varsKeys: vault-root
+  - kind: configMap
+    name: vault-config-tf-vars
+
+
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: tf-vars
+  name: vault-config-tf-vars
 data:
   foo: bar
 

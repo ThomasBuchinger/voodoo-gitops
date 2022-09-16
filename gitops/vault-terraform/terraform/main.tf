@@ -1,17 +1,10 @@
+resource "vault_auth_backend" "static" {
+  type        = "userpass"
+  path        = "static"
+  description = "Static Username/Passowrd Authentication for Vault UI"
 
-
-terraform {
-  required_providers {
-    local = {
-      source = "hashicorp/local"
-      version = "2.2.3"
-    }
+  tune {
+    max_lease_ttl      = "90000s"
+    listing_visibility = "unauth"
   }
-}
-
-provider "local" { }
-
-resource "local_file" "hello" {
-  content  = "hello world"
-  filename = "./hello.txt"
 }
