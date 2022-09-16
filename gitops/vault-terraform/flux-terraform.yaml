@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   approvePlan: "auto"
-  path: gitops/vault-config/terraform
+  path: gitops/vault-terraform/terraform
   sourceRef:
     kind: GitRepository
     name: voodoo-gitops
