@@ -4,7 +4,7 @@ variable "vault_address" {
   default     = "http://vault:8200"
   description = "Vault Root Token"
 }
-variable "token" {
+variable "vault_token" {
   type        = string
   sensitive   = true
   description = "Vault Root Token"
