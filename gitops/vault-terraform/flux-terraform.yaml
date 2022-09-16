@@ -21,7 +21,7 @@ spec:
   - name: vault_token
     value: "test"
   - name: vault_address
-    value: http://vault:8200
+    value: http://vault.default.svc:8200
   # varsFrom:
   # - kind: ConfigMap
   #   name: vault-config-tf-vars
