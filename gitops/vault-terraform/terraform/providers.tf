@@ -15,5 +15,11 @@ provider "local" { }
 provider "vault" {
   # configuration provided via secrets
   address = var.vault_address
-  token   = var.vault_token
+  auth_login {
+    method = "kubernetes"
+    parameters = {
+      "role" = "tf-runner"
+    }
+  }
+#   token   = var.vault_token
 }

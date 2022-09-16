@@ -103,6 +103,12 @@ spec:
             bound_service_account_namespaces: ["default"]
             policies: ["secret_editor", "default"]
             ttl: 1h
+          # Configure kubernetes authentication for flux terraform controller
+          - name: editor
+            bound_service_account_names: ["tf-runner"]
+            bound_service_account_namespaces: ["flux-system"]
+            policies: ["root", "default"]
+            ttl: 1h
       - type: approle
         roles:
           - name: reader

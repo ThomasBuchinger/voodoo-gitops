@@ -9,3 +9,9 @@ variable "vault_token" {
   sensitive   = true
   description = "Vault Root Token"
 }
+
+# variable "sa_token" {
+#   type        = string
+#   sensitive   = true
+#   description = "Vault Root Token"
+# }
