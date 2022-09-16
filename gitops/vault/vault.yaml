@@ -88,7 +88,7 @@ spec:
         rules: path "secret/*" {
           capabilities = ["create", "read", "update", "delete", "list"]
           }
-          path "auth/*"{
+          path "sys/auth/*"{
           capabilities = ["create", "read", "update", "delete", "list"]
           }
     auth:
