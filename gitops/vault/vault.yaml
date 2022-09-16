@@ -91,7 +91,7 @@ spec:
           path "auth/*"{
           capabilities = ["create", "read", "update", "delete", "list"]
           }
-          path "sys/auth/*"{
+          path "sys/*"{
           capabilities = ["create", "read", "update", "delete", "list"]
           }
     auth:
