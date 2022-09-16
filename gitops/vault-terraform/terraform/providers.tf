@@ -17,8 +17,9 @@ provider "vault" {
   address = var.vault_address
   auth_login {
     method = "kubernetes"
+    path   = "auth/kubernetes/login"
     parameters = {
-      "role" = "tf-runner"
+      "role" = "terraform"
     }
   }
 #   token   = var.vault_token
