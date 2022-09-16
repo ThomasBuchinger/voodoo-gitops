@@ -12,12 +12,12 @@ spec:
     name: voodoo-gitops
     namespace: flux-system
   vars:
-  - name: VAULT_TOKEN
+  - name: TF_VAR_vault_token
     valueFrom:
       secretKeyRef:
         name: vault-unseal-keys
         key: vault-root
-  - name: VAULT_ADDR
+  - name: TF_VAR_vault_address
     value: http://vault:8200
   varsFrom:
   - kind: configMap
