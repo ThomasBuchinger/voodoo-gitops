@@ -76,17 +76,20 @@ spec:
   # See: https://github.com/banzaicloud/bank-vaults#example-external-vault-configuration for more details.
   externalConfig:
     policies:
-      - name: secret_editor
-        rules: path "secret/*" {
-          capabilities = ["create", "read", "update", "delete", "list"]
-          }
       - name: secret_writer
         rules: path "secret/*" {
-          capabilities = ["create", "update", "list"]
+          capabilities = ["create", "update", "list", "delete"]
           }
       - name: secret_reader
         rules: path "secret/*" {
           capabilities = ["create", "read", "list"]
+          }
+      - name: admin
+        rules: path "secret/*" {
+          capabilities = ["create", "read", "update", "delete", "list"]
+          }
+          path "auth/*"{
+          capabilities = ["create", "read", "update", "delete", "list"]
           }
     auth:
       - type: kubernetes
@@ -101,7 +104,7 @@ spec:
           - name: editor
             bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
             bound_service_account_namespaces: ["default"]
-            policies: ["secret_editor", "default"]
+            policies: ["secret_reader", "secret_writer", "default"]
             ttl: 1h
           # Configure kubernetes authentication for flux terraform controller
           - name: terraform
