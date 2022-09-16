@@ -17,6 +17,8 @@ spec:
       secretKeyRef:
         name: vault-unseal-keys
         key: vault-root
+  - name: VAULT_ADDR
+    value: http://vault:8200
   varsFrom:
   - kind: configMap
     name: vault-config-tf-vars
