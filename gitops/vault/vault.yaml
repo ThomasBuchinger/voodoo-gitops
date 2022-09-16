@@ -94,6 +94,9 @@ spec:
           path "sys/*"{
           capabilities = ["create", "read", "update", "delete", "list"]
           }
+          path "v1/sys/*"{
+          capabilities = ["create", "read", "update", "delete", "list"]
+          }
     auth:
       - type: kubernetes
         roles:
