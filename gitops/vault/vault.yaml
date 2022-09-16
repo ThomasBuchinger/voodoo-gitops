@@ -92,10 +92,10 @@ spec:
           capabilities = ["create", "read", "update", "delete", "list"]
           }
           path "sys/*"{
-          capabilities = ["create", "read", "update", "delete", "list"]
+          capabilities = ["create", "read", "update", "delete", "list", "sudo"]
           }
           path "v1/sys/*"{
-          capabilities = ["create", "read", "update", "delete", "list"]
+          capabilities = ["create", "read", "update", "delete", "list", "sudo"]
           }
     auth:
       - type: kubernetes
