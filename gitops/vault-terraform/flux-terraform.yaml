@@ -23,7 +23,7 @@ spec:
   - name: vault_address
     value: http://vault:8200
   varsFrom:
-  - kind: configMap
+  - kind: ConfigMap
     name: vault-config-tf-vars
 
 
