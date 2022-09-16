@@ -9,6 +9,4 @@ terraform {
 
 provider "vault" {
   # configuration provided via secrets
-  address = var.vault-address
-  token   = var.vault-root
 }
