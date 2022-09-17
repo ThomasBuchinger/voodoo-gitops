@@ -12,13 +12,13 @@ resource "vault_auth_backend" "static" {
 
 resource "vault_generic_endpoint" "admin_user" {
   depends_on           = [vault_auth_backend.static]
-  path                 = "auth/static/users/${var.admin_user}"
+  path                 = "auth/static/users/${var.cred_admin_user}"
   ignore_absent_fields = true
 
   data_json = <<EOT
 {
   "policies": ["admin"],
-  "password": "${var.admin_passwd}"
+  "password": "${var.cred_admin_password}"
 }
 EOT
 }

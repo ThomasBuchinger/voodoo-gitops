@@ -16,18 +16,20 @@ spec:
   varsFrom:
   - kind: ConfigMap
     name: vault-config-tf-vars
-  vars:
-  - name: admin_user
-    value: admin
-    # valueFrom:
-    #   secretKeyRef:
-    #     name: common-secrets
-    #     key: cred_admin_user
-  - name: admin_passwd
-    valueFrom:
-      secretKeyRef:
-        name: common-secrets
-        key: cred_admin_password
+  - kind: Secret
+    name: common-secrets
+  # vars:
+  # - name: admin_user
+  #   value: admin
+  #   # valueFrom:
+  #   #   secretKeyRef:
+  #   #     name: common-secrets
+  #   #     key: cred_admin_user
+  # - name: admin_passwd
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: common-secrets
+  #       key: cred_admin_password
 
 
 

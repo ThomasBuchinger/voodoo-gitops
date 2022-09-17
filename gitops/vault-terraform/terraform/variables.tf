@@ -11,14 +11,14 @@ variable "vault_role" {
   description = "Vault Role to authenticate with"
 }
 
-variable "admin_user" {
+variable "cred_admin_user" {
   type        = string
   sensitive   = false
   default     = "admin"
   description = "username for the default admin user"
 }
 
-variable "admin_passwd" {
+variable "cred_admin_password" {
   type        = string
   sensitive   = true
   description = "password for the default admin"
