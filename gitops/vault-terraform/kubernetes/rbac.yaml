@@ -23,7 +23,7 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: vault-terraform-admin
+  name: authorize-tf-controller-in-namespace
 subjects:
 - kind: ServiceAccount
   name: tf-controller
