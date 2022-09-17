@@ -24,8 +24,12 @@ spec:
   provider:
     kubernetes:
       remoteNamespace: default
-      # server:
-      #   url: "http://kubernetes.default.svc"
+      server:
+        url: "http://kubernetes.default.svc"
+        caProvider:
+          type: ConfigMap
+          name: kube-root-ca.crt
+          key: ca.crt
       auth:
         serviceAccount:
           name: external-secrets
