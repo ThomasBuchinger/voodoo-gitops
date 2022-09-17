@@ -22,4 +22,6 @@ spec:
         kind: HelmRepository
         name: tf-controller
       version: ">=0.7.0"
+  values:
+    installCRDs: true
   interval: 15m
