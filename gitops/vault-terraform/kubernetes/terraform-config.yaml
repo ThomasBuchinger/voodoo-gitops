@@ -24,11 +24,10 @@ spec:
     #     name: common-secrets
     #     key: cred_admin_user
   - name: admin_passwd
-    value: changeme
-    # valueFrom:
-    #   secretKeyRef:
-    #     name: common-secrets
-    #     key: cred_admin_password
+    valueFrom:
+      secretKeyRef:
+        name: common-secrets
+        key: cred_admin_password
 
 
 
