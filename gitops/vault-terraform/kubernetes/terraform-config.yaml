@@ -18,19 +18,6 @@ spec:
     name: vault-config-tf-vars
   - kind: Secret
     name: common-secrets
-  # vars:
-  # - name: admin_user
-  #   value: admin
-  #   # valueFrom:
-  #   #   secretKeyRef:
-  #   #     name: common-secrets
-  #   #     key: cred_admin_user
-  # - name: admin_passwd
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: common-secrets
-  #       key: cred_admin_password
-
 
 
 ---
