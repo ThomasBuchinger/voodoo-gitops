@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: static
+  name: infra
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/static
+  path: ./gitops/infra
   prune: true
   sourceRef:
     kind: GitRepository
