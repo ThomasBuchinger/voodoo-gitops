@@ -114,8 +114,8 @@ spec:
             ttl: 1h
           # Configure kubernetes authentication for flux terraform controller
           - name: terraform
-            bound_service_account_names: ["tf-runner"]
-            bound_service_account_namespaces: ["flux-system"]
+            bound_service_account_names: ["vault-terraform-admin"]
+            bound_service_account_namespaces: ["default"]
             policies: ["admin", "default"]
             ttl: 1h
       - type: approle

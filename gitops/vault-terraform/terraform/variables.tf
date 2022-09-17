@@ -2,10 +2,11 @@ variable "vault_address" {
   type        = string
   sensitive   = false
   default     = "http://vault:8200"
-  description = "Vault Root Token"
+  description = "Vault URL"
 }
-variable "vault_token" {
+variable "vault_role" {
   type        = string
-  sensitive   = true
-  description = "Vault Root Token"
+  sensitive   = false
+  default     = "terraform"
+  description = "Vault Role to authenticate with"
 }

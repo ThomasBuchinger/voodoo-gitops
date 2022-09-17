@@ -19,9 +19,8 @@ provider "vault" {
     method = "kubernetes"
     path   = "auth/kubernetes/login"
     parameters = {
-      "role" = "terraform"
+      "role" = var.vault_role
       "jwt"  = file("/var/run/secrets/kubernetes.io/serviceaccount/token")
     }
   }
-#   token   = var.vault_token
 }

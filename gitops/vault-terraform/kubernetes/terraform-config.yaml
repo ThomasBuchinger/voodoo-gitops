@@ -1,0 +1,32 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha1
+kind: Terraform
+metadata:
+  name: vault-config
+  namespace: default
+spec:
+  alwaysCleanupRunnerPod: true
+  interval: 1m
+  approvePlan: "auto"
+  path: gitops/vault-terraform/terraform
+  sourceRef:
+    kind: GitRepository
+    name: voodoo-gitops
+    namespace: flux-system
+  serviceAccountName: vault-terraform-admin
+  varsFrom:
+  - kind: ConfigMap
+    name: vault-config-tf-vars
+
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-config-tf-vars
+  namespace: default
+data:
+  vault_address: http://vault.default.svc:8200
+  vault_role: terraform
+
+

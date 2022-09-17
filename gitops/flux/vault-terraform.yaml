@@ -6,9 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/vault-terraform
+  path: ./gitops/vault-terraform/kubernetes
   prune: true
   sourceRef:
     kind: GitRepository
     name: voodoo-gitops
-  targetNamespace: flux-system
+  targetNamespace: default
