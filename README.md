@@ -31,7 +31,41 @@ Input files for K3os config.yaml
 * `k3os/network.config`: Network config
 * `k3os/install_flux.sh` Download flus installation files from this repo and copy them into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
 
-## Applications
+## Architecture
+
+```mermaid
+flowchart TD
+
+k3os-->ci[Cloud-Init]
+
+ci-->os[OS Configuration]
+ci--configures-->ss_key{{SealedSecrets PrivateKey}}
+ci--copies-->cron[Image Updater Cron Job]
+ci--copies-->install_flux[install_flux.sh]
+
+repo_flux_install{{flux-install/}}
+install_flux--installs-->FluxCD
+repo_flux_install-->FluxCD
+
+repo_flux{{gitops/flux/}}-->FluxCD
+FluxCD-->pihole
+FluxCD-->cloudflared
+FluxCD-->eso[External Secrets]
+FluxCD-->node-exporter
+FluxCD-->console[OKD Console]
+FluxCD-->shell-ddns
+FluxCD-->static
+FluxCD-->wastebin
+FluxCD-->tfc[Flux Terraform Controller]
+FluxCD-->ss[SealedSecrets]
+
+FluxCD---->vaultop[Vault Operator]
+vaultop--deploys-->Vault
+ss----vaultcfg
+tfc-->vaultcfg{{Vault Config}}
+vaultcfg--terraforms-->Vault
+
+```
 All applcations are handled by fluxcd
 
 ### Secrets Management
@@ -39,7 +73,7 @@ Secrets are handled via a combination of vault and SealedSecrets.
 
 * The plain secrets are stored in `secrets/<app-dir>/<secret>.yaml`. This path os obviously not pushed to git
 * The Makefile encrypts the secrets using `kubeseal` and stores them in `gitops/<app-dir>/<secret>-sealed.yaml`
-* (TODO): A component in the cluster stores those secrets into vault, along with any Cert-Manager certificates
+* Banzaicloud Vault Operator stores the decrypted Secrets in Vault
 * The External-Secrets-Otperator fetches the Secrets from vault and creates the actual Secret
 
 ```bash
