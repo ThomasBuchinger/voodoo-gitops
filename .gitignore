@@ -6,3 +6,4 @@ secrets/
 
 out/
 
+gitops/*-terraform/terraform/.terraform*

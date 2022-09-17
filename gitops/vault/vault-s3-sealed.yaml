@@ -1,17 +1,17 @@
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  creationTimestamp: null
-  name: vault-s3
-  namespace: default
-spec:
-  encryptedData:
-    access_key: AgALdZIMgaUi4L/b/KLTzYh9bgi5ZcGnyvvVIgyGchUkIamBlQ54PQWZAXcPZ7kFDPmjzRB9hJtFxU6TRRkczCDnNLLlO2Q+/e/VrWos3fpCaX7sQvDWNr+Ug55AgqmOks93SiKLljbd5INz/tk5F/Jc2sqZonktQAuk1ZfAj8bS1YI/2AXd89zAiNcDKucWb7Nh+uesmAyO9S+6bjgm20nAvWECdOP0hSOxwC+dqUY1lZwONj7+mWjGJJha0b7aYBfMQmjy13nvApOkPPFiYX7e6QRIzKvlxrLDjqQlOwJCpIXZWKROwCGSIZqRbneF5DwcsXCIYlXB46nVwQmW6etfAWXjJ6LOBnMOGK3Aso0+KU0uYh90xEV1tqsr+hDtnVA6QUgV87rKMV/jpTGnFbdxSN4zT5YmM1sVFMkmR90dn/SF+FDc1gYWf/a8/Hhnw+PfXJlYrmDHTzn2js90vb+W0yYfH6vQl5EQkQ32zQwsQLP/m29zfJ7JAx5kmc3UPiUHx+88WM21FKw+TORlrS/jGaZ9bNWfT3yKgxBx1cIifQyRGLHYhvz/LApQ5Ngtu4L9YRVSfCfFhLeyO7pP1EvUyT2koI6D6XQpm6MRkuREC5zeIRCsgQcZ4L8+rUQhGTKlpioRc+NYu6LEWekFjkUikR2wbpbxypEC/7V9N1q4m/XmmQQSU16DJOHTbvHKB/baRlWJ+Q==
-    secret_key: AgCjmpFQmeqcRBzi4ZQSssI6XRUi0QA8kNyQZW3wXXa6vSUWutWIJkZXqhtF4qP2MVKTCjI3YEG6E3Ur+XMCd9UUhgj29aVeQo76DJC5ic/P+6EvJBnBk+lW+g0jiGvL25vAcBrzfr2csERUaoh4+AgOR0P9fMDhci/AyX2zIkxRGAT2zi+B8XrATt/jFdl8i1wxyguHNSF5MV82E7RT0IZ69wuZdAkYub3TBxLkggGjTgmmGqWT7ugDrszfF975KjfsZY8vQ1c4kpOB/waSYKzimDh98oJhbfpbqGI5e5gx1IMkFFXi0iEBCBrZURmNkeLGnY50R14wgAyWNUeP4lAxJCa2BJnlEMghQQR2GuAmcjTbh+n0LSwDMB8Z4nswXiVMgG1W/JZAQKWj4tyl93JqHoVQyJuQFwC1oVIvWgIp1IB42rmDXO6G/51pomF5Y8Rnj5kPYmzpw5zFOTwhUAsd4NwCFqJciIQedYuZe7yTQTkP6HNHK4QEkjA51oDKW7QBWuS4f07ARtXAI1UDhX3PFEBHJ8otgfOlZQOUQ11i8zE8mEUEceSJa10PN/wSbPpflmbH8Gpo19AdNPgt8NZYDqA4RNS0G0+dbOgjWXzxqs8yZsXF51T4SKgBV1U2nuul7T/KqVjJ9whIZhaZfH/c7pczeClqdwxLQ1YHCJMRK+2TdpQI2JTRNy0Qt8Hj6WfxPEFI8lSGXZV5AINNlZav1BDy2WD+iPoasvKEZ5K0ozA=
-  template:
-    data: null
-    metadata:
-      creationTimestamp: null
-      name: vault-s3
-      namespace: default
+# apiVersion: bitnami.com/v1alpha1
+# kind: SealedSecret
+# metadata:
+#   creationTimestamp: null
+#   name: vault-s3
+#   namespace: default
+# spec:
+#   encryptedData:
+#     access_key: AgALdZIMgaUi4L/b/KLTzYh9bgi5ZcGnyvvVIgyGchUkIamBlQ54PQWZAXcPZ7kFDPmjzRB9hJtFxU6TRRkczCDnNLLlO2Q+/e/VrWos3fpCaX7sQvDWNr+Ug55AgqmOks93SiKLljbd5INz/tk5F/Jc2sqZonktQAuk1ZfAj8bS1YI/2AXd89zAiNcDKucWb7Nh+uesmAyO9S+6bjgm20nAvWECdOP0hSOxwC+dqUY1lZwONj7+mWjGJJha0b7aYBfMQmjy13nvApOkPPFiYX7e6QRIzKvlxrLDjqQlOwJCpIXZWKROwCGSIZqRbneF5DwcsXCIYlXB46nVwQmW6etfAWXjJ6LOBnMOGK3Aso0+KU0uYh90xEV1tqsr+hDtnVA6QUgV87rKMV/jpTGnFbdxSN4zT5YmM1sVFMkmR90dn/SF+FDc1gYWf/a8/Hhnw+PfXJlYrmDHTzn2js90vb+W0yYfH6vQl5EQkQ32zQwsQLP/m29zfJ7JAx5kmc3UPiUHx+88WM21FKw+TORlrS/jGaZ9bNWfT3yKgxBx1cIifQyRGLHYhvz/LApQ5Ngtu4L9YRVSfCfFhLeyO7pP1EvUyT2koI6D6XQpm6MRkuREC5zeIRCsgQcZ4L8+rUQhGTKlpioRc+NYu6LEWekFjkUikR2wbpbxypEC/7V9N1q4m/XmmQQSU16DJOHTbvHKB/baRlWJ+Q==
+#     secret_key: AgCjmpFQmeqcRBzi4ZQSssI6XRUi0QA8kNyQZW3wXXa6vSUWutWIJkZXqhtF4qP2MVKTCjI3YEG6E3Ur+XMCd9UUhgj29aVeQo76DJC5ic/P+6EvJBnBk+lW+g0jiGvL25vAcBrzfr2csERUaoh4+AgOR0P9fMDhci/AyX2zIkxRGAT2zi+B8XrATt/jFdl8i1wxyguHNSF5MV82E7RT0IZ69wuZdAkYub3TBxLkggGjTgmmGqWT7ugDrszfF975KjfsZY8vQ1c4kpOB/waSYKzimDh98oJhbfpbqGI5e5gx1IMkFFXi0iEBCBrZURmNkeLGnY50R14wgAyWNUeP4lAxJCa2BJnlEMghQQR2GuAmcjTbh+n0LSwDMB8Z4nswXiVMgG1W/JZAQKWj4tyl93JqHoVQyJuQFwC1oVIvWgIp1IB42rmDXO6G/51pomF5Y8Rnj5kPYmzpw5zFOTwhUAsd4NwCFqJciIQedYuZe7yTQTkP6HNHK4QEkjA51oDKW7QBWuS4f07ARtXAI1UDhX3PFEBHJ8otgfOlZQOUQ11i8zE8mEUEceSJa10PN/wSbPpflmbH8Gpo19AdNPgt8NZYDqA4RNS0G0+dbOgjWXzxqs8yZsXF51T4SKgBV1U2nuul7T/KqVjJ9whIZhaZfH/c7pczeClqdwxLQ1YHCJMRK+2TdpQI2JTRNy0Qt8Hj6WfxPEFI8lSGXZV5AINNlZav1BDy2WD+iPoasvKEZ5K0ozA=
+#   template:
+#     data: null
+#     metadata:
+#       creationTimestamp: null
+#       name: vault-s3
+#       namespace: default
 
