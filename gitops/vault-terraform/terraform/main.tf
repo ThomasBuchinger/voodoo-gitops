@@ -8,3 +8,17 @@ resource "vault_auth_backend" "static" {
     listing_visibility = "unauth"
   }
 }
+
+
+resource "vault_generic_endpoint" "admin_user" {
+  depends_on           = [vault_auth_backend.static]
+  path                 = "auth/userpass/users/admin"
+  ignore_absent_fields = true
+
+  data_json = <<EOT
+{
+  "policies": ["admin"],
+  "password": "changeme"
+}
+EOT
+}
