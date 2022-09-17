@@ -9,11 +9,3 @@ spec:
   targetNamespace: default
   valuesContent: |-
     installCRDs: true
-    image:
-      tag: latest
-    cainjector:
-      image:
-        tag: latest
-    startupapicheck:
-      image:
-        tag: latest
