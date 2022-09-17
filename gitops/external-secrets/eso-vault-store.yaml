@@ -24,8 +24,8 @@ spec:
   provider:
     kubernetes:
       remoteNamespace: default
-      server:
-        url: "http://kubernetes.default.svc"
+      # server:
+      #   url: "http://kubernetes.default.svc"
       auth:
         serviceAccount:
           name: external-secrets
