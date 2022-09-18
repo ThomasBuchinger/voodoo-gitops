@@ -18,13 +18,16 @@ spec:
             github_username: "${env `github_username`}"
             github_apikey_image_updater: "${env `github_apikey_image_updater`}"
       - type: kv
-        path: secret/data/saas/vault-cr-test
+        path: secret/data/saas/vault-cr-test2
         data:
           secretKeyRef:
           - name: vault-content-github
             key: github_username
             optional: true
           - name: vault-content-github
+            key: github_apikey_image_updater
+            optional: true
+          - name: vault-content-does-notexist
             key: github_apikey_image_updater
             optional: true
       - type: kv
