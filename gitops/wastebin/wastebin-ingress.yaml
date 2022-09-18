@@ -5,7 +5,7 @@ kind: Ingress
 metadata:
   name: wastebin
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare-dns
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
 spec:
   tls:
   - hosts:
