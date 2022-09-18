@@ -22,6 +22,12 @@ spec:
   # Vault Configurer Pods and Services labels
   vaultConfigurerLabels:
     example.com/log-format: "string"
+  
+  watchedSecretsLabels:
+  - vault.buc.sh/update-action: restart
+
+  watchedSecretsAnnotations:
+  - certmanager.k8s.io/issuer-kind: ClusterIssuer
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault
