@@ -10,7 +10,6 @@ spec:
   tls:
   - hosts:
     - paste.buc.sh
-    - paste.10.0.0.16.nip.io
     secretName: cert-paste-buc-sh
   rules:
   - host: paste.buc.sh
