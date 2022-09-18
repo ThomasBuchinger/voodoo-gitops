@@ -85,6 +85,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: okd-console
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
+  tls:
+  - hosts:
+    - voodoo-console.buc.sh
+    secretName: cert-voodoo-console-buc-sh
 spec:
   rules:
   - host: voodoo-console.buc.sh
