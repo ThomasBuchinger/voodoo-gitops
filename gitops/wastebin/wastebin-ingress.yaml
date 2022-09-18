@@ -4,6 +4,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wastebin
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging-cloudflare-dns
+  tls:
+  - hosts:
+    - paste.buc.sh
+    - paste.10.0.0.16.nip.io
+    secret-name: cert-paste-buc-sh
 spec:
   rules:
   - host: paste.buc.sh
