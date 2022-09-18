@@ -11,7 +11,7 @@ spec:
   - hosts:
     - paste.buc.sh
     - paste.10.0.0.16.nip.io
-    secret-name: cert-paste-buc-sh
+    secretName: cert-paste-buc-sh
   rules:
   - host: paste.buc.sh
     http:
