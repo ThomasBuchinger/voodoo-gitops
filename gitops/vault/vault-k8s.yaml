@@ -4,7 +4,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vault
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
 spec:
+  tls:
+  - hosts:
+    - vault.buc.sh
+    secretName: cert-vault-buc-sh
   rules:
   - host: vault.buc.sh
     http:

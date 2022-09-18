@@ -77,6 +77,9 @@ Secrets are handled via a combination of vault and SealedSecrets.
 * The External-Secrets-Otperator fetches the Secrets from vault and creates the actual Secret
 
 ```bash
+# Rotate encryption key
+openssl req -new -x509 -nodes -days 30 -key sealed.key -out sealed2.crt -subj "/CN=sealed-secret/O=sealed-secret"
+
 # to update Secrets run
 make kubeseal
 ```

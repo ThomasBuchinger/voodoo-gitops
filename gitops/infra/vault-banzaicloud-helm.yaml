@@ -2,7 +2,7 @@ apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: vault
-  namespace: kube-system
+  namespace: default
 spec:
   repo: https://kubernetes-charts.banzaicloud.com
   chart: vault-operator

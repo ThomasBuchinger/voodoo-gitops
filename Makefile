@@ -1,10 +1,8 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
-SECRETS = gitops/static/common-secrets-sealed.yaml \
+SECRETS = gitops/infra/common-secrets-sealed.yaml \
 					gitops/vault/vault-content-cloudflare-sealed.yaml \
-					gitops/vault/vault-content-github-sealed.yaml \
-					gitops/vault/vault-s3-sealed.yaml \
-					gitops/vault/vault-unseal-keys-sealed.yaml
+					gitops/vault/vault-content-github-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
 build: config.yaml kubeseal

@@ -20,10 +20,7 @@ spec:
     # serviceWeb: {}
     virtualHost: pihole.buc.sh
     ingress:
-      enabled: true
-      hosts:
-      - pihole.buc.sh
-      - pihole.10.0.0.16.nip.io
+      enabled: false
     admin:
       existingSecret: common-secrets
       passwordKey: cred_admin_password
@@ -43,3 +40,37 @@ spec:
       - cname=vault.buc.sh,voodoo.buc.sh
       - cname=wireguard.buc.sh,voodoo.buc.sh
       - cname=voodoo-console.buc.sh,voodoo.buc.sh
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
+spec:
+  tls:
+  - hosts:
+    - pihole.buc.sh
+    secretName: cert-pihole-buc-sh
+  rules:
+  - host: pihole.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pihole-web
+            port:
+              number: 80
+  - host: pihole.10.0.0.16.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pihole-web
+            port:
+              number: 80
