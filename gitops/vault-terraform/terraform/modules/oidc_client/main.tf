@@ -28,6 +28,16 @@ resource "vault_identity_oidc_client" "client_config" {
   access_token_ttl = 7200
 }
 
+resource "vault_kv_secret_v2" "generic_secret" {
+  mount = "secrets"
+  name = "cluster/oidc/${var.client_name}"
+  data_json = jsonencode({
+    "client_name" = var.client_name,
+    "client_id" = vault_identity_oidc_client.client_config.client_id,
+    "client_secret" = vault_identity_oidc_client.client_config.client_secret
+  })
+}
+
 variable "client_name" {
   type = string
 }
