@@ -29,7 +29,7 @@ resource "vault_identity_oidc_client" "client_config" {
 }
 
 resource "vault_kv_secret_v2" "generic_secret" {
-  mount = "secrets"
+  mount = "secret"
   name = "cluster/oidc/${var.client_name}"
   data_json = jsonencode({
     "client_name" = var.client_name,
