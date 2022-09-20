@@ -96,16 +96,7 @@ spec:
           capabilities = ["create", "read", "list"]
           }
       - name: admin
-        rules: path "secret/*" {
-          capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-          }
-          path "auth/*"{
-          capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-          }
-          path "sys/*"{
-          capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-          }
-          path "v1/sys/*"{
+        rules: path "*" {
           capabilities = ["create", "read", "update", "delete", "list", "sudo"]
           }
     auth:
@@ -118,11 +109,11 @@ spec:
             policies: ["secret_reader", "default"]
             ttl: 1h
           # Configure kubernetes authentication for external secrets operator
-          - name: editor
-            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
-            bound_service_account_namespaces: ["default"]
-            policies: ["secret_reader", "secret_writer", "default"]
-            ttl: 1h
+          # - name: editor
+          #   bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+          #   bound_service_account_namespaces: ["default"]
+          #   policies: ["secret_reader", "secret_writer", "default"]
+          #   ttl: 1h
           # Configure kubernetes authentication for flux terraform controller
           - name: terraform
             bound_service_account_names: ["vault-terraform-admin"]
