@@ -8,10 +8,34 @@ resource "vault_auth_backend" "static" {
   }
 }
 
+resource "vault_identity_group" "admins" {
+  name     = "admins"
+  type     = "external"
+  metadata = { }
+  policies = [
+    "admins"
+  ]
+  member_entity_ids = [
+    vault_identity_entity.admin.id
+  ]
+}
+
+
+resource "vault_identity_group" "users" {
+  name     = "users"
+  type     = "external"
+  metadata = { }
+  policies = [ ]
+  member_group_ids = [
+    vault_identity_group.admins.id
+  ]
+}
+
 resource "vault_identity_entity" "admin" {
   name      = "admin"
-  policies  = ["admin"]
-  metadata  = { }
+  metadata  = {
+    email = "thomas@buc.sh"
+  }
 }
 
 resource "vault_identity_entity_alias" "admin_to_userpass_admin" {
