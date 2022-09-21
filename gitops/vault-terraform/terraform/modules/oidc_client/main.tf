@@ -20,7 +20,7 @@ resource "vault_identity_oidc_client" "client_config" {
     var.redirect_url
   ]
   assignments = [
-    vault_identity_oidc_assignment.authorized_groups
+    vault_identity_oidc_assignment.authorized_groups.name
   ]
   id_token_ttl     = 2400
   access_token_ttl = 7200
