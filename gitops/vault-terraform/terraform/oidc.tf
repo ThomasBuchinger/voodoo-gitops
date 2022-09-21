@@ -36,7 +36,7 @@ module "oidc_kubernetes" {
   source = "./modules/oidc_client"
 
   client_name = "kubelogin"
-  provider_url = vault_oidc_provider.cluster_internal.issuer
+  provider_url = vault_identity_oidc_provider.cluster_internal.issuer
   authorized_users = [
     vault_identity_entity.admin.id
   ]
