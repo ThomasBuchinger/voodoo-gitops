@@ -16,7 +16,7 @@ resource "vault_identity_oidc_scope" "scope_user" {
   description = "username"
   template    = jsonencode(
     {
-      name = "{{identity.entity.name}}",
+      name = "{{identity.entity.name}}"
     }
   )
 }
@@ -26,7 +26,7 @@ resource "vault_identity_oidc_scope" "scope_groups" {
   description = "Groups scope."
   template    = jsonencode(
     {
-      groups = "{{identity.entity.groups.names}}",
+      groups = "{{identity.entity.groups.names}}"
     }
   )
 }
