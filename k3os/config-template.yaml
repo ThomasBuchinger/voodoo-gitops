@@ -18,6 +18,7 @@ k3os:
   - "--cluster-init"
   - "--cluster-cidr=172.16.0.0/16"
   - "--service-cidr=172.17.0.0/16"
+  - --kube-apiserver-arg="--oidc-client-id=REPLACE_ME --oidc-issuer-url=REPLACE_ME --oidc-username-claim=username --oidc-groups-claim=groups --oidc-groups-prefix=\"\""
 write_files:
 - path: /var/lib/connman/service-main.config
   content: "see network.config"
@@ -32,6 +33,10 @@ write_files:
 - path: /etc/periodic/daily/cron_update_images.sh
   permissions: '0755'
   content: see cron_update_images.sh
+
+- path: /etc/periodic/hourly/cron_update_oidc.sh
+  permissions: '0755'
+  content: see cron_update_oidc.sh
 
 run_cmd:
 - /usr/local/bin/install_flux.sh
