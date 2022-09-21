@@ -14,7 +14,7 @@ resource "vault_identity_oidc_provider" "global" {
 resource "vault_identity_oidc_scope" "scope_user" {
   name        = "username"
   description = "username"
-  template    = "{\"username\":{{identity.entity.name}}}"
+  template    = "{\"username\":{{identity.entity.metadata.login_name}}}"
 }
 
 resource "vault_identity_oidc_scope" "scope_groups" {

@@ -34,6 +34,7 @@ resource "vault_identity_group" "users" {
 resource "vault_identity_entity" "admin" {
   name      = "admin"
   metadata  = {
+    login_name = "admin"
     email = "thomas@buc.sh"
   }
 }
