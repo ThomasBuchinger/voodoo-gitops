@@ -12,23 +12,15 @@ resource "vault_identity_oidc_provider" "global" {
   ]
 }
 resource "vault_identity_oidc_scope" "scope_user" {
-  name        = "user"
+  name        = "username"
   description = "username"
-  template    = jsonencode(
-    {
-      name = "{{identity.entity.name}}"
-    }
-  )
+  template    = "{\"username\":{{identity.entity.name}}}"
 }
 
 resource "vault_identity_oidc_scope" "scope_groups" {
   name        = "groups"
   description = "Groups scope."
-  template    = jsonencode(
-    {
-      groups = "{{identity.entity.groups.names}}"
-    }
-  )
+  template    = "{\"groups\":{{identity.entity.groups.names}}}"
 }
 
 module "oidc_kubernetes" {
