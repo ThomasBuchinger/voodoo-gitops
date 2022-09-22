@@ -8,15 +8,13 @@ resource "vault_auth_backend" "static" {
   }
 }
 
-resource "vault_generic_endpoint" "admin_user" {
-  depends_on           = [vault_auth_backend.static]
-  path                 = "auth/static/users/${var.cred_admin_user}"
-  ignore_absent_fields = true
+module "kubeconfig" {
+  source = "./modules/kubeconfig"
 
-  data_json = <<EOT
-{
-  "policies": ["admin"],
-  "password": "${var.cred_admin_password}"
-}
-EOT
+  name = "voodoo"
+  api_url = "https://voodoo.buc.sh:6443"
+
+  client_id = module.oidc_kubernetes.client_id
+  client_secret = module.oidc_kubernetes.client_secret
+  oidc_provider_url = module.oidc_kubernetes.oidc_provider_url
 }

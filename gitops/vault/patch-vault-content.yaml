@@ -45,7 +45,7 @@ spec:
             key: cred_user_password
             optional: true
       - type: kv
-        path: secret/data/cluster/cert/cert-paste-buc-sh
+        path: cluster/data/cert/cert-paste-buc-sh
         data:
           secretKeyRef:
           - name: cert-paste-buc-sh
@@ -54,6 +54,11 @@ spec:
           - name: cert-paste-buc-sh
             key: tls.key
             optional: true
+      - type: kv
+        path: cluster/data/cert/apiserver
+        data:
+          data:
+            ca_cert: "${env `CA_CERT`}"
       # - type: kv
       #   path: secret/data/cluster/s3/vault
       #   data:
@@ -64,3 +69,10 @@ spec:
       #     - name: vault-s3
       #       key: secret_key
       #       optional: true
+  envsConfig:
+    - name: CA_CERT
+      valueFrom:
+        configMapKeyRef:
+          name: kube-root-ca.crt
+          key: ca.crt
+          optional: true

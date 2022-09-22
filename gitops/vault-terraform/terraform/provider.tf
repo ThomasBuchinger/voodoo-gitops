@@ -8,8 +8,15 @@ terraform {
       source = "hashicorp/local"
       version = "2.2.3"
     }
+    template = {
+      source = "hashicorp/template"
+      version = "2.2.0"
+    }
   }
 }
+
+provider "template" { }
+
 provider "local" { }
 
 provider "vault" {

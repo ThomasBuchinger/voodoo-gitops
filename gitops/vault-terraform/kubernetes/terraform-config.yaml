@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   alwaysCleanupRunnerPod: true
-  interval: 1m
+  interval: 5m
   approvePlan: "auto"
   path: gitops/vault-terraform/terraform
   sourceRef:
