@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: oidc-configurer
 spec:
-  schedule: "* * * * *"
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
@@ -26,7 +26,6 @@ spec:
                 secretKeyRef:
                   name: oidc-kubelogin
                   key: client_id
-            
             volumeMounts:
             - name: script
               mountPath: /script
@@ -35,6 +34,9 @@ spec:
             - name: etc
               mountPath: /host-etc
               readOnly: true
+            securityContext:
+              privileged: false
+              allowPrivilegeEscalation: true
           volumes:
           - name: script
             configMap:
