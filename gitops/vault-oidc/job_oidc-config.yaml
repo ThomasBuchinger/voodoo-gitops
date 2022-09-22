@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: oidc-configurer
 spec:
-  schedule: "*/15 * * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
