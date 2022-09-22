@@ -34,11 +34,11 @@ spec:
             
             volumeMounts:
             - name: script
-              path: /script
+              mountPath: /script
             - name: config
-              path: /config
+              mountPath: /config
             - name: etc
-              path: /host-etc
+              mountPath: /host-etc
           volumes:
           - name: script
             configMap:
