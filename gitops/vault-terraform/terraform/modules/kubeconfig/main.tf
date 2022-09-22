@@ -12,15 +12,39 @@ resource "vault_kv_secret_v2" "kubeconfig" {
 }
 
 data "template_file" "kubeconfg_template" {
-  vars = {
-    apiserver_ca = "${data.vault_kv_secret_v2.api_ca_cert.data.ca_cert}"
-    server = "${var.api_url}"
-    name = "${var.name}"
-    issuer_url = "${var.oidc_provider_url}"
-    client_id = "${var.client_id}"
-    client_secret = "${var.client_secret}"
-  }
-  template = "${file("${path.module}/kubeconfig.tpl")}"
+  template = <<-EOF
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: ${data.vault_kv_secret_v2.api_ca_cert.data.ca_cert}
+    server: ${var.api_url}
+  name: ${var.name}
+contexts:
+- context:
+    cluster: ${var.name}
+    user: oidc
+  name: ${var.name}
+current-context: ${var.name}
+kind: Config
+preferences: {}
+users:
+- name: oidc
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - oidc-login
+      - get-token
+      - --oidc-issuer-url=${var.oidc_provider_url}
+      - --oidc-client-id=${var.client_id}
+      - --oidc-client-secret=${var.client_secret}
+      - --oidc-extra-scope=username
+      - --oidc-extra-scope=groups
+      command: kubectl
+      env: null
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+EOF
 }
 
 
