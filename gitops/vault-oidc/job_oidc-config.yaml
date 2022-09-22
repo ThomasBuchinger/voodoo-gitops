@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: oidc-configurer
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: oidc-configurer
+            image: redhat/ubi9:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - /script/configure_oidc.sh
+            env:
+            - name: ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: oidc-kubelogin
+                  key: oidc_provider_url
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oidc-kubelogin
+                  key: client_id
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oidc-kubelogin
+                  key: client_secret
+            
+            volumeMounts:
+            - name: script
+              path: /script/
+            - name: config
+              path: /config
+            - name: etc
+              path: /host-etc
+          volumes:
+          - name: script
+            configMapRef:
+              name: configure-oidc
+          - name: config
+            hostPath:
+              path: /var/lib/rancher/k3os/config.d/
+          - name: etc
+            hostPath:
+              path: /etc
+              readOnly: true
+          
+          restartPolicy: OnFailure

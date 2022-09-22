@@ -1,0 +1,9 @@
+resources:
+- job_oidc-config.yaml
+- rbac.yaml
+- secret.yaml
+
+configMapGenerator:
+- name: configure-oidc
+  files:
+  - configure_oidc.sh
