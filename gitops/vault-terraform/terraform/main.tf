@@ -10,7 +10,7 @@ resource "vault_auth_backend" "static" {
 
 resource "vault_identity_group" "admins" {
   name     = "admins"
-  type     = "external"
+  type     = "internal"
   metadata = { }
   policies = [
     "admins"
@@ -23,7 +23,7 @@ resource "vault_identity_group" "admins" {
 
 resource "vault_identity_group" "users" {
   name     = "users"
-  type     = "external"
+  type     = "internal"
   metadata = { }
   policies = [ ]
   member_group_ids = [
