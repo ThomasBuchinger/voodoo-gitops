@@ -34,14 +34,14 @@ spec:
             
             volumeMounts:
             - name: script
-              path: /script/
+              path: /script
             - name: config
               path: /config
             - name: etc
               path: /host-etc
           volumes:
           - name: script
-            configMapRef:
+            configMap:
               name: configure-oidc
           - name: config
             hostPath:
