@@ -26,11 +26,6 @@ spec:
                 secretKeyRef:
                   name: oidc-kubelogin
                   key: client_id
-            - name: CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: oidc-kubelogin
-                  key: client_secret
             
             volumeMounts:
             - name: script

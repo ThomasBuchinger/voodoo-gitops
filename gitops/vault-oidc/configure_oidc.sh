@@ -12,11 +12,6 @@ if [ ${CLIENT_ID:-x} = "x" ]; then
   exit 1
 fi
 
-if [ ${CLIENT_SECRET:-x} = "x" ]; then
-  echo "SNo CLIENT_SECRET configured"
-  exit 0
-fi
-
 # === Update /etc/hosts ===
 HOST=$(echo $ISSUER | awk -F/ '{print $3}')
 if ! grep -q "$HOST" /host-etc/hosts; then
