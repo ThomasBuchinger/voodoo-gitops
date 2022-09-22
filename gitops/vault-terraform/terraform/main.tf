@@ -57,3 +57,17 @@ resource "vault_generic_endpoint" "static_admin" {
 }
 EOT
 }
+
+resource "vault_generic_endpoint" "static_public" {
+  depends_on           = [vault_auth_backend.static]
+  path                 = "auth/static/users/public"
+  ignore_absent_fields = true
+
+  data_json = <<EOT
+{
+  "policies": ["public_reader"],
+  "password": "public"
+}
+EOT
+}
+
