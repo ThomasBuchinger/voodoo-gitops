@@ -22,8 +22,8 @@ k3os:
   - --kube-apiserver-arg=oidc-issuer-url=https://localhost:8000/invalid/url
   - --kube-apiserver-arg=oidc-username-claim=username
   - --kube-apiserver-arg=oidc-groups-claim=groups
-  - --kube-apiserver-arg=oidc-groups-prefix=""
-  - --kube-apiserver-arg=oidc-username-prefix=""
+  - --kube-apiserver-arg=oidc-groups-prefix=
+  - --kube-apiserver-arg=oidc-username-prefix=
 write_files:
 - path: /var/lib/connman/service-main.config
   content: "see network.config"
