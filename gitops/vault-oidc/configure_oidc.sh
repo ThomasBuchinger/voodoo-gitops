@@ -16,7 +16,7 @@ fi
 HOST=$(echo $ISSUER | awk -F/ '{print $3}')
 if ! grep -q "$HOST" /host-etc/hosts; then
   echo "Adding $HOST to /etc/host"
-  sudo echo "127.0.0.1 $HOST" >> /host-etc/hosts
+  echo "127.0.0.1 $HOST" >> /host-etc/hosts
 fi
 
 EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /host-etc/init.d/k3s-service)
@@ -43,5 +43,5 @@ k3os:
   - --kube-apiserver-arg=oidc-username-prefix=
 
 EOF
-sudo reboot
+reboot
 #service k3s-service restart

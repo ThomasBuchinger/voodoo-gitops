@@ -35,8 +35,7 @@ spec:
               mountPath: /host-etc
               readOnly: false
             securityContext:
-              privileged: false
-              allowPrivilegeEscalation: true
+              privileged: true
           volumes:
           - name: script
             configMap:
