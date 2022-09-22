@@ -30,6 +30,6 @@ module "oidc_kubernetes" {
   provider_url = vault_identity_oidc_provider.global.issuer
   redirect_url = "http://localhost:8000"
   authorized_users = [
-    vault_identity_entity.admin.name
+    vault_identity_entity.admin.id
   ]
 }

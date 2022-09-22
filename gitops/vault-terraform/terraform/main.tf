@@ -16,7 +16,7 @@ resource "vault_identity_group" "admins" {
     "admins"
   ]
   member_entity_ids = [
-    vault_identity_entity.admin.name
+    vault_identity_entity.admin.id
   ]
 }
 
@@ -27,7 +27,7 @@ resource "vault_identity_group" "users" {
   metadata = { }
   policies = [ ]
   member_group_ids = [
-    vault_identity_group.admins.name
+    vault_identity_group.admins.id
   ]
 }
 
