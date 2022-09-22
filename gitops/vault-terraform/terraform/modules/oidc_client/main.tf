@@ -66,3 +66,7 @@ output "client_secret" {
   value = vault_identity_oidc_client.client_config.client_secret
   sensitive = true
 }
+
+output "oidc_provider_url" {
+  value = var.provider_url
+}
