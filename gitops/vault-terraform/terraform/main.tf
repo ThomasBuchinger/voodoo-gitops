@@ -9,7 +9,7 @@ resource "vault_auth_backend" "static" {
 }
 
 module "kubeconfig" {
-  source = "modules/kubeconfig"
+  source = "./modules/kubeconfig"
 
   name = "voodoo"
   api_url = "https://voodoo.buc.sh:6443"
