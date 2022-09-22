@@ -4,8 +4,8 @@ data "vault_kv_secret_v2" "api_ca_cert" {
 }
 
 resource "vault_kv_secret_v2" "kubeconfig" {
-  mount = "secret"
-  name = "cluster/kubeconfig/${var.name}"
+  mount = "cluster"
+  name = "kubeconfig/${var.name}"
   data_json = jsonencode({
     kubeconfig = data.template_file.kubeconfg_template.rendered
   })
@@ -16,7 +16,8 @@ data "template_file" "kubeconfg_template" {
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority-data: ${data.vault_kv_secret_v2.api_ca_cert.data.ca_cert}
+    certificate-authority-data: |
+      ${indent(6, data.vault_kv_secret_v2.api_ca_cert.data.ca_cert)}
     server: ${var.api_url}
   name: ${var.name}
 contexts:
