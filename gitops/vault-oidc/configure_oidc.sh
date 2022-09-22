@@ -19,8 +19,8 @@ if ! grep -q "$HOST" /host-etc/hosts; then
   # echo "127.0.0.1 $HOST" >> /host-etc/hosts
 fi
 
-EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /etc/init.d/k3s-service)
-EXISTING_CLIENT_ID=$(grep -o -e "oidc-client-id=[^ ']*" /etc/init.d/k3s-service)
+EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /host-etc/init.d/k3s-service)
+EXISTING_CLIENT_ID=$(grep -o -e "oidc-client-id=[^ ']*" /host-etc/init.d/k3s-service)
 
 if [[ ${EXISTING_ISSUER:-x} = "oidc-issuer-url=${ISSUER:-y}" && ${EXISTING_CLIENT_ID:-x} = "oidc-client-id=${CLIENT_ID:-y}" ]]; then
   echo "Existing config matched required Config. Nothing to do"
@@ -31,6 +31,10 @@ echo "Updating OIDC config... Issuer=$ISSUER ClientID=$CLIENT_ID"
 cat >/config/oidc_config.yaml <<EOF
 k3os:
   k3s_args:
+  - server
+  - "--cluster-init"
+  - "--cluster-cidr=172.16.0.0/16"
+  - "--service-cidr=172.17.0.0/16"
   - --kube-apiserver-arg=oidc-client-id=$CLIENT_ID
   - --kube-apiserver-arg=oidc-issuer-url=$ISSUER
   - --kube-apiserver-arg=oidc-username-claim=username
