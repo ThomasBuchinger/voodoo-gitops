@@ -16,7 +16,7 @@ data "template_file" "kubeconfg_template" {
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority-data: ${base64encode(replace(data.vault_kv_secret_v2.api_ca_cert.data.ca_cert, " ", "\n"))}
+    certificate-authority-data: ${base64encode(replace(data.vault_kv_secret_v2.api_ca_cert.data.ca_cert, "/ (^CERTIFICATE)/", "\n"))}
     server: ${var.api_url}
   name: ${var.name}
 contexts:
