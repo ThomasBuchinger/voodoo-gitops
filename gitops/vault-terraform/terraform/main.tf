@@ -16,7 +16,7 @@ resource "vault_identity_group" "admins" {
     "admins"
   ]
   member_entity_ids = [
-    vault_identity_entity.admin.id
+    vault_identity_entity.admin.name
   ]
 }
 
@@ -27,7 +27,7 @@ resource "vault_identity_group" "users" {
   metadata = { }
   policies = [ ]
   member_group_ids = [
-    vault_identity_group.admins.id
+    vault_identity_group.admins.name
   ]
 }
 
@@ -39,13 +39,13 @@ resource "vault_identity_entity" "admin" {
   }
 }
 
-resource "vault_identity_entity_alias" "admin_to_userpass_admin" {
+resource "vault_identity_entity_alias" "admin_to_static_admin" {
   name            = var.cred_admin_user
   mount_accessor  = vault_auth_backend.static.accessor
   canonical_id    = vault_identity_entity.admin.id
 }
 
-resource "vault_generic_endpoint" "admin_user" {
+resource "vault_generic_endpoint" "static_admin" {
   depends_on           = [vault_auth_backend.static]
   path                 = "auth/static/users/${var.cred_admin_user}"
   ignore_absent_fields = true
