@@ -58,7 +58,7 @@ spec:
         path: cluster/data/cert/apiserver
         data:
           data:
-            ca: ${env "CA_CERT"}
+            ca_cert: "${env `CA_CERT`}"
       # - type: kv
       #   path: secret/data/cluster/s3/vault
       #   data:
