@@ -13,7 +13,7 @@ resource "vault_kv_secret_v2" "kubeconfig" {
 
 data "template_file" "kubeconfg_template" {
   vars = {
-    apiserver_ca = "foo"#  data.vault_kv_secret_v2.api_ca_cert.data.ca.crt
+    apiserver_ca = data.vault_kv_secret_v2.api_ca_cert.data.ca_cert
     server = var.api_url
     name = var.name
     issuer_url = var.oidc_provider_url
