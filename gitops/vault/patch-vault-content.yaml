@@ -57,10 +57,8 @@ spec:
       - type: kv
         path: cluster/data/cert/apiserver
         data:
-          configMapKeyRef:
-          - name: kube-root-ca.crt
-            key: ca.crt
-            optional: true
+          data:
+            ca: ${env "CA_CERT"}
       # - type: kv
       #   path: secret/data/cluster/s3/vault
       #   data:
@@ -71,3 +69,10 @@ spec:
       #     - name: vault-s3
       #       key: secret_key
       #       optional: true
+  envsConfig:
+    - name: CA_CERT
+      valueFrom:
+        configMapKeyRef:
+          name: kube-root-ca.crt
+          key: ca.crt
+          optional: true
