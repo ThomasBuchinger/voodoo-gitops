@@ -33,9 +33,5 @@ write_files:
   permissions: '0755'
   content: see cron_update_images.sh
 
-- path: /etc/periodic/hourly/cron_update_oidc.sh
-  permissions: '0755'
-  content: see cron_update_oidc.sh
-
 run_cmd:
 - /usr/local/bin/install_flux.sh

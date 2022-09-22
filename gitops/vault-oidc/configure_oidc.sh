@@ -13,11 +13,11 @@ if [ ${CLIENT_ID:-x} = "x" ]; then
 fi
 
 # === Update /etc/hosts ===
-HOST=$(echo $ISSUER | awk -F/ '{print $3}')
-if ! grep -q "$HOST" /host-etc/hosts; then
-  echo "Adding $HOST to /etc/host"
-  echo "127.0.0.1 $HOST" >> /host-etc/hosts
-fi
+# HOST=$(echo $ISSUER | awk -F/ '{print $3}')
+# if ! grep -q "$HOST" /host-etc/hosts; then
+#   echo "Adding $HOST to /etc/host"
+#   echo "127.0.0.1 $HOST" >> /host-etc/hosts
+# fi
 
 EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /host-etc/init.d/k3s-service)
 EXISTING_CLIENT_ID=$(grep -o -e "oidc-client-id=[^ ']*" /host-etc/init.d/k3s-service)
@@ -30,6 +30,8 @@ fi
 echo "Updating OIDC config... Issuer=$ISSUER ClientID=$CLIENT_ID"
 cat >/config/oidc_config.yaml <<EOF
 k3os:
+  dns_nameservers:
+  - 127.0.0.1
   k3s_args:
   - server
   - "--cluster-init"
