@@ -39,6 +39,7 @@ spec:
               mountPath: /config
             - name: etc
               mountPath: /host-etc
+              readOnly: true
           volumes:
           - name: script
             configMap:
@@ -49,6 +50,5 @@ spec:
           - name: etc
             hostPath:
               path: /etc
-              readOnly: true
           
           restartPolicy: OnFailure
