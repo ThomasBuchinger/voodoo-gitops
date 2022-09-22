@@ -33,7 +33,7 @@ spec:
               mountPath: /config
             - name: etc
               mountPath: /host-etc
-              readOnly: true
+              readOnly: false
             securityContext:
               privileged: false
               allowPrivilegeEscalation: true
