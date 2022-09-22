@@ -18,8 +18,8 @@ k3os:
   - "--cluster-init"
   - "--cluster-cidr=172.16.0.0/16"
   - "--service-cidr=172.17.0.0/16"
-  - --kube-apiserver-arg=oidc-client-id=REPLACE_ME
-  - --kube-apiserver-arg=oidc-issuer-url=REPLACE_ME
+  - --kube-apiserver-arg=oidc-client-id=REPLACEME
+  - --kube-apiserver-arg=oidc-issuer-url=https://localhost:8000/invalid/url
   - --kube-apiserver-arg=oidc-username-claim=username
   - --kube-apiserver-arg=oidc-groups-claim=groups
   - --kube-apiserver-arg=oidc-groups-prefix=""
