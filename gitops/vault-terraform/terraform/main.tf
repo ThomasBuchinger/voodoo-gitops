@@ -7,9 +7,8 @@ resource "vault_auth_backend" "static" {
     listing_visibility = "unauth"
   }
 }
-data "vault_auth_backend" "approle" {
+resource "vault_auth_backend" "approle" {
   type = "approle"
-  path = "approle"
   description = "Auth Backend for ServiceAccounts outside of Kubernetes"
 }
 
