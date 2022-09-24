@@ -45,6 +45,13 @@ spec:
             key: cred_user_password
             optional: true
       - type: kv
+        path: secret/data/access/secret-ids
+        data:
+          secretKeyRef:
+          - name: vault-content-secretids
+            key: green
+            optional: true
+      - type: kv
         path: cluster/data/cert/cert-paste-buc-sh
         data:
           secretKeyRef:
