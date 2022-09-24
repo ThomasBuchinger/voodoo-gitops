@@ -39,7 +39,6 @@ resource "vault_approle_auth_backend_login" "login" {
 variable "name" {
   type = string
 }
-
 variable "secretid_fetch_mount" {
   type = string
 }
@@ -48,10 +47,6 @@ variable "secretid_fetch_path" {
   type = string
 }
 variable "secretid_fetch_key" {
-  type = string
-}
-
-variable "name" {
   type = string
 }
 
