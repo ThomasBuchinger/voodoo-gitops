@@ -9,6 +9,7 @@ resource "vault_auth_backend" "static" {
 }
 data "vault_auth_backend" "approle" {
   type = "approle"
+  path = "approle"
   description = "Auth Backend for ServiceAccounts outside of Kubernetes"
 }
 

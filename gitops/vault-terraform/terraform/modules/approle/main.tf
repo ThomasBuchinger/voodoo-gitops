@@ -52,5 +52,5 @@ variable "secretid_fetch_key" {
 
 variable "approle_path" {
   type = string
-  default = "approle/"
+  default = "approle"
 }
