@@ -28,14 +28,6 @@ resource "vault_approle_auth_backend_role_secret_id" "secret_id" {
     secretid_secret = "${var.secretid_fetch_mount}/${var.secretid_fetch_path}"
   })
 }
-
-resource "vault_approle_auth_backend_login" "login" {
-  backend   = var.approle_path
-  role_id   = vault_approle_auth_backend_role.role.role_id
-  secret_id = vault_approle_auth_backend_role_secret_id.secret_id.secret_id
-}
-
-
 variable "name" {
   type = string
 }
@@ -53,4 +45,13 @@ variable "secretid_fetch_key" {
 variable "approle_path" {
   type = string
   default = "approle"
+}
+
+output "role_id" {
+  description = "Generated RoleID"
+  value = vault_approle_auth_backend_role.role.role_id
+}
+output "secret_id" {
+  description = "Generated SecretID"
+  value = vault_approle_auth_backend_role_secret_id.secret_id.secret_id
 }
