@@ -83,4 +83,48 @@ openssl req -new -x509 -nodes -days 30 -key sealed.key -out sealed2.crt -subj "/
 # to update Secrets run
 make kubeseal
 ```
+#### Secret Flow
 
+```mermaid
+
+flowchart TD
+
+repo{{Sealed Secrets in Repo}}
+repo-->Cloudflare
+repo-->GitHub
+repo-->secretids[Approle SecretIDs]
+repo-->creds[Static Credentials]
+
+vault-static{{Vault Static Secrets Engine}}
+GitHub-->vault-static
+Cloudflare-->vault-static
+secretids-->vault-static
+creds-->vault-static
+
+vault-cluster{{Vault Cluster Secrets Engine}}
+certs[CertManager Certificates]--->vault-cluster
+vault-cluster-->oidc-config[OIDC Configs]
+vault-cluster-->external-certs[Managed Certificate]
+vault-cluster-->kubeconfig[Kubeconfig for local Cluster]
+vault-cluster-->es
+
+es{{External Secrets Maager}}
+vault-static--> es
+es--cf_apikey_dnsedit-_key-->CertManager
+es--cf_tunnel_token-_key-->cloudflared
+es--cf_apikey_dnsedit-_key-->ShellDDNS
+es--OIDC-Config-->vault-oidc[Cluster OIDC Login]
+
+
+vault-auth{{Vault Auth Config}}
+vault-tf-approle-->vault-auth
+creds-->vault-auth
+creds-->PiHole
+
+vault-tf-approle{{Vault Terraform Approle Config}}
+vault-static--secret-ids-->vault-tf-approle
+
+vault-tf-oidc{{Vault Terraform OIDC Client}}
+vault-tf-oidc--->vault-cluster
+
+```

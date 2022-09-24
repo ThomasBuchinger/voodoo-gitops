@@ -130,22 +130,20 @@ spec:
             bound_service_account_namespaces: ["default"]
             policies: ["admin", "default"]
             ttl: 5m
-      - type: approle
-        roles:
-          - name: reader
-            policies: secret_reader
-            secret_id_ttl: 10m
-            token_num_uses: 10
-            token_ttl: 20m
-            token_max_ttl: 30m
-            secret_id_num_uses: 40
-          - name: editor
-            policies: secret_editor
-            secret_id_ttl: 10m
-            token_num_uses: 10
-            token_ttl: 20m
-            token_max_ttl: 30m
-            secret_id_num_uses: 40
+      # - type: approle
+      #   roles:
+      #     - name: workload-cluster
+      #       policies: ["cluster_reader"]
+      #       token_num_uses: 5
+      #       token_ttl: 5m
+      #       token_max_ttl: 5m
+      #     - name: editor
+      #       policies: secret_editor
+      #       secret_id_ttl: 10m
+      #       token_num_uses: 10
+      #       token_ttl: 20m
+      #       token_max_ttl: 30m
+      #       secret_id_num_uses: 40
 
     secrets:
       - path: public
