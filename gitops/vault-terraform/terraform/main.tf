@@ -28,6 +28,6 @@ module "approle_green" {
   
   name = "green"
   secretid_fetch_mount = "secret"
-  secretid_fetch_path = "access/secretids"
+  secretid_fetch_path = "access/secret-ids"
   secretid_fetch_key = "green"
 }
