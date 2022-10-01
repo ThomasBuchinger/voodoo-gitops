@@ -6,6 +6,7 @@ spec:
   schedule: "*/5 * * * *"
   jobTemplate:
     spec:
+      backoffLimit: 1
       template:
         spec:
           containers:
@@ -39,6 +40,7 @@ spec:
               readOnly: true
             securityContext:
               privileged: true
+          restartPolicy: Never
           hostIPC: true
           hostPID: true
           volumes:
@@ -54,5 +56,3 @@ spec:
           - name: host-root
             hostPath:
               path: /
-          
-          restartPolicy: OnFailure
