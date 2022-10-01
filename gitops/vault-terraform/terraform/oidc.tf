@@ -33,3 +33,14 @@ module "oidc_kubernetes" {
     vault_identity_entity.admin.id
   ]
 }
+
+module "oidc_green_prod" {
+  source = "./modules/oidc_client"
+
+  client_name = "green-prod"
+  provider_url = vault_identity_oidc_provider.global.issuer
+  redirect_url = "http://localhost:8000"
+  authorized_users = [
+    vault_identity_entity.admin.id
+  ]
+}

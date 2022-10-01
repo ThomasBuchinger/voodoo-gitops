@@ -36,6 +36,8 @@ spec:
               readOnly: false
             securityContext:
               privileged: true
+          hostIPC: true
+          hostPID: true
           volumes:
           - name: script
             configMap:

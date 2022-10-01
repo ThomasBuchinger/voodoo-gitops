@@ -5,7 +5,7 @@ data "vault_kv_secret_v2" "api_ca_cert" {
 
 resource "vault_kv_secret_v2" "kubeconfig" {
   mount = "cluster"
-  name = "kubeconfig/${var.name}"
+  name = "${var.name}/kubeconfig"
   data_json = jsonencode({
     kubeconfig = data.template_file.kubeconfg_template.rendered
   })
