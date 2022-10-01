@@ -22,7 +22,9 @@ fi
 EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /host-etc/init.d/k3s-service)
 EXISTING_CLIENT_ID=$(grep -o -e "oidc-client-id=[^ ']*" /host-etc/init.d/k3s-service)
 
-/host-etc/init.d/ntpd restart
+chroot /host-root
+/etc/init.d/ntpd restart
+exit
 
 if [[ ${EXISTING_ISSUER:-x} = "oidc-issuer-url=${ISSUER:-y}" && ${EXISTING_CLIENT_ID:-x} = "oidc-client-id=${CLIENT_ID:-y}" ]]; then
   echo "Existing config matched required Config. Nothing to do"
