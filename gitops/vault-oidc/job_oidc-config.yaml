@@ -35,9 +35,6 @@ spec:
             - name: etc
               mountPath: /host-etc
               readOnly: false
-            - name: host-root
-              mountPath: /host-root
-              readOnly: true
             securityContext:
               privileged: true
           restartPolicy: Never
@@ -53,6 +50,3 @@ spec:
           - name: etc
             hostPath:
               path: /etc
-          - name: host-root
-            hostPath:
-              path: /
