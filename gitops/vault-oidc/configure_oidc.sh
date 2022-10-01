@@ -22,6 +22,8 @@ fi
 EXISTING_ISSUER=$(grep -o -e "oidc-issuer-url=[^ ']*" /host-etc/init.d/k3s-service)
 EXISTING_CLIENT_ID=$(grep -o -e "oidc-client-id=[^ ']*" /host-etc/init.d/k3s-service)
 
+/host-etc/init.d/ntpd restart
+
 if [[ ${EXISTING_ISSUER:-x} = "oidc-issuer-url=${ISSUER:-y}" && ${EXISTING_CLIENT_ID:-x} = "oidc-client-id=${CLIENT_ID:-y}" ]]; then
   echo "Existing config matched required Config. Nothing to do"
   exit 0
@@ -45,6 +47,6 @@ k3os:
 EOF
 
 # TODO: Figure out how to restart k3s
-/etc/init.d/k3s-service restart
+/host-etc/init.d/k3s-service restart
 #reboot # Does not work. It is using systemd
 #service k3s-service restart # no binary in container
