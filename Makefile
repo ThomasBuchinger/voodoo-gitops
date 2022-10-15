@@ -1,12 +1,13 @@
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
+CLUSTERCTL="./clusterctl"
 SECRETS = gitops/infra/common-secrets-sealed.yaml \
 					gitops/vault/vault-content-cloudflare-sealed.yaml \
 					gitops/vault/vault-content-secretids-sealed.yaml \
 					gitops/vault/vault-content-github-sealed.yaml
 
 .PHONY: build config.yaml check-files generate_sealedsecret kubeseal
-build: config.yaml kubeseal
+build: config.yaml kubeseal generate_sidero
 
 config.yaml: check-files generate_sealedsecret
 	cp -f k3os/config-template.yaml $(OUTPUT_DIR)/config.yaml
@@ -38,3 +39,12 @@ $(SECRETS): gitops/%-sealed.yaml: secrets/%.yaml
 	@which kubeseal > /dev/null
 	@echo "Encrypt '$@' from file '$<'"
 	kubeseal --cert sealed.crt -o yaml -f $< > $@
+
+SIDERO_ENV = SIDERO_CONTROLLER_MANAGER_HOST_NETWORK=true \
+							SIDERO_CONTROLLER_MANAGER_API_ENDPOINT=10.0.0.16 \
+							SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT=10.0.0.16
+generate_sidero:
+	@which $(CLUSTERCTL) > /dev/null
+	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -b talos > gitops/sidero/bootstrap-talos.yaml
+	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -c talos > gitops/sidero/controlplane-talos.yaml
+	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -i sidero > gitops/sidero/infrastrucure-sidero.yaml
