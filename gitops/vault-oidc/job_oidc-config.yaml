@@ -6,6 +6,7 @@ spec:
   schedule: "*/5 * * * *"
   jobTemplate:
     spec:
+      backoffLimit: 1
       template:
         spec:
           containers:
@@ -36,6 +37,7 @@ spec:
               readOnly: false
             securityContext:
               privileged: true
+          restartPolicy: Never
           volumes:
           - name: script
             configMap:
@@ -46,5 +48,3 @@ spec:
           - name: etc
             hostPath:
               path: /etc
-          
-          restartPolicy: OnFailure

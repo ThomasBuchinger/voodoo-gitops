@@ -43,6 +43,8 @@ k3os:
   - --kube-apiserver-arg=oidc-username-prefix=
 
 EOF
+
 # TODO: Figure out how to restart k3s
+# /host-etc/init.d/k3s-service restart. Binary not found
 #reboot # Does not work. It is using systemd
 #service k3s-service restart # no binary in container
