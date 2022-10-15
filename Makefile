@@ -45,6 +45,7 @@ SIDERO_ENV = SIDERO_CONTROLLER_MANAGER_HOST_NETWORK=true \
 							SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT=10.0.0.16
 generate_sidero:
 	@which $(CLUSTERCTL) > /dev/null
+	$(SIDERO_ENV) $(CLUSTERCTL) generate provider --core cluster-api > gitops/sidero/clusterapi.yaml
 	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -b talos > gitops/sidero/bootstrap-talos.yaml
 	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -c talos > gitops/sidero/controlplane-talos.yaml
 	$(SIDERO_ENV) $(CLUSTERCTL) generate provider -i sidero > gitops/sidero/infrastrucure-sidero.yaml
