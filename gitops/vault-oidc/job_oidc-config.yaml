@@ -38,8 +38,6 @@ spec:
             securityContext:
               privileged: true
           restartPolicy: Never
-          hostIPC: true
-          hostPID: true
           volumes:
           - name: script
             configMap:
