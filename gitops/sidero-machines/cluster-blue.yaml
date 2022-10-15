@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cluster-blue
+
+---
+apiVersion: metal.sidero.dev/v1alpha1
+kind: ServerClass
+metadata:
+  name: cluster-test
+spec:
+  selector:
+    matchLabels:
+      buc.sh/cluster: blue
