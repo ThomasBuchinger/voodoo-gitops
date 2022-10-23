@@ -4,8 +4,8 @@ metadata:
   name: vault
 spec:
   size: 1
-  # image: docker.io/library/vault:latest
-  # bankVaultsImage: ghcr.io/banzaicloud/bank-vaults:latest
+  image: docker.io/library/vault:1.11.4
+  bankVaultsImage: ghcr.io/banzaicloud/bank-vaults:1.16.0
 
   # Vault Pods , Services and TLS Secret annotations
   vaultAnnotations:
