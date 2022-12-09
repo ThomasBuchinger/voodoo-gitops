@@ -1,50 +1,39 @@
 # Voodoo Board
 
-This repoitory sets up and configures the voodoo board. A SBC running various small services on K3os.
+This repoitory sets up and configures the voodoo board. A SBC running various small services on Talos.
 
 ## Installation
 
-K3os is installed via a cloudinit(-ish?) configuration file. [See k3os docs](https://github.com/rancher/k3os/blob/master/README.md#configuration). The full configuration file is generated via a Makefile.
-
-To complete the Setup, boot the k3os-amd64.iso as Live-System (e.g. via PiKVM). Copy the generated `config.yaml` to the system and run `sudo k3os install`
+To install Talos, you first need to boot the `talos-amd64.iso` on your node. Then you apply the talos configuration to the node.
 
 ```bash
-# Generate cloud-init config in out/config.yaml
-make
+# Generate a OpenSSL keypair for sealed-secrets
+# openssl ...
 
-# Because the config.yaml is too big for the text-paste system of PiKVM, you can host it on a HTTP server
-firewall-cmd --add-port 8000/tcp
-python -m http.server
+# Set NODE_IP and DHCP_IP in the Makefile
+make talos-config
 
-# On K3os run (login rancher + ssh-key)
-sudo k3os install
+# Now boot the Node into the talos.iso
+make talos-apply
 
-http://10.0.0.11:8000/config.yaml
+# Wait for the initial Bootstrap to be complete
+make talos bootstrap
+
 ```
 
-## K3os Config
-
-Input files for K3os config.yaml
-* `./password.txt` Add the password for the 'rancher'-user here
-* `./id_rsa.pub` Add an SSH key to login with the rancher user remotely
-* `./sealed.key` and `./sealed.crt` Sealed Secrets private Key
-* `k3os/network.config`: Network config
-* `k3os/install_flux.sh` Download flus installation files from this repo and copy them into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
 
 ## Architecture
 
 ```mermaid
 flowchart TD
 
-k3os-->ci[Cloud-Init]
+talos-->conf[Talos Config]
 
-ci-->os[OS Configuration]
-ci--configures-->ss_key{{SealedSecrets PrivateKey}}
-ci--copies-->cron[Image Updater Cron Job]
-ci--copies-->install_flux[install_flux.sh]
+conf-->os[OS Configuration]
+conf--configures-->ss_key{{SealedSecrets PrivateKey}}
+conf--installs-->FluxCD
 
 repo_flux_install{{flux-install/}}
-install_flux--installs-->FluxCD
 repo_flux_install-->FluxCD
 
 repo_flux{{gitops/flux/}}-->FluxCD
@@ -71,7 +60,7 @@ All applcations are handled by fluxcd
 ### Secrets Management
 Secrets are handled via a combination of vault and SealedSecrets.
 
-* The plain secrets are stored in `secrets/<app-dir>/<secret>.yaml`. This path os obviously not pushed to git
+* The plain secrets are stored in `secrets/<app-dir>/<secret>.yaml`. This path is obviously not checked in.
 * The Makefile encrypts the secrets using `kubeseal` and stores them in `gitops/<app-dir>/<secret>-sealed.yaml`
 * Banzaicloud Vault Operator stores the decrypted Secrets in Vault
 * The External-Secrets-Otperator fetches the Secrets from vault and creates the actual Secret

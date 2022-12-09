@@ -1,0 +1,38 @@
+
+
+machine:
+  network:
+    hostname: voodoo.buc.sh
+    interfaces:
+    - interface: eth0
+      addresses:
+      - "10.0.0.0/24"
+      routes:
+      - network: "0.0.0.0/0"
+        gateway: "10.0.0.1"
+    nameservers:
+    - 10.0.0.16
+    - 10.0.0.1
+  install:
+    disk: /dev/sda
+
+cluster:
+  extraManifests:
+  - https://raw.githubusercontent.com/ThomasBuchinger/voodoo-gitops/main/flux-install/flux-system.yaml
+  - https://raw.githubusercontent.com/ThomasBuchinger/voodoo-gitops/main/flux-install/voodoo-gitops.yaml
+  inlineManifests:
+  - name: sealed-secrets-private-key
+    contents:  ""
+
+  #     apiVersion: v1
+  #     kind: Secret
+  #     metadata:
+  #       name: sealed-secrets-private-key
+  #       namespace: kube-system
+  #       labels:
+  #         sealedsecrets.bitnami.com/sealed-secrets-key: active
+  #     type: kubernetes.io/tls
+  #     stringData:
+  #       tls.crt: ""
+  #       tls.key: ""
+
