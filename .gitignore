@@ -1,9 +1,9 @@
-password.txt
-id_rsa.pub
 sealed.key
 secrets/
 !secrets/.gitkeep
 
+bin/
 out/
+kubeconfig
 
 gitops/*-terraform/terraform/.terraform*
