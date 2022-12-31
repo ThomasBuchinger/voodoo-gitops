@@ -1,5 +1,5 @@
 NODE_IP=10.0.0.16
-DHCP_IP=10.0.0.187
+DHCP_IP=10.0.0.189
 
 OUTPUT_DIR=out
 YQ_ARGS=--prettyPrint --no-colors --inplace
@@ -20,10 +20,10 @@ bin/talosctl:
 	curl -Lo $(TALOSCTL) --silent https://github.com/siderolabs/talos/releases/download/v1.2.7/talosctl-linux-amd64
 	chmod +x $(TALOSCTL)
 
-$(OUTPUT_DIR)/secrets.yaml:
+$(OUTPUT_DIR)/talos-secrets.yaml:
 	$(TALOSCTL) gen secrets --output-file "$(OUTPUT_DIR)/talos-secrets.yaml"
 
-talos-config: check-files bin/talosctl $(OUTPUT_DIR)/secrets.yaml generate_sealedsecret
+talos-config: check-files bin/talosctl $(OUTPUT_DIR)/talos-secrets.yaml generate_sealedsecret
 	mkdir -p $(OUTPUT_DIR)/talos
 	$(TALOSCTL) gen config voodoo https://$(NODE_IP):6443 \
 		--config-patch=@talos/talos-merge.yaml \
@@ -33,18 +33,18 @@ talos-config: check-files bin/talosctl $(OUTPUT_DIR)/secrets.yaml generate_seale
 	yq eval $(YQ_ARGS) '.cluster.inlineManifests[0].contents = load_str("$(OUTPUT_DIR)/sealed_secret.yaml")' $(TALOS_NODECONF)
 	yq eval $(YQ_ARGS) '.contexts.voodoo.endpoints[0] = "$(NODE_IP)"'                                        $(TALOS_CONFIG)
 
-talos-apply:
+talos-init: talos-config
 	$(TALOSCTL) apply-config --insecure --nodes $(DHCP_IP) --file $(TALOS_NODECONF)
-
-talos-update:
-	$(TALOSCTL) apply-config --talosconfig $(TALOS_CONFIG) --nodes $(NODE_IP) --file $(TALOS_NODECONF)
-
 talos-bootstrap:
 	$(TALOSCTL) bootstrap --talosconfig $(TALOS_CONFIG) --nodes $(NODE_IP)
+untaint: kubeconfig
+	KUBECONFIG=./kubeconfig kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+
+
 talos-reset:
 	$(TALOSCTL) reset --talosconfig $(TALOS_CONFIG) --nodes $(NODE_IP)
-untaint: kueconfig
-	KUBECONFIG=./kubeconfig kubectl taint nodes --all node-role.kubernetes.io/controlplane-
+talos-apply:
+	$(TALOSCTL) apply-config --talosconfig $(TALOS_CONFIG) --nodes $(NODE_IP) --file $(TALOS_NODECONF)
 
 kubeconfig:
 	$(TALOSCTL) kubeconfig ./kubeconfig --talosconfig $(TALOS_CONFIG) --nodes $(NODE_IP)

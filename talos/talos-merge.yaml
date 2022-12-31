@@ -14,9 +14,12 @@ machine:
     - 10.0.0.16
     - 10.0.0.1
   install:
-    disk: /dev/sda
+    disk: /dev/mmcblk0
 
 cluster:
+  etcd:
+    extraArgs:
+      snapshot-count: 500
   extraManifests:
   - https://raw.githubusercontent.com/ThomasBuchinger/voodoo-gitops/main/flux-install/flux-system.yaml
   - https://raw.githubusercontent.com/ThomasBuchinger/voodoo-gitops/main/flux-install/voodoo-gitops.yaml
