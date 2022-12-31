@@ -41,6 +41,9 @@ spec:
         enabled: false
         gateway:
           enabled: true
+    # Configure Ports to be 80/443
+    securityContext:
+      allowPrivilegeEscalation: true
     ports:
       web:
         hostPort: 80
