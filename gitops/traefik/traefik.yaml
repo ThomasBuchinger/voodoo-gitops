@@ -43,8 +43,8 @@ spec:
           enabled: true
     ports:
       web:
-        expose: false
         hostPort: 80
       websecure:
-        expose: false
         hostPort: 443
+    service:
+      type: NodePort
