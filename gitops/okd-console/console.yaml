@@ -111,7 +111,7 @@ kind: Ingress
 metadata:
   name: okd-console-http
 spec:
-  tls:
+  rules:
   - host: voodoo-console.10.0.0.16.nip.io
     http:
       paths:
