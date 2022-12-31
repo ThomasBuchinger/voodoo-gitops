@@ -34,3 +34,17 @@ spec:
         allowExternalNameServices: true
       kubernetesIngress:
         allowExternalNameServices: true
+    experimental:
+      v3:
+        enabled: false
+      kubernetesGateway:
+        enabled: false
+        gateway:
+          enabled: true
+    ports:
+      web:
+        expose: false
+        hostPort: 80
+      websecure:
+        expose: false
+        hostPort: 443
