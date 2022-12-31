@@ -47,5 +47,5 @@ spec:
       websecure:
         hostPort: 443
     service:
-      enabled: false
+      enabled: true
       type: NodePort
