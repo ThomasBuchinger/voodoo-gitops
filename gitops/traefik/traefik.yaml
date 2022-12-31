@@ -17,7 +17,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  targetNamespace: default
+  targetNamespace: kub-system
   chart:
     spec:
       chart: traefik
