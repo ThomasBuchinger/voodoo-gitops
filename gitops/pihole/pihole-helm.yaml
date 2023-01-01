@@ -1,13 +1,33 @@
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
 metadata:
   name: pihole
-  namespace: kube-system
+  namespace: flux-system
 spec:
-  repo: https://mojo2600.github.io/pihole-kubernetes
-  chart: pihole
+  interval: 24h
+  url: https://mojo2600.github.io/pihole-kubernetes
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: flux-system
+spec:
+  interval: 5m
   targetNamespace: default
-  valuesContent: |-
+  chart:
+    spec:
+      chart: pihole
+      version: '>=2.0.0'
+      sourceRef:
+        kind: HelmRepository
+        name: pihole
+        namespace: flux-system
+      interval: 15m
+  values:
     image:
       tag: "latest"
     dnsHostPort:
@@ -28,7 +48,7 @@ spec:
       customDnsEntries:
       - address=/nas.buc.sh/10.0.0.19
       - address=/kvm.buc.sh/10.0.0.13
-      - address=/voodoo.buc.sh/10.0.0.16
+      - address=/evergreen.buc.sh/10.0.0.16
       - address=/kube.buc.sh/10.0.0.20
       - address=/prod.buc.sh/10.0.0.32
       - address=/green-prod.buc.sh/10.0.0.33
@@ -36,11 +56,11 @@ spec:
       customCnameEntries:
       - cname=s3.buc.sh,nas.buc.sh
       - cname=sync.buc.sh,nas.buc.sh
-      - cname=pihole.buc.sh,voodoo.buc.sh
-      - cname=paste.buc.sh,voodoo.buc.sh
-      - cname=vault.buc.sh,voodoo.buc.sh
-      - cname=wireguard.buc.sh,voodoo.buc.sh
-      - cname=voodoo-console.buc.sh,voodoo.buc.sh
+      - cname=pihole.buc.sh,evergreen.buc.sh
+      - cname=paste.buc.sh,evergreen.buc.sh
+      - cname=vault.buc.sh,evergreen.buc.sh
+      - cname=wireguard.buc.sh,evergreen.buc.sh
+      - cname=voodoo-console.buc.sh,evergreen.buc.sh
       - cname=argocd.buc.sh,green-prod.buc.sh
 
 ---
@@ -48,6 +68,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pihole
+  namespace: default
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
 spec:
