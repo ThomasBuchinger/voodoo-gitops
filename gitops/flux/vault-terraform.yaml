@@ -5,7 +5,9 @@ metadata:
   name: vault-terraform
   namespace: flux-system
 spec:
-  interval: 15m0s
+  interval: 1m0s
+  dependsOn:
+  - name: vault-instance
   path: ./gitops/vault-terraform/kubernetes
   prune: true
   sourceRef:

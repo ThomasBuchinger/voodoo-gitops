@@ -5,7 +5,9 @@ metadata:
   name: cloudflared
   namespace: flux-system
 spec:
-  interval: 15m0s
+  interval: 1m0s
+  dependsOn:
+  - name: external-secrets-config
   path: ./gitops/cloudflared
   prune: true
   sourceRef:
