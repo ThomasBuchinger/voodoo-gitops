@@ -14,7 +14,7 @@ build: ssh-install ssh-kubeconfig ssh-configure kubeseal
 
 ssh-install: check-files generate_sealedsecret
 	ssh $(SSH_HOST) mkdir -p bin
-	scp install_k3s.sh switch_flux.sh $(SSH_HOST):bin/
+	scp install_k3s.sh switch_flux.sh k3os/install_flux.sh $(SSH_HOST):bin/
 	ssh $(SSH_HOST) bin/install_k3s.sh
 ssh-kubeconfig:
 	scp $(SSH_HOST):/etc/rancher/k3s/k3s.yaml kubeconfig

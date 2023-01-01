@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: voodoo-gitops
-  targetNamespace: default
+  targetNamespace: flux-system
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
