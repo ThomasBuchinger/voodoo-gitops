@@ -5,6 +5,7 @@ metadata:
 spec:
   # Update hourly
   schedule: "0 * * * *"
+  suspend: true
   jobTemplate:
     spec:
       template:
