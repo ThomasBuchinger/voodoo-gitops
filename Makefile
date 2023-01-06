@@ -4,9 +4,9 @@ IP=10.0.0.16
 SSH_HOST=root@$(IP)
 K3S_MANIFEST_DIR=/var/lib/rancher/k3s/server/manifests
 SECRETS = gitops/infra/common-secrets-sealed.yaml \
-					gitops/vault/vault-content-cloudflare-sealed.yaml \
-					gitops/vault/vault-content-secretids-sealed.yaml \
-					gitops/vault/vault-content-github-sealed.yaml
+					gitops/vault/instance/vault-content-cloudflare-sealed.yaml \
+					gitops/vault/instance/vault-content-secretids-sealed.yaml \
+					gitops/vault/instance/vault-content-github-sealed.yaml
 
 
 .PHONY: build ssh-install ssh-configure check-files generate_sealedsecret kubeseal
