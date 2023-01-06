@@ -10,7 +10,8 @@ SECRETS = gitops/infra/common-secrets-sealed.yaml \
 
 
 .PHONY: build ssh-install ssh-configure check-files generate_sealedsecret kubeseal
-build: ssh-install ssh-kubeconfig ssh-configure kubeseal
+build: generate_sealedsecret kubeseal
+install: ssh-install ssh-kubeconfig ssh-configure
 
 ssh-install: check-files
 	ssh $(SSH_HOST) mkdir -p bin
@@ -20,7 +21,7 @@ ssh-kubeconfig:
 	scp $(SSH_HOST):/etc/rancher/k3s/k3s.yaml kubeconfig
 	yq eval $(YQ_ARGS) '.clusters[0].cluster.server = "https://$(IP):6443"' kubeconfig
 ssh-configure: generate_sealedsecret
-	scp $(OUTPUT_DIR)/sealed_secret.yaml $(SSH_HOST):$(K3S_MANIFEST_DIR)
+	scp $(OUTPUT_DIR)/sealed-secret.yaml $(SSH_HOST):$(K3S_MANIFEST_DIR)
 	scp flux-install/* $(SSH_HOST):$(K3S_MANIFEST_DIR)
 
 check-files:
