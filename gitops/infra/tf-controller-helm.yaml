@@ -15,6 +15,7 @@ metadata:
   name: tf-controller
   namespace: flux-system
 spec:
+  releaseName: tf-controller
   chart:
     spec:
       chart: tf-controller

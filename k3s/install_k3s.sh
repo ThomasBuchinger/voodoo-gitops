@@ -4,8 +4,9 @@
 # Some Base OS config
 #
 dnf install -y vim
-dnf install -y cockpit cockpit-navigator cockpit-networkmanager cockpit-packagekit cockpit-pcp cockpit-selinux cockpit-sosreport tar
+dnf install -y cockpit cockpit-networkmanager cockpit-packagekit cockpit-pcp cockpit-selinux cockpit-sosreport tar
 systemctl enable --now cockpit.socket
+systemctl enable --now pmlogger.service
 
 
 # Install k3s

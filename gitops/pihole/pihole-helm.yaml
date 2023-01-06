@@ -17,6 +17,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  releaseName: pihole
   targetNamespace: default
   chart:
     spec:
@@ -84,7 +85,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: pihole-web
+            name: pihole-pihole-web
             port:
               number: 80
   - host: pihole.10.0.0.16.nip.io
@@ -94,6 +95,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: pihole-web
+            name: pihole-pihole-web
             port:
               number: 80

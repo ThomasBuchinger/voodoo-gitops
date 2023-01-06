@@ -16,6 +16,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  releaseName: vault-operator
   targetNamespace: default
   chart:
     spec:
