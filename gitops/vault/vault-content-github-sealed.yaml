@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: vault-content-github
+  namespace: default
+spec:
+  encryptedData:
+    github_apikey_image_updater: AgAh8SfYGhcuLtXpeWfsaOMzLz0DB5hdNnyRmbdpySNSFGHFIoIo5qrtvc/wW1eoObtITKBdyxdMHgdJfZXMV1t2oNJKUVKaUrjUAEBnsGML/okAqChq7Uh0EvlSdfjWyOPT8AyK4lXpxxQ0N1bxHK2Uw8P8n/akXS8pNHXRwC0aJY5IIdql0H4aU0aurKsAtlRxeflGXt5mCn/PSmZiKKYD9jrmsFjwHOiwI5fmlUKasFEZd/7XqLMe5CcK3ZCOYBYIh8bE1BeQ9NeKo4uJEs27LSNfkgg5RGHBrWciffgNkqZiOlzNttx8bdcFrHRiVJbWSq70DFU5TOXFMXiL+xabr71+qrUR+KPdXhBHNpqO6LSqgX8XnZOtGkn0+VIvh8mdZ5iwCGXzSTmirzPkEVHnaQ7a+oc4ELy+eM+3QMuxTTCk1LgFrB4jfOvebYMxwa35fz9nhCZMwwM9hOAAO0Zioog8szcomfTwQx056qzfZSSZHqTfSKqbyktNZ2DvJm+EZkMSFU8pqzuZpy44Rho4MFL0I/JKlCoWK2B3rdTkhwNhNyiiz2TaeSaJzYXUMWjH2oDnkkNdQEUm9f8X3AjD7FNUCmiteYsKZHmPYNxg3rLe6twbTaiDhOAB/aapm0xGLNqgsQlE7e/+UIPhU2xNf3cOE59wOwZjaIeaTvDhxxPqW+7bY0Cnxq3exwyVjydf4XtHXaU=
+    github_username: AgA/R6Ce7j3q3uaAhp+eNGvUOOfmFxJdE5VTXJxZildXxNKA50UNIx7ydrthqvKxdxPdc8SWjCeymv10TgLhRZ9CM5OAa5X3jIRy5ln8uY7L1k4DcKpFrsEJUNAFJaryTYaS64UAxnlLYKTzl/cvg7A/KfPm3QqdWse2nCfS6qPBxS2yLu3klArI9n9tufDJiOkmpF8l1E9KNGfTnPkrFlKEC1dtZDb99JLfWZiJPPWAlX9M0/sVm/u17Dcw7lH5SsZlOFRc8tYautFrd9wUi1m+CpxecrvqnfOh6i23T0XYleE2XYU2tRTfLQT+cLRt/Dhn1Op3eZYIYu63s73G5tvKxF4FIWg52bgMKckM0vYZFh6+SPSCzTC2ad7psO99k+Ow7i+HSPhNBJ1BZEQ2kqss/A2URcti+RMK5KmOgwEBC+jEEH7oH9pHsV586ABa/6g14u4KBucNWhnleG/qf8PEJt7xRiUygmk941ITuLNF/B7vRqhdmELAxFWilj4s0RMxljm/Of7/SD+N4UAS+CjrCaHs9N1/PlL1Mpb8C2H+uZB7sqC4s8WIshXztNaZyKLlKaBS3RGSbyQRZSBUCJyDRBUli8wN+A3xEgvDu7BC1Pbw65c9vW/oUrSD7A1ww4WHxQFLtnFTo52h9SfFs/1CG7c43rrvwgvU5Gd76ssqQ540z7aWNyMd67BoyBgNpU+1TgcMv6mUf5IJoCOOyvI=
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        vault.buc.sh/update-action: restart
+        vault.buc.sh/vault-path: secret.saas.github
+      name: vault-content-github
+      namespace: default
+
