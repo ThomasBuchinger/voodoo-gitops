@@ -323,6 +323,8 @@ configMap:
     filesystem:
       enabled: true
       filename: /config/notification.txt
+    smtp:
+      enabled: false
   identity_providers:
     oidc:
       enabled: false
