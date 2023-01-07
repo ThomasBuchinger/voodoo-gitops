@@ -176,7 +176,7 @@ configMap:
     ##
     file:
       enabled: true
-      path: /users/users_database.yml
+      path: /users/users_database.yaml
       watch: true
       search:
         email: false
