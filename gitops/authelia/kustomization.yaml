@@ -4,7 +4,10 @@ kind: Kustomization
 resources:
 - authelia-helm.yaml
 
-configMapGenerator:
+secretGenerator:
 - name: authelia-values
   files:
   - values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
