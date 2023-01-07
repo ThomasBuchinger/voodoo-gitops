@@ -24,8 +24,8 @@ module "approle_green" {
 module "kubeconfig" {
   source = "./modules/kubeconfig"
 
-  name = "voodoo"
-  api_url = "https://voodoo.buc.sh:6443"
+  name = "evergreen"
+  api_url = "https://evergreen.buc.sh:6443"
 
   client_id = module.oidc_kubernetes.client_id
   client_secret = module.oidc_kubernetes.client_secret
