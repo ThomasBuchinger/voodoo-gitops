@@ -28,12 +28,7 @@ spec:
         name: authelia
         namespace: flux-system
       interval: 5m
-  values:
-    domain: buc.sh
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-test-cloudflare-dns
-      tls:
-        enabled: true
-        secret: cert-auth-buc-sh
+  valuesFrom:
+    - kind: Secret
+      name: authelia-values
+      valuesKey: values.yaml
