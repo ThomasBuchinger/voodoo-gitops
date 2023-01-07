@@ -4,6 +4,7 @@ sealed.key
 secrets/
 !secrets/.gitkeep
 
+kubeconfig
 out/
 
 gitops/*-terraform/terraform/.terraform*

@@ -2,6 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: cloudflared
+  namespace: default
 spec:
   secretStoreRef:
     name: k8s-vault-secret

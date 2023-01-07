@@ -90,10 +90,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - voodoo-console.buc.sh
-    secretName: cert-voodoo-console-buc-sh
+    - evergreen-console.buc.sh
+    secretName: cert-evergreen-console-buc-sh
   rules:
-  - host: voodoo-console.buc.sh
+  - host: evergreen-console.buc.sh
     http:
       paths:
       - path: /
@@ -103,7 +103,15 @@ spec:
             name: okd-console
             port:
               number: 9000
-  - host: voodoo-console.10.0.0.16.nip.io
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: okd-console-http
+spec:
+  rules:
+  - host: evergreen-console.10.0.0.16.nip.io
     http:
       paths:
       - path: /
