@@ -1,130 +1,132 @@
-# Voodoo Board
+# Cluster: evergreen
 
-This repoitory sets up and configures the voodoo board. A SBC running various small services on K3os.
+This repoitory managed the evergreen-cluster, a single-node Kubernetes cluster providing infrastructure services to the rest of the Network.
 
 ## Installation
 
-K3os is installed via a cloudinit(-ish?) configuration file. [See k3os docs](https://github.com/rancher/k3os/blob/master/README.md#configuration). The full configuration file is generated via a Makefile.
-
-To complete the Setup, boot the k3os-amd64.iso as Live-System (e.g. via PiKVM). Copy the generated `config.yaml` to the system and run `sudo k3os install`
+First Install RockyLinux 8 and setup passwordless SSH access to the server.
 
 ```bash
-# Generate cloud-init config in out/config.yaml
+# Generate the SealedSecret encryption secret
 make
 
-# Because the config.yaml is too big for the text-paste system of PiKVM, you can host it on a HTTP server
-firewall-cmd --add-port 8000/tcp
-python -m http.server
-
-# On K3os run (login rancher + ssh-key)
-sudo k3os install
-
-http://10.0.0.11:8000/config.yaml
+# Install and configure node
+#
+# ssh-install: installs k3s and a few OS packages
+# ssh-kubeconfig: fetch the admin kubeconfig
+# ssh-configure: bootstrap flux
+make install
 ```
 
-## K3os Config
-
-Input files for K3os config.yaml
-* `./password.txt` Add the password for the 'rancher'-user here
-* `./id_rsa.pub` Add an SSH key to login with the rancher user remotely
-* `./sealed.key` and `./sealed.crt` Sealed Secrets private Key
-* `k3os/network.config`: Network config
-* `k3os/install_flux.sh` Download flus installation files from this repo and copy them into k3s automatic deployment directory /var/lib/rancher/k3s/server/manifests
+### Switch branches
+To switch to a different branch, log into the server and run `~/bin/install_flux.sh <BRANCH>`
 
 ## Architecture
+All applcations are handled by fluxcd
+linux--installs-->fluxchart
 
 ```mermaid
-flowchart TD
+flowchart TB
 
-k3os-->ci[Cloud-Init]
+subgraph os[RockyLinux 8]
+direction TB
+Makefile-->os_conf[Configure OS]
+Makefile-->k3s[Install k3s]
+Makefile-->copy_ss[Copy SealedSecret]
+Makefile-->bootstrap[Bootstrap Flux]
 
-ci-->os[OS Configuration]
-ci--configures-->ss_key{{SealedSecrets PrivateKey}}
-ci--copies-->cron[Image Updater Cron Job]
-ci--copies-->install_flux[install_flux.sh]
+end
 
-repo_flux_install{{flux-install/}}
-install_flux--installs-->FluxCD
-repo_flux_install-->FluxCD
+os--deploys-->flux
 
-repo_flux{{gitops/flux/}}-->FluxCD
+subgraph flux[FluxCD]
+direction TB
+
+repo_flux_install{{Repo: flux-install/}}-->FluxCD
+repo_flux{{repo: gitops/flux/}}-->FluxCD
+
 FluxCD-->pihole
-FluxCD-->cloudflared
 FluxCD-->eso[External Secrets]
+FluxCD-->cert[Cert Manager]
 FluxCD-->node-exporter
 FluxCD-->console[OKD Console]
 FluxCD-->shell-ddns
-FluxCD-->static
 FluxCD-->wastebin
 FluxCD-->tfc[Flux Terraform Controller]
 FluxCD-->ss[SealedSecrets]
-
-FluxCD---->vaultop[Vault Operator]
-vaultop--deploys-->Vault
-ss----vaultcfg
-tfc-->vaultcfg{{Vault Config}}
-vaultcfg--terraforms-->Vault
-
+FluxCD-->vaultop[Vault Operator]
+end
 ```
-All applcations are handled by fluxcd
 
-### Secrets Management
+## Secrets Management
 Secrets are handled via a combination of vault and SealedSecrets.
 
 * The plain secrets are stored in `secrets/<app-dir>/<secret>.yaml`. This path os obviously not pushed to git
 * The Makefile encrypts the secrets using `kubeseal` and stores them in `gitops/<app-dir>/<secret>-sealed.yaml`
 * Banzaicloud Vault Operator stores the decrypted Secrets in Vault
-* The External-Secrets-Otperator fetches the Secrets from vault and creates the actual Secret
+* The External-Secrets-Operator fetches the Secrets from vault and creates the actual Secret
 
 ```bash
 # Rotate encryption key
-openssl req -new -x509 -nodes -days 30 -key sealed.key -out sealed2.crt -subj "/CN=sealed-secret/O=sealed-secret"
+mv sealed.crt sealed.crt.old
+openssl req -new -x509 -nodes -days 30 -key sealed.key -out sealed.crt -subj "/CN=sealed-secret/O=sealed-secret"
 
 # to update Secrets run
 make kubeseal
 ```
-#### Secret Flow
+### Secret Flow
 
 ```mermaid
-
 flowchart TD
+ss{{Sealed Secrets in Repo}}
 
-repo{{Sealed Secrets in Repo}}
-repo-->Cloudflare
-repo-->GitHub
-repo-->secretids[Approle SecretIDs]
-repo-->creds[Static Credentials]
+ss_creds-->Pihole
+ss-->ss_creds[Static Credentials]
+ss-->ss_github[GitHub]
+ss-->ss_cf[Cloudflare]
+ss-->ss_approle[Approle SecretIDs]
+
+tfc{{Vault Terraform Config}}
+tfc--uses-->vault-static
+tfc--configures-->vault-auth
+
+ss_creds--Admin Password-->vault
+ss_creds-->vault-static
+ss_github-->vault-static
+ss_cf-->vault-static
+ss_approle-->vault-static
+
+certman_cert[CertManaager Certificates]
+tf_oidc[Terraform OIDC Config]
+certman_cert-->vault-cluster
+tf_oidc-->vault-cluster
+
+
+es[External Secrets Operator]
+vault-static--->es
+vault-cluster--->es
+
+
+subgraph vault[Hashicorp Vault]
 
 vault-static{{Vault Static Secrets Engine}}
-GitHub-->vault-static
-Cloudflare-->vault-static
-secretids-->vault-static
-creds-->vault-static
-
+vault-auth{{Auth Config}}
 vault-cluster{{Vault Cluster Secrets Engine}}
-certs[CertManager Certificates]--->vault-cluster
+
 vault-cluster-->oidc-config[OIDC Configs]
 vault-cluster-->external-certs[Managed Certificate]
 vault-cluster-->kubeconfig[Kubeconfig for local Cluster]
-vault-cluster-->es
 
-es{{External Secrets Maager}}
-vault-static--> es
+end
+
+
 es--cf_apikey_dnsedit-_key-->CertManager
 es--cf_tunnel_token-_key-->cloudflared
 es--cf_apikey_dnsedit-_key-->ShellDDNS
 es--OIDC-Config-->vault-oidc[Cluster OIDC Login]
 
-
-vault-auth{{Vault Auth Config}}
-vault-tf-approle-->vault-auth
-creds-->vault-auth
-creds-->PiHole
-
-vault-tf-approle{{Vault Terraform Approle Config}}
-vault-static--secret-ids-->vault-tf-approle
-
-vault-tf-oidc{{Vault Terraform OIDC Client}}
-vault-tf-oidc--->vault-cluster
-
 ```
+
+
+
+

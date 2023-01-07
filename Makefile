@@ -13,7 +13,7 @@ SECRETS = gitops/infra/common-secrets-sealed.yaml \
 build: generate_sealedsecret kubeseal
 install: ssh-install ssh-kubeconfig ssh-configure
 
-ssh-install: check-files
+ssh-install:
 	ssh $(SSH_HOST) mkdir -p bin
 	scp k3s/install_k3s.sh k3s/install_flux.sh $(SSH_HOST):bin/
 	ssh $(SSH_HOST) bin/install_k3s.sh
@@ -30,7 +30,7 @@ check-files:
 	test -f sealed.crt
 	test -f sealed.key
 
-generate_sealedsecret:
+generate_sealedsecret: check-files
 	cp k3s/sealed-secrets-template.yaml $(OUTPUT_DIR)/sealed-secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.key" = load_str("sealed.key")'  $(OUTPUT_DIR)/sealed-secret.yaml
 	yq eval $(YQ_ARGS) '.stringData."tls.crt" = load_str("sealed.crt")'  $(OUTPUT_DIR)/sealed-secret.yaml
