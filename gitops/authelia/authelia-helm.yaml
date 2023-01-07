@@ -31,5 +31,4 @@ spec:
   valuesFrom:
     - kind: Secret
       name: authelia-values
-      namespace: default
       valuesKey: values.yaml
