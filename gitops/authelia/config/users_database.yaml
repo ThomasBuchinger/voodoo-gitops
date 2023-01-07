@@ -1,0 +1,9 @@
+users:
+  admin:
+    disabled: false
+    displayname: "Authelia Admin"
+    password: "$argon2id$v=19$m=65536,t=3,p=4$B/s1isKqDY6xayHP76TQ6A$LE58XDhhOK5GkEPVqz1e8JC+szeIOa0W+s0UD2wjfAs"
+    email: root@evergreen.buc.sh
+    groups:
+      - admins
+      - dev

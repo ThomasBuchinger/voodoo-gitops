@@ -58,7 +58,14 @@ pod:
       cpu: "0.25"
       memory: 50Mi
 
-
+  extraVolumeMounts:
+  - name: user-database
+    mountPath: "/users"
+    readOnly: true
+  extraVolumes:
+  - name: user-database
+    secret:
+      secretName: authelia-users
 
 ##
 ## Authelia Config Map Generator
@@ -169,7 +176,7 @@ configMap:
     ##
     file:
       enabled: true
-      path: /config/users_database.yml
+      path: /users/users_database.yml
       watch: true
       search:
         email: false
