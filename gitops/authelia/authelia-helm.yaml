@@ -1,0 +1,39 @@
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: authelia
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://charts.authelia.com
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: flux-system
+spec:
+  interval: 5m
+  releaseName: authelia
+  targetNamespace: default
+  chart:
+    spec:
+      chart: authelia
+      version: '0.8.52'
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: flux-system
+      interval: 5m
+  values:
+    domain: buc.sh
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-test-cloudflare-dns
+      tls:
+        enabled: true
+        secret: cert-auth-buc-sh
