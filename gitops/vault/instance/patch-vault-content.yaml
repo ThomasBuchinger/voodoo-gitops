@@ -49,7 +49,7 @@ spec:
         data:
           secretKeyRef:
           - name: vault-content-secretids
-            key: green
+            key: prod
             optional: true
       - type: kv
         path: cluster/data/cert/cert-paste-buc-sh
