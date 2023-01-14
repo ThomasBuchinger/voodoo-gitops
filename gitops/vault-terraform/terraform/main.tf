@@ -12,13 +12,13 @@ resource "vault_auth_backend" "approle" {
   description = "Auth Backend for ServiceAccounts outside of Kubernetes"
 }
 
-module "approle_green" {
+module "approle_prod_cluster" {
   source = "./modules/approle"
 
-  name = "green"
+  name = "prod"
   secretid_fetch_mount = "secret"
   secretid_fetch_path = "access/secret-ids"
-  secretid_fetch_key = "green"
+  secretid_fetch_key = "prod"
 }
 
 module "kubeconfig" {
