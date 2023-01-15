@@ -54,12 +54,15 @@ spec:
       - address=/prod.buc.sh/10.0.0.32
       - address=/green-prod.buc.sh/10.0.0.33
       - address=/bastion.buc.sh/10.0.0.101
+
+      # Workaround
+      - address=/vault.buc.sh/10.0.0.16
       customCnameEntries:
       - cname=s3.buc.sh,nas.buc.sh
       - cname=sync.buc.sh,nas.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
       - cname=paste.buc.sh,evergreen.buc.sh
-      - cname=vault.buc.sh,evergreen.buc.sh
+      # - cname=vault.buc.sh,evergreen.buc.sh
       - cname=wireguard.buc.sh,evergreen.buc.sh
       - cname=voodoo-console.buc.sh,evergreen.buc.sh
       - cname=argocd.buc.sh,green-prod.buc.sh
