@@ -4,7 +4,8 @@ resource "vault_identity_oidc_provider" "global" {
   https_enabled = true
   issuer_host = "vault.buc.sh"
   allowed_client_ids = [
-    module.oidc_kubernetes.client_id
+    module.oidc_kubernetes.client_id,
+    module.oidc_prod.client_id
   ]
   scopes_supported = [
     vault_identity_oidc_scope.scope_user.name,
@@ -34,12 +35,12 @@ module "oidc_kubernetes" {
   ]
 }
 
-module "oidc_green_prod" {
+module "oidc_prod" {
   source = "./modules/oidc_client"
 
-  client_name = "green-prod"
+  client_name = "prod"
   provider_url = vault_identity_oidc_provider.global.issuer
-  redirect_url = "http://localhost:8000"
+  redirect_url = "https://argocd.buc.sh"
   authorized_users = [
     vault_identity_entity.admin.id
   ]
