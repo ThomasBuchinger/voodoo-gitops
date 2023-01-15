@@ -66,6 +66,8 @@ spec:
       - cname=wireguard.buc.sh,evergreen.buc.sh
       - cname=voodoo-console.buc.sh,evergreen.buc.sh
       - cname=argocd.buc.sh,green-prod.buc.sh
+      - cname=grafana.buc.sh,green-prod.buc.sh
+      - cname=paperless.buc.sh,green-prod.buc.sh
 
 ---
 apiVersion: networking.k8s.io/v1
