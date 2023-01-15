@@ -12,7 +12,7 @@ resource "vault_approle_auth_backend_role" "role" {
   backend         = var.approle_path
   role_name       = local.role_name
   role_id         = local.role_id
-  token_policies  = ["default", "cluster_reader"]
+  token_policies  = concat(["default"], var.policies)
   token_ttl = 300
   token_max_ttl = 300
 }
@@ -45,6 +45,12 @@ variable "secretid_fetch_key" {
 variable "approle_path" {
   type = string
   default = "approle"
+}
+
+variable "policies" {
+  type = list(string)
+  description = "Additional Policies for this role"
+  default = []
 }
 
 output "role_id" {
