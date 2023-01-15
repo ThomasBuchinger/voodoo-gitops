@@ -62,6 +62,16 @@ spec:
             key: tls.key
             optional: true
       - type: kv
+        path: cluster/data/cert/cert-argocd-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-argocd-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-argocd-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/apiserver
         data:
           data:
