@@ -10,8 +10,8 @@ data "vault_kv_secret_v2" "secret_id" {
 
 resource "vault_approle_auth_backend_role" "role" {
   backend         = var.approle_path
-  role_name       = local.role_id
-  role_id         = local.role_name
+  role_name       = local.role_name
+  role_id         = local.role_id
   token_policies  = ["default", "cluster_reader"]
   token_ttl = 300
   token_max_ttl = 300
