@@ -72,6 +72,26 @@ spec:
             key: tls.key
             optional: true
       - type: kv
+        path: cluster/data/cert/cert-grafana-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-grafana-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-grafana-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
+        path: cluster/data/cert/cert-paperless-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-paperless-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-paperless-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/apiserver
         data:
           data:
