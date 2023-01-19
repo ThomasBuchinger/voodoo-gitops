@@ -19,6 +19,8 @@ module "approle_prod_cluster" {
   secretid_fetch_mount = "secret"
   secretid_fetch_path = "access/secret-ids"
   secretid_fetch_key = "prod"
+
+  policies = ["cluster_reader", "secret_reader"]
 }
 
 module "kubeconfig" {
