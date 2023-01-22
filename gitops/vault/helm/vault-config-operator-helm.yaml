@@ -30,3 +30,4 @@ spec:
   # Get values.yaml: helm show values vault-config-operator/vault-config-operator
   values:
     enableMonitoring: false
+
