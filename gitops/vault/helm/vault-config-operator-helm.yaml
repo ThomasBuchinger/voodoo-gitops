@@ -26,8 +26,7 @@ spec:
         kind: HelmRepository
         name: vault-config-operator
         namespace: flux-system
-      # Get values.yaml: helm show values vault-config-operator/vault-config-operator
-      values:
-        enableMonitoring: false
       interval: 5m
-  values: {}
+  # Get values.yaml: helm show values vault-config-operator/vault-config-operator
+  values:
+    enableMonitoring: false
