@@ -64,7 +64,8 @@ spec:
       - cname=paste.buc.sh,evergreen.buc.sh
       # - cname=vault.buc.sh,evergreen.buc.sh
       - cname=wireguard.buc.sh,evergreen.buc.sh
-      - cname=voodoo-console.buc.sh,evergreen.buc.sh
+      - cname=evergreen-console.buc.sh,evergreen.buc.sh
+      - cname=auth.buc.sh,evergreen.buc.sh
       - cname=argocd.buc.sh,green-prod.buc.sh
       - cname=grafana.buc.sh,green-prod.buc.sh
       - cname=paperless.buc.sh,green-prod.buc.sh
