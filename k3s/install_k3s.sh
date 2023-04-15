@@ -10,7 +10,7 @@ systemctl enable --now pmlogger.service
 
 # Automatic Updates
 #
-dnf install dnf-automatic
+dnf install -y dnf-automatic
 sed -i -e 's/apply_updates.*=.*no/apply_updates = yes/g' -e '/apply_updates/a reboot = when-needed' /etc/dnf/automatic.conf
 systemctl enable --now dnf-automatic.timer
 
