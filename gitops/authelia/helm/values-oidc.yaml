@@ -1,0 +1,49 @@
+configMap:
+  identity_providers:
+    oidc:
+      enabled: true
+      hmac_secret: this_is_a_secret_abc123abc123abc
+      issuer_private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEogIBAAKCAQEA3MnK+mushUFVTq5FaJ5cZe5+UKRtl80W+xbYYs6Co+enw9fz
+        TamCYRzjSVjQUwbbavc2MGeWYBbOq8RX8MX31V+lcOl2z2aCjKBsktRoxTcHSfgG
+        jJ4QGV+e5b5YRZw7fvZD4vV/t6L4mOBRukytrp8+d5uZnpa1t1ck5iSnGOhetawM
+        0KFvuRgvwZUfdSZdRzdilK6BF1ff/M6rMoWiTIzXLs6jLaDWMU0ntMQ9/yjjznid
+        QWcMZmgahYGw/XEA2vDoyXsboJS361zJqSfyKv9lHaIMnmnjF1CnG6PnrvrcNyoJ
+        LP+uBmPTXE1PFrNq22AoJgnDHy5v44w1sUtTRwIDAQABAoIBAD6l87aC/v0AwNgG
+        kyNQbB9wQN9ZCM/eHfs5TEUdG+yuOuhTSnJq+tfbfpK9ZL9qXrBHXVT2z7CMSDBt
+        Ehb71YryDNuxI0lOaRTGIIi5RNFQ//x5KEKWRzMr8sZ18E4wOqGX90NbLdZJpAic
+        /hPC1jWKcgs2V6ysTvuq+oljNRbXsZXdfDynnJ4+x6zdVbymmSEveC43X8S9zgqR
+        fiyvwoDy0TnIhKai5N/taZES/u6UkAPKd1cdRuTXpvJmK5f+dBG2E+7UdTXvuFlR
+        QjzWIhopJ9TKJwQmRNJeq7TfTRvxpV8uye2Ot+h3dWVmxTee2tBWCGsjll4S9Wfr
+        pYPCTwECgYEA+UAdjOU8NIAxrO2vX0HEKvKh2sVyj/kLLudkDGiJwFyz2EeWcFS4
+        4bKELbkHHmugB0ci1m0klC1wXbqIrRIkYGcg1ri90SI1tUHM4dJuhujBaIRJtPne
+        C46BhShg/gv/2Bb4RfA6Xa/+5n/Hmz8oDv3Rnzm4UpICQTEA+NfhJaECgYEA4sRe
+        SdDNAzHqVtXPlB7zGtID6xHQiV+H2VTbxRWsKKGi5DAoTmRIi/84vTY17+xAlGNJ
+        urFlBe6mMC6gRvWRg1IHKymtww3qExzY7cHLVHUiCoD6kXwqXMjNZaHVP+9Rj6aN
+        YGPNqeKnsbWIlb5ErRkuYUJ+5zHpHqI64JFH/+cCgYBHpgWYleDLmros4ppSAJ66
+        VcrvD2kSN93eGsfoxTgr4roUBugY3FHVFzLlzdVdCkUTMoCyMOed7L3rQ468aYWp
+        bJvE/ZAbCQF1XDfgBlSdVVUbjUN+0YDhw5I5y9St0pc178xolljAy7GzYrHnT61d
+        OdtDMR1qJuyc/tAvuCbRYQKBgF3yOpncLkMnl80X0WKtG8w9u6/Udo+jCzXnqRDS
+        dLt0k3Zz2Q75DvEo8Em7PsdCGlMfezkkKxU1FJabin07WWiNQDkKkFlh11rJtbly
+        cxlvWYX+f1Bsn2RHMIjtbdqJ/EFGIAYR8u9x3kWKTqay5+LKruNOWCLSE6FEVp4Y
+        sjp7AoGALKQ2vuFU4bnUyhZDKoD+Y3Qb7map/RXIlgEXgYuq98vGed/myv/Ars7l
+        zhB85n+OxN8OHbwPj+P0vNbRFilQGe8FMyksulPHW0tkw9TgvtnH+jYX891UWCTs
+        NftZa4TsYOfCV5oWu/A2NnqJVEh3aWXI9iSGzAXqMwiKGi1i5Wk=
+        -----END RSA PRIVATE KEY-----
+      clients:
+      - id: vault
+        description: HashiCorp Vault
+        secret: '$plaintext$vault_client_secret'
+        public: false
+        authorization_policy: one_factor
+        redirect_uris:
+          - https://vault.buc.sh/oidc/callback
+          - https://vault.buc.sh/ui/vault/auth/oidc/oidc/callback
+          - https://psteniusubi.github.io/oidc-tester/authorization-code-flow.html
+        scopes:
+          - openid
+          - profile
+          - groups
+          - email
+        userinfo_signing_algorithm: none

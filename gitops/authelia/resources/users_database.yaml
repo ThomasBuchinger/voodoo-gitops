@@ -1,0 +1,28 @@
+users:
+  admin:
+    disabled: false
+    displayname: "Lab Super Admin"
+    password: __REPLACE_ME_ADMIN__
+    email: root@evergreen.buc.sh
+    groups:
+      - admins
+      - developers
+      - users
+      - external
+  buc:
+    disabled: false
+    displayname: "Main user"
+    password: __REPLACE_ME_BUC__
+    email: root@evergreen.buc.sh
+    groups:
+      - developers
+      - users
+      - external
+  external:
+    disabled: false
+    displayname: "User for external http access"
+    password: __REPLACE_ME_EXTERNAL__
+    email: root@evergreen.buc.sh
+    groups:
+      - external
+
