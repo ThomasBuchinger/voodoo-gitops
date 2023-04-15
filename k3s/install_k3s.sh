@@ -8,6 +8,13 @@ dnf install -y cockpit cockpit-networkmanager cockpit-packagekit cockpit-pcp coc
 systemctl enable --now cockpit.socket
 systemctl enable --now pmlogger.service
 
+# Automatic Updates
+#
+dnf install dnf-automatic
+sed -i -e 's/apply_updates.*=.*no/apply_updates = yes/g' -e '/apply_updates/a reboot = when-needed' /etc/dnf/automatic.conf
+systemctl enable --now dnf-automatic.timer
+
+
 
 # Install k3s
 #

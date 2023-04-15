@@ -21,11 +21,43 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: view
+  name: cluster-viewer
 subjects:
 - kind: ServiceAccount
   name: okd-console
   namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-viewer
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ''
+  resources:
+  - 'Pod'
+  verbs:
+  - get
+  - list
+  - watch
+  - delete
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+
+
 
 ---
 apiVersion: apps/v1
