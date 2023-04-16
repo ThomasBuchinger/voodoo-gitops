@@ -10,11 +10,11 @@ spec:
   url: https://minicloudlabs.github.io/helm-charts
 
 ---
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gatus-status
+  namespace: default
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
 spec:
@@ -39,6 +39,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gatus-status-http
+  namespace: default
 spec:
   rules:
   - host: status.10.0.0.16.nip.io
