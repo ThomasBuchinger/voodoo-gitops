@@ -79,10 +79,16 @@ spec:
       - name: OKD Console
         url: http://okd-console:9000
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
       - name: PiHole
         url: http://pihole-web
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
       - name: Vault
         url: http://vault:8200
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
 
