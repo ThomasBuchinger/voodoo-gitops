@@ -82,7 +82,7 @@ spec:
         conditions:
           - "[STATUS] == 200"
       - name: PiHole
-        url: http://pihole-web
+        url: http://pihole-web/admin/login.php
         interval: 5m
         conditions:
           - "[STATUS] == 200"
