@@ -1,0 +1,94 @@
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: gatus
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://minicloudlabs.github.io/helm-charts
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gatus-status
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
+spec:
+  tls:
+  - hosts:
+    - status.buc.sh
+    secretName: cert-status-buc-sh
+  rules:
+  - host: status.buc.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gatus
+            port:
+              number: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gatus-status-http
+  namespace: default
+spec:
+  rules:
+  - host: status.10.0.0.16.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gatus
+            port:
+              number: 80
+
+
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gatus
+  namespace: flux-system
+spec:
+  interval: 5m
+  releaseName: gatus
+  targetNamespace: default
+  chart:
+    spec:
+      chart: gatus
+      version: '>=3.2.0'
+      sourceRef:
+        kind: HelmRepository
+        name: gatus
+        namespace: flux-system
+  values:
+    config:
+      endpoints:
+      - name: OKD Console
+        url: http://okd-console:9000
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+      - name: PiHole
+        url: http://pihole-web/admin/login.php
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+      - name: Vault
+        url: http://vault:8200
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+
