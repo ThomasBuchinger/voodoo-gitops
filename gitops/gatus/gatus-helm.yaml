@@ -77,18 +77,51 @@ spec:
     config:
       endpoints:
       - name: OKD Console
+        group: evergreen
         url: http://okd-console:9000
-        interval: 5m
+        interval: 20m
         conditions:
           - "[STATUS] == 200"
       - name: PiHole
+        group: evergreen
         url: http://pihole-web/admin/login.php
-        interval: 5m
+        interval: 1m
         conditions:
           - "[STATUS] == 200"
       - name: Vault
+        group: evergreen
         url: http://vault:8200
-        interval: 5m
+        interval: 20m
         conditions:
           - "[STATUS] == 200"
+      - name: TrueNAS
+        group: Hardware
+        url: "icmp://10.0.0.20"
+        interval: 5m
+        conditions:
+        - "[CONNECTED] == true"
+      - name: QNAP
+        group: Hardware
+        url: "icmp://10.0.0.19"
+        interval: 5m
+        conditions:
+        - "[CONNECTED] == true"
+      - name: KVM
+        group: Hardware
+        url: "icmp://10.0.0.19"
+        interval: 5m
+        conditions:
+        - "[CONNECTED] == true"
+      - name: Gateway
+        group: Hardware
+        url: "icmp://10.0.0.1"
+        interval: 5m
+        conditions:
+        - "[CONNECTED] == true"
+      - name: Internet
+        group: Hardware
+        url: "icmp://8.8.8.8"
+        interval: 5m
+        conditions:
+        - "[CONNECTED] == true"
 
