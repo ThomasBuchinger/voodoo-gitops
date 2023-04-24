@@ -1,11 +1,11 @@
-unseafe: &unsafehttp
+.unsafe: &unsafehttp
   interval: 5m
   client:
     insecure: true
   conditions:
     - "[STATUS] == 200"
 
-webservice: &web
+.webservice: &web
   interval: 20m
   conditions:
     - "[STATUS] == 200"
