@@ -114,7 +114,7 @@ spec:
         - "[CONNECTED] == true"
       - name: Gateway
         group: Hardware
-        url: "icmp://10.0.0.1"
+        url: "icmp://gateway.10.0.0.1.nip.io"
         interval: 5m
         conditions:
         - "[CONNECTED] == true"
