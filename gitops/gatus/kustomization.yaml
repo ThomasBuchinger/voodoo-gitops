@@ -1,0 +1,10 @@
+resources:
+- gatus-helm.yaml
+
+configMapGenerator:
+- name: gatus-values
+  files:
+  - gatus-values.yaml
+
+generatorOptions:
+ disableNameSuffixHash: true

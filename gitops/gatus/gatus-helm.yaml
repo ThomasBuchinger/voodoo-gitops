@@ -73,57 +73,7 @@ spec:
         kind: HelmRepository
         name: gatus
         namespace: flux-system
-  values:
-    config:
-      endpoints:
-      - name: OKD Console
-        group: evergreen
-        url: http://okd-console:9000
-        interval: 20m
-        conditions:
-          - "[STATUS] == 200"
-      - name: PiHole
-        group: evergreen
-        url: http://pihole-web/admin/login.php
-        interval: 1m
-        conditions:
-          - "[STATUS] == 200"
-      - name: Vault
-        group: evergreen
-        url: http://vault:8200
-        interval: 20m
-        conditions:
-          - "[STATUS] == 200"
-      - name: TrueNAS - nas.buc.sh
-        group: Hardware
-        url: "https://10.0.0.20"
-        insecure: true
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-      - name: QNAP
-        group: Hardware
-        url: "http://10.0.0.19:8080"
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-      - name: KVM
-        group: Hardware
-        url: "https://10.0.0.19:9090"
-        insecure: true
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-      - name: Gateway
-        group: Hardware
-        url: "http://10.0.0.1"
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-      - name: Internet
-        group: Hardware
-        url: "https://1.1.1.1"
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-
+  valuesFrom:
+  - kind: ConfigMap
+    name: gatus-values
+    valuesKey: gatus-values.yaml
