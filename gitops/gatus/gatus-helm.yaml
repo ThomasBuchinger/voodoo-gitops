@@ -94,34 +94,36 @@ spec:
         interval: 20m
         conditions:
           - "[STATUS] == 200"
-      - name: TrueNAS
+      - name: TrueNAS - nas.buc.sh
         group: Hardware
-        url: "icmp://10.0.0.20"
+        url: "https://10.0.0.20"
+        insecure: true
         interval: 5m
         conditions:
-        - "[CONNECTED] == true"
+          - "[STATUS] == 200"
       - name: QNAP
         group: Hardware
-        url: "icmp://10.0.0.19"
+        url: "http://10.0.0.19:8080"
         interval: 5m
         conditions:
-        - "[CONNECTED] == true"
+          - "[STATUS] == 200"
       - name: KVM
         group: Hardware
-        url: "icmp://10.0.0.19"
+        url: "https://10.0.0.19:9090"
+        insecure: true
         interval: 5m
         conditions:
-        - "[CONNECTED] == true"
+          - "[STATUS] == 200"
       - name: Gateway
         group: Hardware
-        url: "icmp://gateway.10.0.0.1.nip.io"
+        url: "http://10.0.0.1"
         interval: 5m
         conditions:
-        - "[CONNECTED] == true"
+          - "[STATUS] == 200"
       - name: Internet
         group: Hardware
-        url: "icmp://8.8.8.8"
+        url: "https://1.1.1.1"
         interval: 5m
         conditions:
-        - "[CONNECTED] == true"
+          - "[STATUS] == 200"
 
