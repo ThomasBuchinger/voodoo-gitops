@@ -77,4 +77,3 @@ spec:
   - kind: ConfigMap
     name: gatus-values
     valuesKey: config
-    targetPath: config
