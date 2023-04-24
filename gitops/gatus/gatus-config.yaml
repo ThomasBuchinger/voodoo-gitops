@@ -1,14 +1,3 @@
-unseafe: &unsafehttp
-  interval: 5m
-  client:
-    insecure: true
-  conditions:
-    - "[STATUS] == 200"
-
-webservice: &web
-  interval: 20m
-  conditions:
-    - "[STATUS] == 200"
 
 apiVersion: v1
 kind: ConfigMap
@@ -25,6 +14,17 @@ data:
       # link:
       # buttons: []
 
+    unseafe: &unsafehttp
+      interval: 5m
+      client:
+        insecure: true
+      conditions:
+        - "[STATUS] == 200"
+
+    webservice: &web
+      interval: 20m
+      conditions:
+        - "[STATUS] == 200"
     endpoints:
     - name: Internet
       group: Hardware
