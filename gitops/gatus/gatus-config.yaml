@@ -1,0 +1,56 @@
+unseafe: &unsafehttp
+  interval: 5m
+  client:
+    insecure: true
+  conditions:
+    - "[STATUS] == 200"
+
+webservice: &web
+  interval: 20m
+  conditions:
+    - "[STATUS] == 200"
+
+
+metrics: true
+ui:
+  title: LAB Status
+  header: BUC LAB Status Page
+  # logo:
+  # link:
+  # buttons: []
+
+endpoints:
+- name: Internet
+  group: Hardware
+  url: "https://1.1.1.1"
+  interval: 5m
+  <<: *web
+- name: Gateway
+  group: Hardware
+  url: "http://10.0.0.1"
+  interval: 1m
+  <<: *web
+- name: TrueNAS - nas.buc.sh
+  group: Hardware
+  url: "https://10.0.0.20"
+  <<: *unsafehttp
+- name: QNAP
+  group: Hardware
+  url: "http://10.0.0.19:8080"
+  <<: *unsafehttp
+- name: KVM
+  group: Hardware
+  url: "https://10.0.0.19:9090"
+  <<: *unsafehttp
+- name: PiHole
+  group: evergreen
+  url: http://pihole-web/admin/login.php
+  <<: *web
+- name: OKD Console
+  group: evergreen
+  url: http://okd-console:9000
+  <<: *web
+- name: Vault
+  group: evergreen
+  url: http://vault:8200
+  <<: *web

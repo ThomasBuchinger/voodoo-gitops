@@ -76,4 +76,5 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: gatus-values
-    valuesKey: gatus-values.yaml
+    valuesKey: config
+    targetPath: config
