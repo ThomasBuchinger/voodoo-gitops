@@ -24,13 +24,13 @@ config:
   - name: Internet
     group: Hardware
     url: "https://1.1.1.1"
-    interval: 5m
     <<: *web
+    interval: 1m
   - name: Gateway
     group: Hardware
     url: "http://10.0.0.1"
-    interval: 1m
     <<: *web
+    interval: 1m
   - name: TrueNAS - nas.buc.sh
     group: Hardware
     url: "https://10.0.0.20"
