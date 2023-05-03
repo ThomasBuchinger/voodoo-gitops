@@ -1,0 +1,22 @@
+resources:
+- gatus-helm.yaml
+
+
+# Generate ConfigMap from file and move it to correct namespace
+configMapGenerator:
+- name: gatus-values
+  files:
+  - config=gatus-config.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+patchesJSON6902:
+- target:
+    version: v1
+    kind: ConfigMap
+    name: gatus-values
+  patch: |-
+    - op: replace
+      path: /metadata/namespace
+      value: flux-system
