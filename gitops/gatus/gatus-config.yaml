@@ -41,7 +41,7 @@ config:
     <<: *unsafehttp
   - name: KVM
     group: Hardware
-    url: "https://10.0.0.19:9090"
+    url: "https://10.0.0.13:9090"
     <<: *unsafehttp
   - name: PiHole
     group: evergreen
