@@ -80,9 +80,9 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.16,10.0.0.1,8.8.8.8
     # DHCP needs NET_ADMIN and hostNetwork
     hostNetwork: true
-    capabilities:
-      add:
-      - NET_ADMIN
+    # capabilities:
+    #   add:
+    #   - NET_ADMIN
         
 
 ---
