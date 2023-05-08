@@ -28,6 +28,17 @@ spec:
         name: pihole
         namespace: flux-system
       interval: 15m
+  postRenderers:
+  - kustomize:
+      patchesJson6902:
+      - target:
+          version: v1
+          kind: Deployment
+          name: pihole
+        patch:
+        - op: add
+          path: /spec/template/spec/containers/0/ports/4/hostPort
+          value: 67
   values:
     image:
       tag: "latest"
@@ -37,7 +48,8 @@ spec:
       mixedService: true
       type: ClusterIP
     serviceDhcp:
-      enabled: false
+      enabled: true
+      type: ClusterIP
     # serviceWeb: {}
     virtualHost: pihole.buc.sh
     ingress:
@@ -69,6 +81,15 @@ spec:
       - cname=argocd.buc.sh,green-prod.buc.sh
       - cname=grafana.buc.sh,green-prod.buc.sh
       - cname=paperless.buc.sh,green-prod.buc.sh
+      
+      # DHCP Settings. (Raw dnsmasq config)
+      customSettings: |
+        dhcp-authoritative
+        dhcp-range=10.0.0.150,10.0.0.199,255.255.255.0,24h
+        dhcp-option=option:router,10.0.0.1
+        dhcp-option=option:dns-server,10.0.0.16
+        dhcp-option=option:dns-server,10.0.0.1
+        dhcp-option=option:dns-server,8.8.8.8
 
 ---
 apiVersion: networking.k8s.io/v1
