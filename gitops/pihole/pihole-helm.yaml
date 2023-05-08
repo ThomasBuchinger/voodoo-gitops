@@ -28,29 +28,18 @@ spec:
         name: pihole
         namespace: flux-system
       interval: 15m
-  # postRenderers:
-  # - kustomize:
-  #     patchesJson6902:
-  #     - target:
-  #         version: v1
-  #         kind: Deployment
-  #         name: pihole
-  #       patch:
-  #       - op: add
-  #         path: /spec/template/spec/containers/0/ports/4/hostPort
-  #         value: 67
   values:
     image:
       tag: "latest"
-    # dnsHostPort:
-    #   enabled: true
+    # Move HTTP Ports to avoid conflicts with ingress-controller 
+    webHttp: 8000
+    webHttps: 8443
     serviceDns:
       mixedService: true
       type: ClusterIP
     serviceDhcp:
       enabled: true
       type: ClusterIP
-    # serviceWeb: {}
     virtualHost: pihole.buc.sh
     ingress:
       enabled: false
@@ -83,30 +72,17 @@ spec:
       - cname=paperless.buc.sh,green-prod.buc.sh
       
       customSettings:
-      # DHCP Settings. (Raw dnsmasq config)
-      # - interface=eth0
-      # - shared-network=eth0,10.0.0.0
-      # - shared-network=10.42.0.0,10.0.0.0
-      - log-dhcp
+      # DHCP Settings.
       - dhcp-authoritative
       - dhcp-leasefile=/tmp/dhcp.leases
       - dhcp-range=10.0.0.150,10.0.0.199,255.255.255.0,24h
       - dhcp-option=option:router,10.0.0.1
       - dhcp-option=option:dns-server,10.0.0.16,10.0.0.1,8.8.8.8
-    # DHCP needs NET_ADMIN
-    webHttp: 8000
-    webHttps: 8443
+    # DHCP needs NET_ADMIN and hostNetwork
     hostNetwork: true
     capabilities:
       add:
       - NET_ADMIN
-    # # DHCP needs a volume for dhcp leases
-    # extraVolumes:
-    #   dhcpleases:
-    #     emptyDir: {}
-    # extraVolumeMounts:
-    #   dhcpleases:
-    #     mountPath: /var/lib/misc
         
 
 ---
