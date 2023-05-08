@@ -57,6 +57,7 @@ spec:
     admin:
       existingSecret: common-secrets
       passwordKey: cred_admin_password
+    privileged: true
     dnsmasq:
       customDnsEntries:
       - address=/nas.buc.sh/10.0.0.19
