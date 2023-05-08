@@ -28,22 +28,22 @@ spec:
         name: pihole
         namespace: flux-system
       interval: 15m
-  postRenderers:
-  - kustomize:
-      patchesJson6902:
-      - target:
-          version: v1
-          kind: Deployment
-          name: pihole
-        patch:
-        - op: add
-          path: /spec/template/spec/containers/0/ports/4/hostPort
-          value: 67
+  # postRenderers:
+  # - kustomize:
+  #     patchesJson6902:
+  #     - target:
+  #         version: v1
+  #         kind: Deployment
+  #         name: pihole
+  #       patch:
+  #       - op: add
+  #         path: /spec/template/spec/containers/0/ports/4/hostPort
+  #         value: 67
   values:
     image:
       tag: "latest"
-    dnsHostPort:
-      enabled: true
+    # dnsHostPort:
+    #   enabled: true
     serviceDns:
       mixedService: true
       type: ClusterIP
@@ -84,9 +84,9 @@ spec:
       
       customSettings:
       # DHCP Settings. (Raw dnsmasq config)
-      - interface=eth0
-      - shared-network=eth0,10.0.0.0
-      - shared-network=10.42.0.0,10.0.0.0
+      # - interface=eth0
+      # - shared-network=eth0,10.0.0.0
+      # - shared-network=10.42.0.0,10.0.0.0
       - log-dhcp
       - dhcp-authoritative
       - dhcp-leasefile=/tmp/dhcp.leases
@@ -96,6 +96,9 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.1
       - dhcp-option=option:dns-server,8.8.8.8
     # DHCP needs NET_ADMIN
+    webHTTP: 8000
+    webHTTPS: 8443
+    hostNetwork: true
     capabilities:
       add:
       - NET_ADMIN
