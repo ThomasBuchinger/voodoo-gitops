@@ -85,6 +85,9 @@ spec:
       customSettings:
       # DHCP Settings. (Raw dnsmasq config)
       - interface=eth0
+      - shared-network=eth0,10.0.0.0
+      - shared-network=10.42.0.0,10.0.0.0
+      - log-dhcp
       - dhcp-authoritative
       - dhcp-leasefile=/tmp/dhcp.leases
       - dhcp-range=10.0.0.150,10.0.0.199,255.255.255.0,24h
