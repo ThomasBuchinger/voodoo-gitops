@@ -31,15 +31,14 @@ spec:
   values:
     image:
       tag: "latest"
-    # Move HTTP Ports to avoid conflicts with ingress-controller 
+    # Move HTTP Ports to avoid conflicts with ingress-controller
     webHttp: 8000
     webHttps: 8443
     serviceDns:
       mixedService: true
       type: ClusterIP
     serviceDhcp:
-      enabled: true
-      type: ClusterIP
+      enabled: false
     virtualHost: pihole.buc.sh
     ingress:
       enabled: false
@@ -80,9 +79,9 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.16,10.0.0.1,8.8.8.8
     # DHCP needs NET_ADMIN and hostNetwork
     hostNetwork: true
-    # capabilities:
-    #   add:
-    #   - NET_ADMIN
+    capabilities:
+      add:
+      - NET_ADMIN
         
 
 ---
