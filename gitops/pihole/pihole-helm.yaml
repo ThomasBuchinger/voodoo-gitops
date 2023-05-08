@@ -96,8 +96,8 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.1
       - dhcp-option=option:dns-server,8.8.8.8
     # DHCP needs NET_ADMIN
-    webHTTP: 8000
-    webHTTPS: 8443
+    webHttp: 8000
+    webHttps: 8443
     hostNetwork: true
     capabilities:
       add:
