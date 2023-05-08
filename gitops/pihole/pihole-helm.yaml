@@ -28,17 +28,17 @@ spec:
         name: pihole
         namespace: flux-system
       interval: 15m
-  # postRenderers:
-  # - kustomize:
-  #     patchesJson6902:
-  #     - target:
-  #         version: v1
-  #         kind: Deployment
-  #         name: pihole
-  #       patch:
-  #       - op: add
-  #         path: /spec/template/spec/containers/0/ports/4/hostPort
-  #         value: 67
+  postRenderers:
+  - kustomize:
+      patchesJson6902:
+      - target:
+          version: v1
+          kind: Deployment
+          name: pihole
+        patch:
+        - op: add
+          path: /spec/template/spec/containers/0/ports/4/hostPort
+          value: 67
   values:
     image:
       tag: "latest"
