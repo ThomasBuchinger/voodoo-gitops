@@ -21,28 +21,7 @@ config:
     # buttons: []
 
   endpoints:
-  - name: Internet
-    group: Hardware
-    url: "https://1.1.1.1"
-    <<: *web
-    interval: 1m
-  - name: Gateway
-    group: Hardware
-    url: "http://10.0.0.1"
-    <<: *web
-    interval: 1m
-  - name: TrueNAS - nas.buc.sh
-    group: Hardware
-    url: "https://10.0.0.20"
-    <<: *unsafehttp
-  - name: QNAP
-    group: Hardware
-    url: "http://10.0.0.19:8080"
-    <<: *unsafehttp
-  - name: KVM
-    group: Hardware
-    url: "https://10.0.0.13:9090"
-    <<: *unsafehttp
+  # evergreen
   - name: PiHole
     group: evergreen
     url: http://pihole-web/admin/login.php
@@ -55,3 +34,32 @@ config:
     group: evergreen
     url: http://vault:8200
     <<: *web
+
+  # NAS
+  - name: TrueNAS - nas.buc.sh
+    group: NAS
+    url: "https://10.0.0.20"
+    <<: *unsafehttp
+
+  # Prod
+  
+
+  # Network
+  - name: Internet
+    group: Hardware
+    url: "https://1.1.1.1"
+    <<: *web
+    interval: 1m
+  - name: Gateway
+    group: Hardware
+    url: "http://10.0.0.1"
+    <<: *web
+    interval: 1m
+  - name: KVM (Qemu) - kvm.buc.sh
+    group: Hardware
+    url: "https://10.0.0.13:9090"
+    <<: *unsafehttp
+  - name: H3 (oDroid) - h3.buc.sh
+    group: Hardware
+    url: "https://10.0.0.14:9090"
+    <<: *unsafehttp
