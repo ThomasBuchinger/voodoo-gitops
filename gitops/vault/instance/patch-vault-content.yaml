@@ -92,6 +92,16 @@ spec:
             key: tls.key
             optional: true
       - type: kv
+        path: cluster/data/cert/cert-secure-http-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-secure-http-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-secure-http-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/apiserver
         data:
           data:
