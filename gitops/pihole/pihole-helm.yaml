@@ -51,6 +51,7 @@ spec:
       - address=/evergreen.buc.sh/10.0.0.16
       - address=/nas.buc.sh/10.0.0.20
       - address=/prod.buc.sh/10.0.0.21
+      - address=/secure-http.buc.sh/10.0.0.22
       - address=/green-prod.buc.sh/10.0.0.33
       - address=/bastion.buc.sh/10.0.0.101
 
