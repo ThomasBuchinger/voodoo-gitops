@@ -52,6 +52,22 @@ spec:
             key: prod
             optional: true
       - type: kv
+        path: secret/data/access/nas
+        data:
+          secretKeyRef:
+          - name: common-secrets
+            key: iscsi_user
+            optional: true
+          - name: common-secrets
+            key: iscsi_password
+            optional: true
+          - name: common-secrets
+            key: s3_accesskey
+            optional: true
+          - name: common-secrets
+            key: s3_secretkey
+            optional: true
+      - type: kv
         path: cluster/data/cert/cert-paste-buc-sh
         data:
           secretKeyRef:
