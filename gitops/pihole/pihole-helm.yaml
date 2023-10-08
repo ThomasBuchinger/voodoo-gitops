@@ -47,7 +47,7 @@ spec:
       passwordKey: cred_admin_password
     monitoring.sidecar.enabled: true
     extraEnvVars:
-      PIHOLE_LOCAL_IPV4: 10.0.0.16
+      FTLCONF_LOCAL_IPV4: 10.0.0.16
     dnsmasq:
       customDnsEntries:
       - address=/kvm.buc.sh/10.0.0.13
