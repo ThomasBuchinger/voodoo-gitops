@@ -45,6 +45,9 @@ spec:
     admin:
       existingSecret: common-secrets
       passwordKey: cred_admin_password
+    monitoring.sidecar.enabled: true
+    extraEnvVars:
+      PIHOLE_LOCAL_IPV4: 10.0.0.16
     dnsmasq:
       customDnsEntries:
       - address=/kvm.buc.sh/10.0.0.13
@@ -87,7 +90,6 @@ spec:
     capabilities:
       add:
       - NET_ADMIN
-        
 
 ---
 apiVersion: networking.k8s.io/v1
