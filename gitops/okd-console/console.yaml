@@ -44,12 +44,23 @@ rules:
 - apiGroups:
   - ''
   resources:
-  - 'Pod'
+  - 'pods'
   verbs:
   - get
   - list
   - watch
+  - update
   - delete
+- apiGroups:
+  - ''
+  resources:
+  - 'deployments'
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - scale
 - nonResourceURLs:
   - '*'
   verbs:
