@@ -20,10 +20,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - status.buc.sh
-    secretName: cert-status-buc-sh
+    - gatus.buc.sh
+    secretName: cert-gatus-buc-sh
   rules:
-  - host: status.buc.sh
+  - host: gatus.buc.sh
     http:
       paths:
       - path: /
@@ -42,7 +42,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: status.10.0.0.16.nip.io
+  - host: gatus.10.0.0.16.nip.io
     http:
       paths:
       - path: /
