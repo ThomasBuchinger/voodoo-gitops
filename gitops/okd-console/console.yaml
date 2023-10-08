@@ -55,6 +55,7 @@ rules:
   - ''
   resources:
   - 'deployments'
+  - 'statefulsets'
   verbs:
   - get
   - list
