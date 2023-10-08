@@ -61,6 +61,8 @@ spec:
       # evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
       - cname=paste.buc.sh,evergreen.buc.sh
+      - cname=status.buc.sh,evergreen.buc.sh
+      - cname=gatus.buc.sh,evergreen.buc.sh
       - cname=evergreen-console.buc.sh,evergreen.buc.sh
       # prod.buc.sh
       - cname=argocd.buc.sh,prod.buc.sh
