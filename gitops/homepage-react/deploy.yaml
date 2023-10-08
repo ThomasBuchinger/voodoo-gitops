@@ -24,9 +24,22 @@ spec:
       containers:
       - name: homepage
         image: ghcr.io/thomasbuchinger/homepage-react:main
+        imagePullPolicy: Always
         ports:
         - name: http
           containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /api/livez
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /api/livez
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
 
 ---
 apiVersion: v1
