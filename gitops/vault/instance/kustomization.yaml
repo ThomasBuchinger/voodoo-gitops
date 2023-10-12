@@ -6,6 +6,7 @@ resources:
 - vault-content-cloudflare-sealed.yaml
 - vault-content-secretids-sealed.yaml
 - vault-content-github-sealed.yaml
+- vault-content-syncthing-sealed.yaml
 - vault.yaml
 
 patchesStrategicMerge:
