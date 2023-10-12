@@ -72,8 +72,8 @@ spec:
       - cname=grafana.buc.sh,prod.buc.sh
       - cname=auth.buc.sh,prod.buc.sh
       - cname=prod-console.buc.sh,prod.buc.sh
+      - cname=paperless.buc.sh,prod.buc.sh
       # prod-green.buc.sh
-      - cname=paperless.buc.sh,green-prod.buc.sh
       # nas.buc.sh
       - cname=s3.buc.sh,nas.buc.sh
       - cname=sync.buc.sh,nas.buc.sh
