@@ -1,6 +1,6 @@
 # Cluster: evergreen
 
-This repoitory managed the evergreen-cluster, a single-node Kubernetes cluster providing infrastructure services to the rest of the Network.
+This is the gitops repository for evrgreen, a single-node Kubernetes cluster providing infrastructure services to the rest of the Network.
 
 ## Installation
 
