@@ -53,7 +53,6 @@ spec:
       - buc
   dnsNames:
     - paperless.buc.sh
-    - paperless.10.0.0.21.nip.io
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
@@ -92,8 +91,9 @@ spec:
   subject:
     organizations:
       - buc
+  commonName: '*.cloud.buc.sh'
   dnsNames:
-    - "*.cloud.buc.sh"
+    - '*.cloud.buc.sh'
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
