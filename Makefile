@@ -6,6 +6,7 @@ K3S_MANIFEST_DIR=/var/lib/rancher/k3s/server/manifests
 SECRETS = gitops/common/common-secrets-sealed.yaml \
 					gitops/vault/instance/vault-content-cloudflare-sealed.yaml \
 					gitops/vault/instance/vault-content-secretids-sealed.yaml \
+					gitops/vault/instance/vault-content-syncthing-sealed.yaml \
 					gitops/vault/instance/vault-content-github-sealed.yaml
 
 

@@ -68,6 +68,19 @@ spec:
             key: s3_secretkey
             optional: true
       - type: kv
+        path: secret/data/access/syncthing
+        data:
+          secretKeyRef:
+          - name: vault-content-syncthing
+            key: apikey
+            optional: true
+          - name: vault-content-syncthing
+            key: tls.crt
+            optional: true
+          - name: vault-content-syncthing
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/cert-paste-buc-sh
         data:
           secretKeyRef:
