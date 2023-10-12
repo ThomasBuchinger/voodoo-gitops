@@ -121,6 +121,16 @@ spec:
             key: tls.key
             optional: true
       - type: kv
+        path: cluster/data/cert/cert-syncthing-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-syncthing-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-syncthing-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/cert-secure-http-buc-sh
         data:
           secretKeyRef:
@@ -135,16 +145,6 @@ spec:
         data:
           data:
             ca_cert: "${env `CA_CERT`}"
-      # - type: kv
-      #   path: secret/data/cluster/s3/vault
-      #   data:
-      #     secretKeyRef:
-      #     - name: vault-s3
-      #       key: access_key
-      #       optional: true
-      #     - name: vault-s3
-      #       key: secret_key
-      #       optional: true
   envsConfig:
     - name: CA_CERT
       valueFrom:
