@@ -74,6 +74,7 @@ spec:
       - cname=prod-console.buc.sh,prod.buc.sh
       - cname=paperless.buc.sh,prod.buc.sh
       - cname=syncthing.buc.sh,prod.buc.sh
+      - cname=files.buc.sh,prod.buc.sh
       # prod-green.buc.sh
       # nas.buc.sh
       - cname=s3.buc.sh,nas.buc.sh
