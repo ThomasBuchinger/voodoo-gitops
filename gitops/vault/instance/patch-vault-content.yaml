@@ -131,6 +131,16 @@ spec:
             key: tls.key
             optional: true
       - type: kv
+        path: cluster/data/cert/cert-files-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-files-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-files-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
         path: cluster/data/cert/cert-secure-http-buc-sh
         data:
           secretKeyRef:
