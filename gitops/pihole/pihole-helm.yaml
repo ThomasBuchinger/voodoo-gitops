@@ -89,7 +89,7 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.16,10.0.0.1,8.8.8.8
       # Enable IPv6 Raouter Advertisements (broadcast self as a router via IPv6)
       - enable-ra
-      - dhcp-range=::1f,::ff,constructor:eth0
+      - dhcp-range=::1f,::ff,constructor:eth0,ra-only,5m
     # DHCP needs NET_ADMIN and hostNetwork
     hostNetwork: true
     capabilities:
