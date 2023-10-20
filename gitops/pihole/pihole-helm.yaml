@@ -60,6 +60,9 @@ spec:
 
       # Workaround
       - address=/vault.buc.sh/10.0.0.16
+
+      # Make internal resources "publicly" resolveable by 10.0.0.16
+      - address=/status.int.buc.sh/10.0.0.16
       customCnameEntries:
       # evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
