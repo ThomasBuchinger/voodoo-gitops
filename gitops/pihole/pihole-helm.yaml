@@ -89,7 +89,8 @@ spec:
       - dhcp-option=option:dns-server,10.0.0.16,10.0.0.1,8.8.8.8
       # Enable IPv6. Enable Router Advertisements, Only do RA (and not actually assign IPv6 addresses) with high priority
       - enable-ra
-      - dhcp-range=tag:ip6,::1f,::ff,constructor:eth0,ra-only
+      - dhcp-range=tag:ip6,::1f,::ff,constructor:eth0
+      - dhcp-option=option6:dns-server,[fe80::]
       - ra-param=eth0,high,60
       - dhcp-reply-delay=tag:ip6,5
     # DHCP needs NET_ADMIN and hostNetwork
