@@ -76,6 +76,7 @@ spec:
       - cname=syncthing.buc.sh,prod.buc.sh
       - cname=files.buc.sh,prod.buc.sh
       - cname=pdf.buc.sh,prod.buc.sh
+      - cname=kong.buc.sh,prod.buc.sh
       # prod-green.buc.sh
       # nas.buc.sh
       - cname=s3.buc.sh,nas.buc.sh
