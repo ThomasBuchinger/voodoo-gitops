@@ -1,6 +1,7 @@
 The vault-unseal-keys secrets contains the unseal-keys and root-token for vault.
 This secret was first generated randomly and then copied to match the initial config. if this secret is lost, vault is lost...
 
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -18,6 +19,7 @@ stringData:
   vault-unseal-3: 
   vault-unseal-4: 
 type: Opaque
+```
 
 ---
 
