@@ -60,6 +60,7 @@ spec:
 
       # Workaround
       - address=/vault.buc.sh/10.0.0.16
+      - address=/s3.buc.sh/10.0.0.20
       customCnameEntries:
       # evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
@@ -79,8 +80,6 @@ spec:
       - cname=kong.buc.sh,prod.buc.sh
       # prod-green.buc.sh
       # nas.buc.sh
-      - cname=s3.buc.sh,nas.buc.sh
-      - cname=sync.buc.sh,nas.buc.sh
       
       customSettings:
       # DHCP Settings.
