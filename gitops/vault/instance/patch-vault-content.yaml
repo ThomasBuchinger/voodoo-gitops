@@ -67,6 +67,12 @@ spec:
           - name: common-secrets
             key: s3_secretkey
             optional: true
+          - name: common-secrets
+            key: s3_ro_accesskey
+            optional: true
+          - name: common-secrets
+            key: s3_ro_secretkey
+            optional: true
       - type: kv
         path: secret/data/access/syncthing
         data:
@@ -138,6 +144,16 @@ spec:
             key: tls.crt
             optional: true
           - name: cert-files-buc-sh
+            key: tls.key
+            optional: true
+      - type: kv
+        path: cluster/data/cert/cert-r2-buc-sh
+        data:
+          secretKeyRef:
+          - name: cert-r2-buc-sh
+            key: tls.crt
+            optional: true
+          - name: cert-r2-buc-sh
             key: tls.key
             optional: true
       - type: kv
