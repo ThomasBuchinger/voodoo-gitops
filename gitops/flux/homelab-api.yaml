@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/homelab-api
+  path: ./gitops/homelabapi
   prune: true
   sourceRef:
     kind: GitRepository
