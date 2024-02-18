@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: homepage-react
+  name: homelab-api
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/homepage-react
+  path: ./gitops/homelab-api
   prune: true
   sourceRef:
     kind: GitRepository
