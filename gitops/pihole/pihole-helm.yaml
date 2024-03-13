@@ -57,6 +57,7 @@ spec:
       - address=/secure-http.buc.sh/10.0.0.22
       - address=/green-prod.buc.sh/10.0.0.33
       - address=/bastion.buc.sh/10.0.0.101
+      - address=/mediaserver.buc.sh/10.0.0.24
 
       # Workaround
       - address=/vault.buc.sh/10.0.0.16
@@ -80,6 +81,14 @@ spec:
       - cname=api.buc.sh,prod.buc.sh
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
+      # mediaserver.buc.sh
+      - cname=player.tv.buc.sh,mediaserver.buc.sh
+      - cname=requests.tv.buc.sh,mediaserver.buc.sh
+      - cname=download.tv.buc.sh,mediaserver.buc.sh
+      - cname=movies.tv.buc.sh,mediaserver.buc.sh
+      - cname=shows.tv.buc.sh,mediaserver.buc.sh
+      - cname=music.tv.buc.sh,mediaserver.buc.sh
+      - cname=files.tv.buc.sh,mediaserver.buc.sh
       # prod-green.buc.sh
       # nas.buc.sh
       
