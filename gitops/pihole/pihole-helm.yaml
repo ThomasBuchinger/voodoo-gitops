@@ -82,6 +82,8 @@ spec:
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
       # mediaserver.buc.sh
+      - cname=tv.buc.sh,mediaserver.buc.sh
+      - cname=www.tv.buc.sh,mediaserver.buc.sh
       - cname=player.tv.buc.sh,mediaserver.buc.sh
       - cname=requests.tv.buc.sh,mediaserver.buc.sh
       - cname=download.tv.buc.sh,mediaserver.buc.sh
