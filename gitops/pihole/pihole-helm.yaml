@@ -82,15 +82,15 @@ spec:
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
       # mediaserver.buc.sh
-      - cname=*.tv.buc.sh,mediaserver.buc.sh
-      - cname=www.tv.buc.sh,mediaserver.buc.sh
-      - cname=player.tv.buc.sh,mediaserver.buc.sh
-      - cname=requests.tv.buc.sh,mediaserver.buc.sh
-      - cname=download.tv.buc.sh,mediaserver.buc.sh
-      - cname=movies.tv.buc.sh,mediaserver.buc.sh
-      - cname=shows.tv.buc.sh,mediaserver.buc.sh
-      - cname=music.tv.buc.sh,mediaserver.buc.sh
-      - cname=files.tv.buc.sh,mediaserver.buc.sh
+      - cname=*.tv.buc.sh,tv.buc.sh
+      - cname=www.tv.buc.sh,tv.buc.sh
+      - cname=player.tv.buc.sh,tv.buc.sh
+      - cname=requests.tv.buc.sh,tv.buc.sh
+      - cname=download.tv.buc.sh,tv.buc.sh
+      - cname=movies.tv.buc.sh,tv.buc.sh
+      - cname=shows.tv.buc.sh,tv.buc.sh
+      - cname=music.tv.buc.sh,tv.buc.sh
+      - cname=files.tv.buc.sh,tv.buc.sh
       # prod-green.buc.sh
       # nas.buc.sh
       
