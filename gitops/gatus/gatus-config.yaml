@@ -36,10 +36,10 @@ config:
     <<: *web
 
   # NAS
-  - name: TrueNAS - nas.buc.sh
+  - name: Unraid - nasv3.buc.sh
     group: NAS
-    url: "https://10.0.0.20"
-    <<: *unsafehttp
+    url: "https://10.0.0.19"
+    <<: *web
 
   # Prod
   
