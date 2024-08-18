@@ -78,6 +78,7 @@ spec:
       - cname=syncthing.buc.sh,prod.buc.sh
       - cname=files.buc.sh,prod.buc.sh
       - cname=pdf.buc.sh,prod.buc.sh
+      - cname=push.buc.sh,prod.buc.sh
       - cname=api.buc.sh,prod.buc.sh
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
