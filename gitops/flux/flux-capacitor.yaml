@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: flux-capacitor
+  namespace: flux-system
+spec:
+  interval: 15m0s
+  path: ./gitops/flux-capacitor
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: voodoo-gitops

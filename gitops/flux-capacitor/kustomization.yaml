@@ -1,0 +1,3 @@
+resources:
+- capacitor.yaml
+- ingress.yaml
