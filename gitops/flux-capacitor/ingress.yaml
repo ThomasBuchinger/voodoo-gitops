@@ -4,6 +4,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: flux-capacitor
+  namespace: flux-system
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
 spec:
@@ -28,6 +29,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: flux-capacitor-http
+  namespace: flux-system
 spec:
   rules:
   - host: flux.10.0.0.16.nip.io
