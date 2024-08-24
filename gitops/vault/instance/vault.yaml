@@ -169,13 +169,13 @@ spec:
           version: 2
     startupSecrets: []
 
-    envsConfig:
-    - name: CA_CERT
-      valueFrom:
-        configMapKeyRef:
-          name: kube-root-ca.crt
-          key: ca.crt
-          optional: true
+  envsConfig:
+  - name: CA_CERT
+    valueFrom:
+      configMapKeyRef:
+        name: kube-root-ca.crt
+        key: ca.crt
+        optional: true
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
