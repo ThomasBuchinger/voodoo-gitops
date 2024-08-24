@@ -124,6 +124,12 @@ spec:
             bound_service_account_namespaces: ["default"]
             policies: ["secret_reader", "public_reader", "cluster_reader", "default"]
             ttl: 5m
+          # External-Secrets-Operator is allowed Read/Write Access
+          - name: readwrite
+            bound_service_account_names: ["external-secrets", "external-secrets-webhook", "external-secrets-cert-controller"]
+            bound_service_account_namespaces: ["default"]
+            policies: ["secret_reader", "public_reader", "cluster_reader", "secret_writer", "public_writer", "cluster_writer","default"]
+            ttl: 5m
           # Configure kubernetes authentication for flux terraform controller
           - name: terraform
             bound_service_account_names: ["vault-terraform-admin"]
