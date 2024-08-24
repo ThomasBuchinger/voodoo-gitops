@@ -8,13 +8,13 @@
   },
   "kubernetes": {
     "fileMatch": [
-      "/gitops/.*/.*\\.ya?ml$"
+      "gitops/.*/.*.ya?ml$"
     ]
   },
   "flux": {
     "fileMatch": [
-      "/gitops/.*/.*\\.ya?ml$",
-      "/flux-install/.*\\.ya?ml$"
+      "gitops/.*/.*.ya?ml$",
+      "flux-install/.*.ya?ml$"
     ]
   }
 }
