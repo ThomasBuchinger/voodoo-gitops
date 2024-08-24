@@ -2,5 +2,19 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "terraform": {
+    "enabled": false
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "/gitops/.*/.*\\.ya?ml$"
+    ]
+  },
+  "flux": {
+    "fileMatch": [
+      "/gitops/.*/.*\\.ya?ml$",
+      "/flux-install/.*\\.ya?ml$"
+    ]
+  }
 }
