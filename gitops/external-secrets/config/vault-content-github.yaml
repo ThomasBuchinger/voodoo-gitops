@@ -11,9 +11,29 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      labels:
-        vault.buc.sh/update-action: restart
-        vault.buc.sh/vault-path: secret.saas.github
+      # labels:
+      #   vault.buc.sh/update-action: restart
+      #   vault.buc.sh/vault-path: secret.saas.github
       name: vault-content-github
       namespace: default
 
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: vault-content-github
+  namespace: default
+spec:
+  updatePolicy: Replace
+  deletionPolicy: Delete # the provider' secret will be deleted if the PushSecret is deleted
+  refreshInterval: 3600s # Refresh interval for which push secret will reconcile
+  secretStoreRefs: # A list of secret stores to push secrets to
+    - name: k8s-vault-secret
+      kind: ClusterSecretStore
+  selector:
+    secret:
+      name: vault-content-github
+  data:
+  - match:
+      remoteRef:
+        remoteKey: saas/github # Remote reference (where the secret is going to be pushed)

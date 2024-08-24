@@ -26,7 +26,7 @@ type: Opaque
 Setup Secrets Automatically
 https://www.reddit.com/r/kubernetes/comments/xao5pe/automatically_import_secrets_into_vault/
 
-## Solution 1: Template Secrets in StartupSecrets
+## Solution 1: Template Secrets in StartupSecrets (Old)
 
 Patch Vault custom resource as follows
 
@@ -81,4 +81,57 @@ stringData:
   #
   # This translates to: curl -X PUT http://vault:8200/v1/secret/data/test --data "{\"data\":{\"hello\":\"my_secret_value\"}}"
   myworld: ">>vault:secret/data/test#hello#{\"data\":{\"hello\":\"my_secret_value\"}}"
+```
+
+## Solution 3: Push via ExternalSecretsOperator (current)
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mytestsecret
+  namespace: default
+stringData:
+  testkey: foo
+
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: test-secret-push
+  namespace: default # Same of the SecretStores
+spec:
+  updatePolicy: Replace # Policy to overwrite existing secrets in the provider on sync
+  deletionPolicy: Delete # the provider' secret will be deleted if the PushSecret is deleted
+  refreshInterval: 10s # Refresh interval for which push secret will reconcile
+  secretStoreRefs: # A list of secret stores to push secrets to
+    - name: k8s-vault-secret
+      kind: ClusterSecretStore
+  selector:
+    secret:
+      name: mytestsecret
+  data:
+  - match:
+      remoteRef:
+        remoteKey: saas/testsecret # Remote reference (where the secret is going to be pushed)
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: vault-content-github
+  namespace: default
+spec:
+  updatePolicy: Replace
+  deletionPolicy: Delete # the provider' secret will be deleted if the PushSecret is deleted
+  refreshInterval: 3600s # Refresh interval for which push secret will reconcile
+  secretStoreRefs: # A list of secret stores to push secrets to
+    - name: k8s-vault-secret
+      kind: ClusterSecretStore
+  selector:
+    secret:
+      name: mytestsecret
+  data:
+  - match:
+      remoteRef:
+        remoteKey: saas/testsecret # Remote reference (where the secret is going to be pushed)
 ```
