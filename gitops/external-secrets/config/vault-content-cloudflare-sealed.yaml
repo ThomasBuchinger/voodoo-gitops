@@ -1,0 +1,39 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: vault-content-cloudflare
+  namespace: default
+spec:
+  encryptedData:
+    cf_apikey_dnsedit: AgBIXNEXkAUFsSWdpcNA57I41CjT1suTYnWVbwTJt8KeJ92rwhUSQnnEjv5Ou/I73jUQlqPkamThGSfYqBi3ohSrdLsHMC2Rsuphm1qDHZgKDxxSemQaBRd8JMsrMGYbLTpvh0PHjs1iClUbYBkHkdgpmSjsoSr6Ct1QFTBre07LZ6E3SWZ6PKWsowuZzAZr3hyLr3/rluOyj1C1HVQDvIWs2aVupFu88Dp7VH1xsITzXwkJbzFSHRvGnwQ6ATe1bqajbQTQwrheSjhmvBEaPeWyIxK0+TOZLI4o8dFspEseMuBg1WnH5Dqo9uzEep305nYDWmqVYVvVU1MuU7NI4ARYduzaYbxgNxX+JWBJgqDWxi64HEN9sKB1B+m/E7VWXT82T+fUvDoe3r86FB/1z5PB8Mu+fCjRlyifjtMbVORye9Ovjdogt88dS6NPa/jzFluGebUtC+1Jsb77Yy+SRDPpJmJMk75BkAAZ3JX0tPOtuHkQEVSNJubRSVqG/4ugQQ2Kyr2rRZoNppVEVC3DZjYPIuqfsmVrmKyM35yYoBjIwmcZwdvPUlRMlc4Fv2/yOfOXfw9W995cukOfOv55z5KOCaCJt7+x33w9HF1tuMj5Fc32mESgDyKiUEwEgcsIWrJs3SXmrGQTy6ZsmipexX5ppE02rL1Itwox9dvQ7qplW2j8t/CqrHYlVAGXrXyzE7xc+QEvF4JMOCOygRMnCmjh2Hq+JEdMM/xlNDOxJrf5J8CsRqvtlpBx
+    cf_tunnel_token: AgBjDXh7boL+Ur2R2oxwM5VzLOVGljz+rA6VU6KwEmZyTsdE9Aw9/yHug+yhemLsmetDDQancnqz3KVM0WW0f9JBIg/gG7l+PTwNSfXbliSiJT5glY0fXFSH6ot/wFxFZchE8N8FRRzW8h3s/XawnVFUu1k5XYQHrDSivaNg+KlES0H0tFEtS9MOkUVSVvILyITwJ/C9EWBJhs+MErHu851J9bZ3HFReqWQVIxOtDYfXVqSRYdOR//xB/lTEE7p+PKVChlywBLfbAlXJxuGinETrdgksHWG/hCWs9JkalFyd/ZWFBuK+XVIfYsQ59OfuMmSJS/m25JyPp724kcSvHhoaYd3HnYEiI0O0b/lcY4utN/gEy2V8M2EmhHKP3td/rfxVwJED8Jsbrmpkb6L7wZD0e4mGEZ05hfGdc6n/EfsZ/tOWKNaKcegLwETc3+rPONXeDARtiTfbyQV74Pg/iPIp2pur9Lahba13OOoiQCpsippLwUBfckf+x9x8eogiRJA4TLl2nSPCPzfmyo/SxvT0NWM4DrTCyv/1M0r2YGllPVyKmacvcWiC3eOVp8BwQEMYRkFrCcCE9d/YKZFomhksaG/es+FdWICpAOqU4cYAOGCdjxgelqeYaS9tSnayy/fTHEucx4tX3kMz9Od1tAiYtfMBEEA0WawjoMa+E4rm5MrjPC3zX+bhMMixYuVjHZE5PmSfBRN1azmBDGuvDTI839dZZBJtX0ojRFDKVdNgxCk9i3VKW82jaBOg6QQ6MOF1yV8eAmiJcSpjLy3bn7xR4FvqbiFeFuNRQMMVkNUeemCJPfGVbWsLn+ArLqFgfCEvfg5waHvNnrSOQ3HKHIMWIpJQOdhSvh7lm2IuWrQ9Mcmdp9AWoOqFCrRNiobU36oUJAwimsDAUNsjgdMyO21WL5yGHm5LZR16LiakbLz+3jmcLZ7v7Sxn
+  template:
+    metadata:
+      creationTimestamp: null
+      # labels:
+      #   vault.buc.sh/update-action: restart
+      #   vault.buc.sh/vault-path: secret.saas.cloudflare
+      name: vault-content-cloudflare
+      namespace: default
+
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: vault-content-cloudflare
+  namespace: default
+spec:
+  updatePolicy: Replace
+  deletionPolicy: Delete # the provider' secret will be deleted if the PushSecret is deleted
+  refreshInterval: 3600s # Refresh interval for which push secret will reconcile
+  secretStoreRefs: # A list of secret stores to push secrets to
+    - name: k8s-vault-secret
+      kind: ClusterSecretStore
+  selector:
+    secret:
+      name: vault-content-cloudflare
+  data:
+  - match:
+      remoteRef:
+        remoteKey: saas/cloudflare # Remote reference (where the secret is going to be pushed)
