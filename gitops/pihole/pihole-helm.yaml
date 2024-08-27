@@ -61,6 +61,7 @@ spec:
 
       # Workaround
       - address=/vault.buc.sh/10.0.0.16
+      - address=/syncthing.buc.sh/10.0.0.16
       - address=/s3.buc.sh/10.0.0.20
       customCnameEntries:
       # evergreen.buc.sh
@@ -75,7 +76,6 @@ spec:
       - cname=auth.buc.sh,prod.buc.sh
       - cname=prod-console.buc.sh,prod.buc.sh
       - cname=paperless.buc.sh,prod.buc.sh
-      - cname=syncthing.buc.sh,prod.buc.sh
       - cname=files.buc.sh,prod.buc.sh
       - cname=pdf.buc.sh,prod.buc.sh
       - cname=push.buc.sh,prod.buc.sh
