@@ -34,12 +34,24 @@ spec:
         env:
         - name: MODE
           value: internal
-        - name: AUTH_COUNTRIES
-          value: "AT, HR, IT, CZ"
-        - name: AUTH_USER
-          value: testuser
-        - name: AUTH_PASS
-          value: changeme
+        # - name: AUTH_COUNTRIES
+        #   value: "AT, HR, IT, CZ"
+        # - name: AUTH_USER
+        #   value: testuser
+        # - name: AUTH_PASS
+        #   value: changeme
+        - name: SYNCTHING_USER
+          valueFrom:
+            secretKeyRef:
+              name: homlabapi-secrets
+              key: syncthing_user
+              optional: true
+        - name: SYNCTHING_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: homlabapi-secrets
+              key: syncthing_password
+              optional: true
         ports:
         - name: http
           containerPort: 8080
@@ -99,6 +111,29 @@ spec:
             name: homelab-api
             port:
               number: 8080
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: homlabapi-secrets
+  namespace: homelabapi
+spec:
+  secretStoreRef:
+    name: k8s-vault-secret
+    kind: ClusterSecretStore
+  refreshInterval: "1h"
+  # Data defines the connection between the Kubernetes Secret keys and the Provider data
+  data:
+  - secretKey: syncthing_user
+    remoteRef:
+      key: secret/access/static-cred
+      property: cred_admin_user
+  - secretKey: syncthing_password
+    remoteRef:
+      key: secret/access/static-cred
+      property: cred_admin_password
+
 
 # ---
 # apiVersion: monitoring.coreos.com/v1
