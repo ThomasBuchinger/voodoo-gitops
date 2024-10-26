@@ -22,3 +22,28 @@ metadata:
     kubernetes.io/service-account.name: prod-eso-auth
 type: kubernetes.io/service-account-token
 
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: eso-secret-reader
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: eso-secret-reader
+  namespace: prod-secrets
+subjects:
+- kind: ServiceAccount
+  name: prod-eso-auth
+  namespace: prod-secrets
+roleRef:
+  kind: ClusterRole
+  name: eso-secret-reader
+  apiGroup: rbac.authorization.k8s.io
