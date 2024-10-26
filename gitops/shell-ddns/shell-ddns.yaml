@@ -16,8 +16,12 @@ spec:
             envFrom:
             - configMapRef:
                 name: ddns-config
-            - secretRef:
-                name: ddns-config-secrets
+            env:
+            - name: DDNS_CF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-secrets
+                  key: cf_apikey_dnsedit
             command:
             - /bin/bash
             - -c
