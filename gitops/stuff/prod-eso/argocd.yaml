@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-argocd-buc-sh
+  namespace: prod-secrets
+spec:
+  secretName: cert-argocd-buc-sh
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - buc
+  dnsNames:
+    - argocd.buc.sh
+  issuerRef:
+    name: letsencrypt-prod-cloudflare-dns
+    kind: ClusterIssuer
+    group: cert-manager.io

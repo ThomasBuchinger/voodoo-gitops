@@ -1,24 +1,24 @@
 
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: cert-secure-http-buc-sh
-  namespace: default
-spec:
-  secretName: cert-secure-http-buc-sh
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
-  subject:
-    organizations:
-      - buc
-  commonName: '*.cloud.buc.sh'
-  dnsNames:
-    - '*.cloud.buc.sh'
-  issuerRef:
-    name: letsencrypt-prod-cloudflare-dns
-    kind: ClusterIssuer
-    group: cert-manager.io
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: cert-secure-http-buc-sh
+#   namespace: default
+# spec:
+#   secretName: cert-secure-http-buc-sh
+#   duration: 2160h # 90d
+#   renewBefore: 360h # 15d
+#   subject:
+#     organizations:
+#       - buc
+#   commonName: '*.cloud.buc.sh'
+#   dnsNames:
+#     - '*.cloud.buc.sh'
+#   issuerRef:
+#     name: letsencrypt-prod-cloudflare-dns
+#     kind: ClusterIssuer
+#     group: cert-manager.io
 
 ---
 apiVersion: external-secrets.io/v1alpha1
