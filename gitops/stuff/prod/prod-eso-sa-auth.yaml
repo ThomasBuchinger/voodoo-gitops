@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: prod-secrets
+  name: prod
 
 ---
 apiVersion: v1
@@ -10,14 +10,14 @@ metadata:
   annotations:
     kubernetes.io/enforce-mountable-secrets: "true"
   name: prod-eso-auth
-  namespace: prod-secrets
+  namespace: prod
 
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: prod-eso-auth-token
-  namespace: prod-secrets
+  namespace: prod
   annotations:
     kubernetes.io/service-account.name: prod-eso-auth
 type: kubernetes.io/service-account-token
@@ -38,11 +38,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: eso-secret-reader
-  namespace: prod-secrets
+  namespace: prod
 subjects:
 - kind: ServiceAccount
   name: prod-eso-auth
-  namespace: prod-secrets
+  namespace: prod
 roleRef:
   kind: ClusterRole
   name: eso-secret-reader
