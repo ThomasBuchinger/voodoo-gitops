@@ -60,7 +60,6 @@ spec:
       - address=/tv.buc.sh/10.0.0.24
 
       # Workaround
-      - address=/vault.buc.sh/10.0.0.16
       - address=/s3.buc.sh/10.0.0.19
       - address=/syncthing.buc.sh/10.0.0.21
       customCnameEntries:
