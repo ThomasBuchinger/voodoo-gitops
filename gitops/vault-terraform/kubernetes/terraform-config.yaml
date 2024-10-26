@@ -29,5 +29,6 @@ metadata:
 data:
   vault_address: http://vault.default.svc:8200
   vault_role: terraform
+  TF_LOG: debug
 
 
