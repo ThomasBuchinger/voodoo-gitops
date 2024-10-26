@@ -1,19 +1,19 @@
-
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert-syncthing-buc-sh
-  namespace: prod-secrets
+  name: cert-secure-http-buc-sh
+  namespace: default
 spec:
-  secretName: cert-syncthing-buc-sh
+  secretName: cert-secure-http-buc-sh
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
     organizations:
       - buc
+  commonName: '*.cloud.buc.sh'
   dnsNames:
-    - syncthing.buc.sh
+    - '*.cloud.buc.sh'
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
