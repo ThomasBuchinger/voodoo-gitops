@@ -158,3 +158,24 @@ spec:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
     group: cert-manager.io
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-files-buc-sh
+  namespace: prod
+spec:
+  secretName: cert-files-buc-sh
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - buc
+  dnsNames:
+    - files.buc.sh
+    - files-admin.buc.sh
+  issuerRef:
+    name: letsencrypt-prod-cloudflare-dns
+    kind: ClusterIssuer
+    group: cert-manager.io

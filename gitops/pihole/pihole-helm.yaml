@@ -81,6 +81,8 @@ spec:
       - cname=api.buc.sh,prod.buc.sh
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
+      - cname=files-admin.buc.sh,prod.buc.sh
+      - cname=files.buc.sh,prod.buc.sh
       # mediaserver.buc.sh
       - cname=*.tv.buc.sh,tv.buc.sh
       - cname=www.tv.buc.sh,tv.buc.sh
