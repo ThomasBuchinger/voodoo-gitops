@@ -75,7 +75,6 @@ spec:
       - cname=auth.buc.sh,prod.buc.sh
       - cname=prod-console.buc.sh,prod.buc.sh
       - cname=paperless.buc.sh,prod.buc.sh
-      - cname=files.buc.sh,prod.buc.sh
       - cname=pdf.buc.sh,prod.buc.sh
       - cname=push.buc.sh,prod.buc.sh
       - cname=api.buc.sh,prod.buc.sh
