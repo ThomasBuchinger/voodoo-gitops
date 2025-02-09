@@ -1,5 +1,5 @@
 {
-  "packages": ["renovate@latest"],
+  "packages": ["renovate@37.440.7"],
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null"
