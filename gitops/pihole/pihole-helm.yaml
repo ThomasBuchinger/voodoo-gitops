@@ -36,6 +36,8 @@ spec:
     probes:
       liveness:
         enabled: false
+      readiness:
+        enabled: false
 
         
     image:
