@@ -32,7 +32,12 @@ spec:
     # 2025-04-10: Remove DNS2 variable, because it causes Pihole to crash after update
     DNS1: 1.1.1.1
     DNS2: ""
-  
+    # 2025-04-10: Pihole keeps restarting, due to liveness prove failing
+    probes:
+      liveness
+        enabled: false
+
+        
     image:
       tag: "latest"
     # Move HTTP Ports to avoid conflicts with ingress-controller
