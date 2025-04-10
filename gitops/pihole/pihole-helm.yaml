@@ -34,7 +34,7 @@ spec:
     DNS2: ""
     # 2025-04-10: Pihole keeps restarting, due to liveness prove failing
     probes:
-      liveness
+      liveness:
         enabled: false
 
         
