@@ -62,11 +62,12 @@ spec:
       # Workaround
       - address=/s3.buc.sh/10.0.0.19
       - address=/syncthing.buc.sh/10.0.0.21
+      - address=/dex.buc.sh/10.0.0.16
       customCnameEntries:
       # evergreen.buc.sh
       - cname=evergreen-console.buc.sh,evergreen.buc.sh
       - cname=flux.buc.sh,evergreen.buc.sh
-      - cname=dex.buc.sh,evergreen.buc.sh
+      # - cname=dex.buc.sh,evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
       - cname=paste.buc.sh,evergreen.buc.sh
       # prod.buc.sh
