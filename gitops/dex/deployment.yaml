@@ -93,10 +93,12 @@ data:
       public: true
       # secret: "{{ .Env.LOGIN_CLIENT_SECRET }}"
       redirectURIs:
-      - 'http://127.0.0.1:5555/callback'
-      - 'http://argocd.10.0.0.23.nip.io/callback'
+      # kubectl
+      - 'http://localhost:8000'
+      # Homelab HeadLamp
       - 'http://homelab-console.10.0.0.23.nip.io/oidc-callback'
       - 'http://homelab-console.buc.sh/oidc-callback'
+      - 'http://argocd.10.0.0.23.nip.io/callback'
 
 
     enablePasswordDB: true
