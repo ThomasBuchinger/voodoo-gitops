@@ -1,0 +1,8 @@
+namespace: default
+resources:
+- deployment.yaml
+
+configMapGenerator:
+- name: dex
+  files:
+  - config.yaml=dex-config.yaml

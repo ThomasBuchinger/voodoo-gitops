@@ -1,5 +1,8 @@
 {
-  "packages": ["renovate@40.33.1"],
+  "packages": [
+    "renovate@40.33.1",
+    "fluxcd@2.5.1"
+  ],
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null"
