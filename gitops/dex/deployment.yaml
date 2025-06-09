@@ -86,6 +86,7 @@ data:
     
     oauth2:
       skipApprovalScreen: true
+      alwaysShowLoginScreen: false
       # Allow password grants with local users
       passwordConnector: local
 
