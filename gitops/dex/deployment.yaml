@@ -26,7 +26,8 @@ spec:
       containers:
       - image: ghcr.io/dexidp/dex:v2.32.0
         name: dex
-        # command: ["/usr/local/bin/dex", "serve", "/etc/dex/cfg/config.yaml"]
+        command: ["/usr/local/bin/docker-entrypoint", "dex", "serve", "/etc/dex/cfg/config.yaml"]
+        
 
         ports:
         - name: http
