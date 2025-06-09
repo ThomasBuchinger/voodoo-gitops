@@ -26,8 +26,8 @@ staticClients:
   - 'http://homelab-console.10.0.0.23.nip.io/oidc-callback'
   - 'http://homelab-console.buc.sh/oidc-callback'
   - 'http://argocd.10.0.0.23.nip.io/api/dex/callback'
-  - 'https://argocd.10.0.0.23.nip.io/api/dex/callback'
-  - 'https://homelab-argocd.buc.sh/api/dex/callback'
+  # - 'https://argocd.10.0.0.23.nip.io/api/dex/callback'
+  # - 'https://homelab-argocd.buc.sh/api/dex/callback'
 
 enablePasswordDB: true
 staticPasswords:
