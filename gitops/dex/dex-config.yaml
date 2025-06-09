@@ -1,0 +1,37 @@
+issuer: https://dex.buc.sh
+storage:
+  type: kubernetes
+  config:
+    inCluster: true
+web:
+  http: 0.0.0.0:5556
+  # tlsCert: /etc/dex/tls/tls.crt
+  # tlsKey: /etc/dex/tls/tls.key
+connectors: []
+
+oauth2:
+  skipApprovalScreen: true
+  alwaysShowLoginScreen: false
+  # Allow password grants with local users
+  passwordConnector: local
+
+staticClients:
+- id: login
+  name: "SSO Login Applications"
+  secret: notaSecretDexisLocal
+  redirectURIs:
+  # kubectl
+  - 'http://localhost:8000'
+  # Homelab HeadLamp
+  - 'http://homelab-console.10.0.0.23.nip.io/oidc-callback'
+  - 'http://homelab-console.buc.sh/oidc-callback'
+  - 'http://argocd.10.0.0.23.nip.io/api/dex/callback'
+  - 'https://argocd.10.0.0.23.nip.io/api/dex/callback'
+  - 'https://homelab-argocd.buc.sh/api/dex/callback'
+
+enablePasswordDB: true
+staticPasswords:
+- email: "admin@buc.sh"
+  username: "admin"
+  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+  hash: "{{ .Env.USER_ADMIN_HASH }}"
