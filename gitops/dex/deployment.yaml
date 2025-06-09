@@ -35,22 +35,9 @@ spec:
         #   mountPath: /etc/dex/tls
 
         env:
-        - name: LOGIN_CLIENT_SECRET
-          value: ZXhhbXBsZS1hcHAtc2VjcmV0
         - name: USER_ADMIN_HASH
           # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
           value: $2y$10$Kr7cetzV3sTV6VEGncfnXOG0HY2Iq34CpQJYuHKC7siSYfC04VvJW
-        # - name: GITHUB_CLIENT_ID
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: github-client
-        #       key: client-id
-        # - name: GITHUB_CLIENT_SECRET
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: github-client
-        #       key: client-secret
-
         readinessProbe:
           httpGet:
             path: /healthz
@@ -93,8 +80,7 @@ data:
     staticClients:
     - id: login
       name: "SSO Login Applications"
-      public: true
-      # secret: "{{ .Env.LOGIN_CLIENT_SECRET }}"
+      secret: notaSecretDexisLocal
       redirectURIs:
       # kubectl
       - 'http://localhost:8000'
