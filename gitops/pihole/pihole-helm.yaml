@@ -64,11 +64,11 @@ spec:
       - address=/syncthing.buc.sh/10.0.0.21
       customCnameEntries:
       # evergreen.buc.sh
+      - cname=evergreen-console.buc.sh,evergreen.buc.sh
+      - cname=flux.buc.sh,evergreen.buc.sh
+      - cname=dex.buc.sh,evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
       - cname=paste.buc.sh,evergreen.buc.sh
-      - cname=status.buc.sh,evergreen.buc.sh
-      - cname=gatus.buc.sh,evergreen.buc.sh
-      - cname=evergreen-console.buc.sh,evergreen.buc.sh
       # prod.buc.sh
       - cname=argocd.buc.sh,prod.buc.sh
       - cname=grafana.buc.sh,prod.buc.sh
@@ -92,9 +92,14 @@ spec:
       - cname=shows.tv.buc.sh,tv.buc.sh
       - cname=music.tv.buc.sh,tv.buc.sh
       - cname=files.tv.buc.sh,tv.buc.sh
-      # prod-green.buc.sh
-      # nas.buc.sh
+      # homelab.buc.sh
+      - cname=homelab-console.buc.sh,homelab.buc.sh
       
+      # nas.buc.sh
+      - cname=speedtest.buc.sh,nas.buc.sh
+      
+
+
       customSettings:
       # DHCP Settings.
       - dhcp-authoritative
