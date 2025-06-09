@@ -93,8 +93,8 @@ data:
     staticClients:
     - id: login
       name: "SSO Login Applications"
-      # public: true
-      secret: "{{ .Env.LOGIN_CLIENT_SECRET }}"
+      public: true
+      # secret: "{{ .Env.LOGIN_CLIENT_SECRET }}"
       redirectURIs:
       # kubectl
       - 'http://localhost:8000'
