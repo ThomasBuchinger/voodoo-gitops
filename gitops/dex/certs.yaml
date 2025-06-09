@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-dex-buc-sh
+  namespace: dex
+spec:
+  secretName: cert-dex-buc-sh
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - buc
+  dnsNames:
+    - dex.buc.sh
+  issuerRef:
+    name: letsencrypt-prod-cloudflare-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
