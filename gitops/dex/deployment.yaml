@@ -43,7 +43,7 @@ spec:
           value: ZXhhbXBsZS1hcHAtc2VjcmV0
         - name: USER_ADMIN_HASH
           # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
-          value: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+          value: $2y$10$Kr7cetzV3sTV6VEGncfnXOG0HY2Iq34CpQJYuHKC7siSYfC04VvJW
         # - name: GITHUB_CLIENT_ID
         #   valueFrom:
         #     secretKeyRef:
