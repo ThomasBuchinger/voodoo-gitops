@@ -29,14 +29,14 @@ spec:
         # command: ["/usr/local/bin/dex", "serve", "/etc/dex/cfg/config.yaml"]
 
         ports:
-        - name: https
+        - name: http
           containerPort: 5556
 
         volumeMounts:
         - name: config
           mountPath: /etc/dex/cfg
-        - name: tls
-          mountPath: /etc/dex/tls
+        # - name: tls
+        #   mountPath: /etc/dex/tls
 
         env:
         - name: LOGIN_CLIENT_SECRET
@@ -59,7 +59,6 @@ spec:
           httpGet:
             path: /healthz
             port: 5556
-            scheme: HTTPS
       volumes:
       - name: config
         configMap:
@@ -67,9 +66,9 @@ spec:
           items:
           - key: config.yaml
             path: config.yaml
-      - name: tls
-        secret:
-          secretName: cert-dex-buc-sh
+      # - name: tls
+      #   secret:
+      #     secretName: cert-dex-buc-sh
 ---
 kind: ConfigMap
 apiVersion: v1
@@ -84,9 +83,9 @@ data:
       config:
         inCluster: true
     web:
-      https: 0.0.0.0:5556
-      tlsCert: /etc/dex/tls/tls.crt
-      tlsKey: /etc/dex/tls/tls.key
+      http: 0.0.0.0:5556
+      # tlsCert: /etc/dex/tls/tls.crt
+      # tlsKey: /etc/dex/tls/tls.key
     connectors: []
     
     oauth2:
