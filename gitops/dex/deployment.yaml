@@ -1,17 +1,12 @@
 # source: https://github.com/dexidp/dex/blob/master/examples/k8s/dex.yaml
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: dex
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: dex
   name: dex
-  namespace: dex
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -75,10 +70,10 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: dex
-  namespace: dex
+  namespace: default
 data:
   config.yaml: |
-    issuer: https://dex.buc.sh:32000
+    issuer: https://dex.buc.sh
     storage:
       type: kubernetes
       config:
@@ -113,9 +108,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: dex
-  namespace: dex
+  namespace: default
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: dex
     port: 5556
@@ -131,7 +126,7 @@ metadata:
   labels:
     app: dex
   name: dex
-  namespace: dex
+  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -156,4 +151,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: dex
-  namespace: dex
+  namespace: default
