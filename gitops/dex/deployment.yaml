@@ -95,7 +95,9 @@ data:
       redirectURIs:
       - 'http://127.0.0.1:5555/callback'
       - 'http://argocd.10.0.0.23.nip.io/callback'
-      - 'http://homelab-console.10.0.0.23.nip.io/callback'
+      - 'http://homelab-console.10.0.0.23.nip.io/oidc-callback'
+      - 'http://homelab-console.buc.sh/oidc-callback'
+
 
     enablePasswordDB: true
     staticPasswords:
