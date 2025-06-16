@@ -35,8 +35,8 @@ spec:
         #   mountPath: /etc/dex/tls
 
         env:
+        # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
         - name: USER_ADMIN_HASH
-          # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
           value: $2y$10$Kr7cetzV3sTV6VEGncfnXOG0HY2Iq34CpQJYuHKC7siSYfC04VvJW
         readinessProbe:
           httpGet:
