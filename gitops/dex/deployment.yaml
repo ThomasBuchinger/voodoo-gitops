@@ -35,9 +35,9 @@ spec:
         #   mountPath: /etc/dex/tls
 
         env:
-        # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+        # HomeLA standard Admin password
         - name: USER_ADMIN_HASH
-          value: $2y$10$Kr7cetzV3sTV6VEGncfnXOG0HY2Iq34CpQJYuHKC7siSYfC04VvJW
+          value: $2a$10$C8QN1YJaoW/.L6bBSV/k1ucgA5Wm68JkyHPyyT8/Lke.UjwAaf73y
         readinessProbe:
           httpGet:
             path: /healthz
