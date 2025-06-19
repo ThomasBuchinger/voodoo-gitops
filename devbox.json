@@ -1,7 +1,7 @@
 {
   "packages": [
     "renovate@40.33.1",
-    "fluxcd@2.5.1"
+    "fluxcd@2.6.2"
   ],
   "shell": {
     "init_hook": [
