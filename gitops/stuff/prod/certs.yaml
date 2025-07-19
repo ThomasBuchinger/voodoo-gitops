@@ -196,7 +196,7 @@ spec:
       - buc
   dnsNames:
     - "*.mediarr.buc.sh"
-    # - "*.tv.buc.sh"
+    - "*.tv.buc.sh"
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
