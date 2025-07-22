@@ -1,4 +1,6 @@
 kind: Kustomization
+namespace: mtls
+
 resources:
 - root-ca.yaml
 - device-certs.yaml
