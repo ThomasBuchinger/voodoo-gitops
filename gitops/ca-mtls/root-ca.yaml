@@ -30,7 +30,7 @@ spec:
   - cert sign
   - digital signature
   - key agreement
-  - key encipherment"
+  - key encipherment
   - signing
   nameConstraints:
     critical: true
