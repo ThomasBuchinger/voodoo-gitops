@@ -6,9 +6,11 @@ metadata:
 data:
   static.conf: |-
     server {
+      listen        4000;
+
       location / {
         autoindex on;
-        # root  /usr/share/nginx/html;
+        root  /usr/share/nginx/html/;
       }
     }
   index.html: |-
@@ -35,7 +37,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 4000
         livenessProbe:
           httpGet:
             path: /
@@ -82,7 +84,7 @@ spec:
   type: ClusterIP
   ports:
     - name: http
-      port: 8080
+      port: 4000
       targetPort: http
 ---
 apiVersion: networking.k8s.io/v1
