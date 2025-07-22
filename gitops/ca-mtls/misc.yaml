@@ -10,7 +10,7 @@ data:
 
       location / {
         autoindex on;
-        root  /tmp;
+        root  /usr/share/nginx/html;
       }
     }
 
@@ -55,12 +55,16 @@ spec:
         volumeMounts:
         - name: conf
           mountPath: /etc/nginx/conf.d
+        - name: root
+          mountPath: /usr/share/nginx/html
         - name: mtls-buc-lenovo
-          mountPath: /tmp/buc-lenovo
+          mountPath: /usr/share/nginx/html/buc-lenovo
       volumes:
       - name: conf
         configMap:
           name: nginx-config
+      - name: root
+        emptyDir: {}
       - name: mtls-buc-lenovo
         secret:
           secretName: mtls-buc-lenovo
