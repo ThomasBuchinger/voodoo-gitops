@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: cgr.dev/chainguard/nginx:1.27.4
+        image: cgr.dev/chainguard/nginx:latest
+        imagePullPolicy: Always
         ports:
         - name: http
           containerPort: 8080
