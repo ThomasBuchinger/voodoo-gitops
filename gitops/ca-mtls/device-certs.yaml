@@ -16,12 +16,18 @@ spec:
   renewBefore: 2160h # 90d
   usages:
   - client auth
-  secretName: mtls-buc-lenovo
   privateKey:
     algorithm: ECDSA
     size: 521
     rotationPolicy: Always
+  secretName: mtls-buc-lenovo
+  keystores:
+    pkcs12:
+      profile: Modern2023
+      create: true
   issuerRef:
     name: buc-root-ca-mtls
     kind: Issuer
     group: cert-manager.io
+
+  
