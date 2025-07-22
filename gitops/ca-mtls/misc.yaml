@@ -6,6 +6,8 @@ metadata:
 data:
   static: |-
     server {
+      listen 8080;
+
       location / {
         autoindex on;
         root  /www;
