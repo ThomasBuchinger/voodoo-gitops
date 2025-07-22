@@ -48,7 +48,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: cert-httpconsole
+  name: cert-http
 spec:
   selector:
     app: nginx
