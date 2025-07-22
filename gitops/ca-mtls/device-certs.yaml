@@ -23,9 +23,9 @@ spec:
   secretName: mtls-buc-lenovo
   keystores:
     pkcs12:
-      profile: Modern2023
       create: true
       password: "changeme"
+      profile: LegacyDES
   issuerRef:
     name: buc-root-ca-mtls
     kind: Issuer
