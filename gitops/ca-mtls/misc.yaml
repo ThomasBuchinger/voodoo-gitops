@@ -66,9 +66,9 @@ spec:
         configMap:
           name: nginx-config
       - name: root
-        # emptyDir: {}
-        configMap:
-          name: nginx-config
+        emptyDir: {}
+        # configMap:
+        #   name: nginx-config
       - name: mtls-buc-lenovo
         secret:
           secretName: mtls-buc-lenovo
