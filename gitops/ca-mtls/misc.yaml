@@ -6,11 +6,9 @@ metadata:
 data:
   static.conf: |-
     server {
-      listen 8080;
-
       location / {
         autoindex on;
-        root  /usr/share/nginx/html;
+        # root  /usr/share/nginx/html;
       }
     }
   index.html: |-
