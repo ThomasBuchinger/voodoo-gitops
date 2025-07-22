@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: nginx-config
 data:
-  static: |-
+  static.conf: |-
     server {
       listen 8080;
 
