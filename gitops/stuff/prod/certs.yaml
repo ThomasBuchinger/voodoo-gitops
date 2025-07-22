@@ -34,6 +34,7 @@ spec:
   commonName: '*.cloud.buc.sh'
   dnsNames:
     - '*.cloud.buc.sh'
+    - "*.mtls.buc.sh"
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer
