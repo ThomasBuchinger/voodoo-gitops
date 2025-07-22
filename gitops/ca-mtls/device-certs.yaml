@@ -25,6 +25,7 @@ spec:
     pkcs12:
       profile: Modern2023
       create: true
+      password: ""
   issuerRef:
     name: buc-root-ca-mtls
     kind: Issuer
