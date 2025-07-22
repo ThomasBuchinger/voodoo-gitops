@@ -12,8 +12,8 @@ spec:
     - BUC LAB
     countries:
     - AT
-  duration: 365d
-  renewBefore: 90d
+  duration: 8760h    # 365d
+  renewBefore: 2160h # 90d
   usages:
   - client auth
   secretName: mtls-buc-lenovo

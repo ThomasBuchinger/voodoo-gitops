@@ -23,8 +23,8 @@ spec:
     - BUC LAB
     countries:
     - AT
-  duration: 30d
-  renewBefore: 14d
+  duration: 720h    # 30d
+  renewBefore: 336h # 14d
   usages:
   - crl sign
   - cert sign
