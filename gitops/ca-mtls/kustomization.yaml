@@ -1,0 +1,15 @@
+kind: Kustomization
+resources:
+- root-ca.yaml
+- device-certs.yaml
+- misc.yaml
+
+secretGenerator:
+- name: tmp-buc-root-ca-mtls
+  files:
+  # - tls.crt=buc-root-ca-mtls.crt
+  - tls.key=buc-root-ca-mtls.key
+  # type: "kubernetes.io/tls"
+  options:
+    disableNameSuffixHash: true
+    

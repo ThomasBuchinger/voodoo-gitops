@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mtls
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: buc-root-ca-mtls
+  namespace: mtls
+spec:
+  isCA: true
+  commonName: buc-root-ca-mtls
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  duration: 30d
+  renewBefore: 14d
+  usages:
+  - crl sign
+  - cert sign
+  - digital signature
+  - key agreement
+  - key encipherment"
+  - signing
+  nameConstraints:
+    critical: true
+    permitted:
+      dnsDomains:
+      - "mtls.buc.sh"
+  secretName: tmp-buc-root-ca-mtls
+  privateKey:
+    algorithm: ECDSA
+    size: 521
+    rotationPolicy: Never
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: buc-root-ca-mtls
+  namespace: mtls
+spec:
+  ca:
+    secretName: tmp-buc-root-ca-mtls

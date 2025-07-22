@@ -1,0 +1,27 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: buc-lenovo
+  namespace: mtls
+spec:
+  isCA: true
+  commonName: mtls-lenovo
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  duration: 365d
+  renewBefore: 90d
+  usages:
+  - client auth
+  secretName: mtls-buc-lenovo
+  privateKey:
+    algorithm: ECDSA
+    size: 521
+    rotationPolicy: Always
+  issuerRef:
+    name: buc-root-ca-mtls
+    kind: Issuer
+    group: cert-manager.io
