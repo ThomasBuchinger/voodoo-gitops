@@ -13,8 +13,6 @@ data:
         root  /usr/share/nginx/html/;
       }
     }
-  index.html: |-
-    <h1>Hello world</h1>
 
 ---
 apiVersion: apps/v1
@@ -67,8 +65,6 @@ spec:
           name: nginx-config
       - name: root
         emptyDir: {}
-        # configMap:
-        #   name: nginx-config
       - name: mtls-buc-lenovo
         secret:
           secretName: mtls-buc-lenovo
@@ -103,3 +99,18 @@ spec:
             name: cert-http
             port:
               name: http
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: eso-secret-reader
+subjects:
+- kind: ServiceAccount
+  name: prod-eso-auth
+  namespace: prod
+roleRef:
+  kind: ClusterRole
+  name: eso-secret-reader
+  apiGroup: rbac.authorization.k8s.io
