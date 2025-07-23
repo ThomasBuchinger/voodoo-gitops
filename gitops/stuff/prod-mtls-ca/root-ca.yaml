@@ -19,8 +19,8 @@ spec:
     - BUC LAB
     countries:
     - AT
-  duration: 720h    # 30d
-  renewBefore: 336h # 14d
+  duration: 8760h    # 365d
+  renewBefore: 2160h # 90d
   usages:
   - crl sign
   - cert sign
@@ -28,16 +28,16 @@ spec:
   - key agreement
   - key encipherment
   - signing
-  nameConstraints:
-    critical: true
-    permitted:
-      dnsDomains:
-      - "mtls.buc.sh"
+  # nameConstraints:
+  #   critical: true
+  #   permitted:
+  #     dnsDomains:
+  #     - "mtls.buc.sh"
   secretName: tmp-buc-root-ca-mtls
-  privateKey:
-    algorithm: ECDSA
-    size: 521
-    rotationPolicy: Never
+  # privateKey:
+  #   algorithm: ECDSA
+  #   size: 521
+  #   rotationPolicy: Never
   issuerRef:
     name: selfsigned
     kind: ClusterIssuer
