@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
@@ -99,18 +99,3 @@ spec:
             name: cert-http
             port:
               name: http
-
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: eso-secret-reader
-subjects:
-- kind: ServiceAccount
-  name: prod-eso-auth
-  namespace: prod
-roleRef:
-  kind: ClusterRole
-  name: eso-secret-reader
-  apiGroup: rbac.authorization.k8s.io
