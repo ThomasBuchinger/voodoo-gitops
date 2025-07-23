@@ -5,7 +5,7 @@ metadata:
   name: buc-lenovo
   namespace: mtls
 spec:
-  isCA: true
+  isCA: false
   commonName: mtls-lenovo
   subject:
     organizations:
@@ -16,10 +16,11 @@ spec:
   renewBefore: 2160h # 90d
   usages:
   - client auth
-  privateKey:
-    algorithm: ECDSA
-    size: 521
-    rotationPolicy: Always
+  - any
+  # privateKey:
+  #   algorithm: ECDSA
+  #   size: 521
+  #   rotationPolicy: Always
   secretName: mtls-buc-lenovo
   keystores:
     pkcs12:
