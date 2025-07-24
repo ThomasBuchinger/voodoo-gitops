@@ -34,7 +34,7 @@ spec:
   keystores:
     pkcs12:
       create: true
-      password: "thisisnotasecret"
+      password: "underpass-excuse-mounted"
       profile: LegacyDES
   issuerRef:
     name: buc-root-ca-mtls
@@ -63,7 +63,7 @@ spec:
   keystores:
     pkcs12:
       create: true
-      password: "thisisnotasecret"
+      password: "underpass-excuse-mounted"
       profile: LegacyDES
   issuerRef:
     name: buc-root-ca-mtls
