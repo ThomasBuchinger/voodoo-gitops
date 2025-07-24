@@ -5,4 +5,4 @@ resources:
 - mtls-buc-root-ca-sealed.yaml
 - certs.yaml
 - misc.yaml
-- tst-ca.yaml
+- test-ca.yaml
