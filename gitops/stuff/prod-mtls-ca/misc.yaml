@@ -57,8 +57,11 @@ spec:
           mountPath: /etc/nginx/conf.d
         - name: root
           mountPath: /usr/share/nginx/html/
+        - name: mtls-buc-root-ca/tls.crt
+          mountPath: /usr/share/nginx/html/mtls-buc-root-ca/tls.crt
+          subPath: tls.crt
         - name: mtls-buc-lenovo
-          mountPath: /usr/share/nginx/html/buc-lenovo
+          mountPath: /usr/share/nginx/html/mtls-buc-lenovo
       volumes:
       - name: conf
         configMap:
@@ -68,6 +71,9 @@ spec:
       - name: mtls-buc-lenovo
         secret:
           secretName: mtls-buc-lenovo
+      - name: mtls-buc-root-ca
+        secret:
+          secretName: mtls-buc-root-ca
 
 ---
 kind: Service

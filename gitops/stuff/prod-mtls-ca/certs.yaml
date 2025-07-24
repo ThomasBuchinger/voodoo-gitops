@@ -1,0 +1,71 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: mtls-buc-root-ca
+spec:
+  ca:
+    secretName: mtls-buc-root-ca
+
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: buc-lenovo
+  namespace: mtls
+spec:
+  isCA: false
+  commonName: mtls-lenovo
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  duration: 8766h    # 365d
+  renewBefore: 2160h # 90d
+  usages:
+  - client auth
+  # privateKey:
+  #   algorithm: ECDSA
+  #   size: 521
+  #   rotationPolicy: Always
+  secretName: mtls-buc-lenovo
+  keystores:
+    pkcs12:
+      create: true
+      password: "thisisnotasecret"
+      profile: LegacyDES
+  issuerRef:
+    name: buc-root-ca-mtls
+    kind: Issuer
+    group: cert-manager.io
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: buc-android
+  namespace: mtls
+spec:
+  isCA: false
+  commonName: mtls-android
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  duration: 8766h    # 365d
+  renewBefore: 2160h # 90d
+  usages:
+  - client auth
+  secretName: mtls-buc-lenovo
+  keystores:
+    pkcs12:
+      create: true
+      password: "thisisnotasecret"
+      profile: LegacyDES
+  issuerRef:
+    name: buc-root-ca-mtls
+    kind: Issuer
+    group: cert-manager.io

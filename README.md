@@ -23,7 +23,6 @@ To switch to a different branch, log into the server and run `~/bin/install_flux
 
 ## Architecture
 All applcations are handled by fluxcd
-linux--installs-->fluxchart
 
 ```mermaid
 flowchart TB
