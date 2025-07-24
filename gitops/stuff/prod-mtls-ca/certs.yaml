@@ -37,7 +37,7 @@ spec:
       password: "underpass-excuse-mounted"   # Passphrase is not treated as secret, because the file itself is not shared
       profile: LegacyDES
   issuerRef:
-    name: buc-root-ca-mtls
+    name: mtls-buc-root-ca
     kind: Issuer
     group: cert-manager.io
 
@@ -66,6 +66,6 @@ spec:
       password: "underpass-excuse-mounted"
       profile: LegacyDES
   issuerRef:
-    name: buc-root-ca-mtls
+    name: mtls-buc-root-ca
     kind: Issuer
     group: cert-manager.io
