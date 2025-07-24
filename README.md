@@ -68,7 +68,7 @@ Secrets are handled via a combination of vault and SealedSecrets.
 ```bash
 # Rotate encryption key
 mv sealed.crt sealed.crt.old
-openssl req -new -x509 -nodes -days 30 -key sealed.key -out sealed.crt -subj "/CN=sealed-secret/O=sealed-secret"
+openssl req -new -x509 -nodes -days 36500 -key sealed.key -out sealed.crt -subj "/CN=sealed-secret/O=sealed-secret"
 
 # to update Secrets run
 make kubeseal
