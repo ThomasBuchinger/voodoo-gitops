@@ -37,6 +37,7 @@ spec:
   privateKey:
     algorithm: RSA
     size: 4096
+    rotationPolicy: Never
   # privateKey:
   #   algorithm: ECDSA
   #   size: 521
