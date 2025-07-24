@@ -57,23 +57,28 @@ spec:
           mountPath: /etc/nginx/conf.d
         - name: root
           mountPath: /usr/share/nginx/html/
-        - name: mtls-buc-root-ca/tls.crt
+        - name: mtls-buc-root-ca
           mountPath: /usr/share/nginx/html/mtls-buc-root-ca/tls.crt
           subPath: tls.crt
         - name: mtls-buc-lenovo
           mountPath: /usr/share/nginx/html/mtls-buc-lenovo
+        - name: mtls-buc-android
+          mountPath: /usr/share/nginx/html/mtls-buc-android
       volumes:
       - name: conf
         configMap:
           name: nginx-config
       - name: root
         emptyDir: {}
-      - name: mtls-buc-lenovo
-        secret:
-          secretName: mtls-buc-lenovo
       - name: mtls-buc-root-ca
         secret:
           secretName: mtls-buc-root-ca
+      - name: mtls-buc-lenovo
+        secret:
+          secretName: mtls-buc-lenovo
+      - name: mtls-buc-android
+        secret:
+          secretName: mtls-buc-android
 
 ---
 kind: Service
