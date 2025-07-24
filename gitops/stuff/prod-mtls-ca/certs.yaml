@@ -34,7 +34,7 @@ spec:
   keystores:
     pkcs12:
       create: true
-      password: "underpass-excuse-mounted"
+      password: "underpass-excuse-mounted"   # Passphrase is not treated as secret, because the file itself is not shared
       profile: LegacyDES
   issuerRef:
     name: buc-root-ca-mtls
