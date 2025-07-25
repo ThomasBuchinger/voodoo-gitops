@@ -8,7 +8,7 @@ This repository only contains the private key. The Certificate for the Root-CA i
 
 
 openssl req -x509 -newkey rsa:4096 -keyout secrets/stuff/prod-mtls-ca/tls.key -out secrets/stuff/prod-mtls-ca/tls.crt -sha256 -days 364 -nodes -subj "/C=AT/O=BUC LAB/CN=mtls-buc-root-ca" -addext basicConstraints=critical,CA:TRUE -addext "keyUsage=critical,cRLSign,keyCertSign,digitalSignature,keyAgreement,keyEncipherment"
-kubectl create secret generic mtls-buc-root-ca --from-file tls.crt=secrets/stuff/prod-mtls-ca/tls.crt --from-file tls.key=secrets/stuff/prod-mtls-ca/tls.key --from-file ca.crt=secrets/stuff/prod-mtls-ca/tls.crt --dry-run=client -o yaml --namespace prod --type kubernetes.io/tls > secrets/stuff/prod-mtls-ca/mtls-buc-root-ca
+kubectl create secret generic mtls-buc-root-ca --from-file tls.crt=secrets/stuff/prod-mtls-ca/tls.crt --from-file tls.key=secrets/stuff/prod-mtls-ca/tls.key --from-file ca.crt=secrets/stuff/prod-mtls-ca/tls.crt --dry-run=client -o yaml --namespace prod --type kubernetes.io/tls --validate=false > secrets/stuff/prod-mtls-ca/mtls-buc-root-ca.yaml
 make kubeseal
 
 ```
