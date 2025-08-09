@@ -7,7 +7,6 @@ spec:
   ca:
     secretName: mtls-buc-root-ca
 
-
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -16,20 +15,22 @@ metadata:
   namespace: mtls
 spec:
   isCA: false
-  commonName: mtls-lenovo
+  commonName: buc-lenovo
   subject:
     organizations:
     - BUC LAB
     countries:
     - AT
+  emailAddresses:
+  - buc@buc.sh
   duration: 8766h    # 365d
   renewBefore: 2160h # 90d
   usages:
   - client auth
-  # privateKey:
-  #   algorithm: ECDSA
-  #   size: 521
-  #   rotationPolicy: Always
+  privateKey:
+    algorithm: ECDSA
+    size: 521
+    rotationPolicy: Always
   secretName: mtls-buc-lenovo
   keystores:
     pkcs12:
@@ -49,16 +50,22 @@ metadata:
   namespace: mtls
 spec:
   isCA: false
-  commonName: mtls-buc-android
+  commonName: buc-android
   subject:
     organizations:
     - BUC LAB
     countries:
     - AT
+  emailAddresses:
+  - buc@buc.sh
   duration: 8766h    # 365d
   renewBefore: 2160h # 90d
   usages:
   - client auth
+  privateKey:
+    algorithm: ECDSA
+    size: 521
+    rotationPolicy: Always
   secretName: mtls-buc-android
   keystores:
     pkcs12:
