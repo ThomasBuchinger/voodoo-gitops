@@ -5,6 +5,7 @@ SSH_HOST=root@$(IP)
 K3S_MANIFEST_DIR=/var/lib/rancher/k3s/server/manifests
 SECRETS = gitops/stuff/prod/prod-secretids-sealed.yaml \
 					gitops/stuff/prod/syncthing-secrets-sealed.yaml \
+					gitops/stuff/prod-mtls-ca/mtls-buc-root-ca-sealed.yaml \
 					gitops/common/cloudflare-secrets-sealed.yaml \
 					gitops/common/common-secrets-sealed.yaml
 

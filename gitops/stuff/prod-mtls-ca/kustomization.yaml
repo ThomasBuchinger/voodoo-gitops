@@ -1,0 +1,8 @@
+kind: Kustomization
+namespace: prod
+
+resources:
+- mtls-buc-root-ca-sealed.yaml
+- certs.yaml
+- misc.yaml
+- test-ca.yaml

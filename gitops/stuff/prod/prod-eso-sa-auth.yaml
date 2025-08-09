@@ -30,7 +30,7 @@ metadata:
   name: eso-secret-reader
 rules:
 - apiGroups: [""]
-  resources: ["secrets"]
+  resources: ["secrets" , "configmap"]
   verbs: ["get", "watch", "list"]
 
 ---
