@@ -34,6 +34,19 @@ spec:
     # Move HTTP Ports to avoid conflicts with ingress-controller
     webHttp: 8000
     webHttps: 8443
+
+    # We have to change the default liveness/rediness probe, because we changed the webHttp port
+    probes:
+      liveness:
+        command:
+          - /bin/sh
+          - -c
+          - "curl --silent http://localhost:8000/api/info/login | jq 'if (.dns | not) then halt_error(1) end'"
+      readiness:
+        command:
+          - /bin/sh
+          - -c
+          - "curl --silent http://localhost:8000/api/info/login | jq 'if (.dns | not) then halt_error(1) end'"
     serviceDns:
       mixedService: true
       type: ClusterIP
