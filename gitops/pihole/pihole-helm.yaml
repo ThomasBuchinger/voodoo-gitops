@@ -29,8 +29,8 @@ spec:
         namespace: flux-system
       interval: 15m
   values:
-    image:
-      tag: "latest"
+    # image:
+    #   tag: "latest"
     # Move HTTP Ports to avoid conflicts with ingress-controller
     webHttp: 8000
     webHttps: 8443
