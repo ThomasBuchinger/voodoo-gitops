@@ -3,13 +3,16 @@
     "renovate@41.49.0",
     "fluxcd@2.6.4"
   ],
+  "env": {
+    "KUBECONFIG": "./kubeconfig"
+  },
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
+      "update": [
+        "flux reconcile source git voodoo-gitopns"
       ]
     }
   }

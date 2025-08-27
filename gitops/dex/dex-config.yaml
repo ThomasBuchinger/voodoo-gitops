@@ -29,6 +29,10 @@ staticClients:
   # - 'http://argocd.10.0.0.23.nip.io/applications'
   # - 'http://argocd.10.0.0.23.nip.io/api/dex/callback'
   # - 'http://argocd.10.0.0.23.nip.io/auth/login'
+  # r2.buc.sh (S3 Frontend)
+  - https://r2.buc.sh/oauth2/callback
+  # Grafana
+  - https://grafana.buc.sh/oauth2/callback
 
 enablePasswordDB: true
 staticPasswords:
