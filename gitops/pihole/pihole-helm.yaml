@@ -94,6 +94,7 @@ spec:
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=files-admin.buc.sh,prod.buc.sh
       - cname=files.buc.sh,prod.buc.sh
+      - cname=r2.buc.sh,prod.buc.sh
       # homelab.buc.sh
       - cname=homelab-console.buc.sh,homelab.buc.sh
       # nas.buc.sh
