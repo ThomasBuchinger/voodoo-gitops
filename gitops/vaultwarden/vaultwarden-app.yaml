@@ -6,7 +6,7 @@ metadata:
   namespace: default
 data:
   SIGNUPS_ALLOWED: "false"
-  # ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
+  ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
   DAOMIN_URL: https://vault.buc.sh
   USER_ATTACHMENT_LIMIT: "1"
   ORG_ATTACHMENT_LIMIT: "1"
@@ -42,7 +42,7 @@ spec:
         - '-if-replica-exists'
         - /data/db.sqlite3
         volumeMounts:
-        - name: db
+        - name: vaultwarden-data
           mountPath: /data
         - name: litestream-config
           mountPath: /etc
@@ -83,7 +83,7 @@ spec:
         args:
         - 'replicate'
         volumeMounts:
-        - name: db
+        - name: vaultwarden-data
           mountPath: /data
         - name: litestream-config
           mountPath: /etc
@@ -105,6 +105,9 @@ spec:
       - name: vaultwarden-data
         persistentVolumeClaim:
           claimName: vaultwarden-pvc
+      - name: litestream-config
+        configMap:
+          name: litestream-config
 
 ---
 apiVersion: v1
