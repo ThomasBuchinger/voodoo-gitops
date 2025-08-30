@@ -45,7 +45,8 @@ spec:
         - name: vaultwarden-data
           mountPath: /data
         - name: litestream-config
-          mountPath: /etc
+          mountPath: /etc/litestream.yml
+          subPath: litestream.yml
         env:
         - name: LITESTREAM_ACCESS_KEY_ID
           valueFrom:
@@ -64,15 +65,15 @@ spec:
         envFrom:
         - configMapRef:
             name: vaultwarden-config
-        # securityContext:
-        #   capabilities:
-        #     drop:
-        #     - ALL
-        #   runAsUser: 1000
-        #   runAsGroup: 1000
-        #   runAsNonRoot: true
-        #   privileged: false
-        #   readOnlyRootFilesystem: true
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
         volumeMounts:
         - name: vaultwarden-data
           mountPath: /data
@@ -86,7 +87,8 @@ spec:
         - name: vaultwarden-data
           mountPath: /data
         - name: litestream-config
-          mountPath: /etc
+          mountPath: /etc/litestream.yml
+          subPath: litestream.yml
         env:
         - name: LITESTREAM_ACCESS_KEY_ID
           valueFrom:
