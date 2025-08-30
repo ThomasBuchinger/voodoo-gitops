@@ -7,6 +7,12 @@ metadata:
 data:
   SIGNUPS_ALLOWED: "false"
   ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
+  DAOMIN: https://vault.buc.sh
+  USER_ATTACHMENT_LIMIT: "1"
+  ORG_ATTACHMENT_LIMIT: "1"
+  INVITATIONS_ALLOWED: "true"
+  INVITATION_ORG_NAME: "BUC Password Manager"
+  IP_HEADER: X-Forwarded-For
 
 ---
 apiVersion: apps/v1
