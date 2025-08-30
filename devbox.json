@@ -12,7 +12,7 @@
     ],
     "scripts": {
       "update": [
-        "flux reconcile source git voodoo-gitopns"
+        "flux reconcile source git voodoo-gitops"
       ]
     }
   }
