@@ -175,7 +175,7 @@ data:
     - path: /data/db.sqlite3
       replicas:
       - type: s3
-        endpoint: http://s3.buc.sh:9000
+        endpoint: http://10.0.0.19:9000
         region: us-east-1
         bucket: vaultwarden
         path: litestream
