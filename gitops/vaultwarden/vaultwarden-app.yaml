@@ -6,7 +6,7 @@ metadata:
   namespace: default
 data:
   SIGNUPS_ALLOWED: "false"
-  ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
+  # ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
   DAOMIN_URL: https://vault.buc.sh
   USER_ATTACHMENT_LIMIT: "1"
   ORG_ATTACHMENT_LIMIT: "1"
@@ -64,15 +64,15 @@ spec:
         envFrom:
         - configMapRef:
             name: vaultwarden-config
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          runAsUser: 1000
-          runAsGroup: 1000
-          runAsNonRoot: true
-          privileged: false
-          readOnlyRootFilesystem: true
+        # securityContext:
+        #   capabilities:
+        #     drop:
+        #     - ALL
+        #   runAsUser: 1000
+        #   runAsGroup: 1000
+        #   runAsNonRoot: true
+        #   privileged: false
+        #   readOnlyRootFilesystem: true
         volumeMounts:
         - name: vaultwarden-data
           mountPath: /data
