@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   path: ./gitops/vaultwarden
+  interval: 15m0s
   prune: true
   sourceRef:
     kind: GitRepository
