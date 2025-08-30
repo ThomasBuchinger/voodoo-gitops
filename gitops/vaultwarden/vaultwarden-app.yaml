@@ -6,13 +6,14 @@ metadata:
   namespace: default
 data:
   SIGNUPS_ALLOWED: "false"
-  ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
-  DAOMIN: https://vault.buc.sh
+  # ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
+  DAOMIN_URL: https://vault.buc.sh
   USER_ATTACHMENT_LIMIT: "1"
   ORG_ATTACHMENT_LIMIT: "1"
   INVITATIONS_ALLOWED: "true"
   INVITATION_ORG_NAME: "BUC Password Manager"
   IP_HEADER: X-Forwarded-For
+  WEBSOCKET_ENABLED: 'true'
 
 ---
 apiVersion: apps/v1
@@ -32,6 +33,31 @@ spec:
       labels:
         app: vaultwarden
     spec:
+      initContainers:
+      - name: litestream-restore
+        image: litestream/litestream:0.3.13
+        args:
+        - 'restore'
+        - '-if-db-not-exists'
+        - '-if-replica-exists'
+        - /data/db.sqlite3
+        volumeMounts:
+        - name: db
+          mountPath: /data
+        - name: litestream-config
+          mountPath: /etc
+        env:
+        - name: LITESTREAM_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_accesskey
+        - name: LITESTREAM_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_secretkey
+
       containers:
       - name: vaultwarden
         image: ghcr.io/dani-garcia/vaultwarden:1.34.3
@@ -50,6 +76,31 @@ spec:
         volumeMounts:
         - name: vaultwarden-data
           mountPath: /data
+
+      # Litestream
+      - name: litestream
+        image: litestream/litestream:0.3.13
+        args:
+        - 'replicate'
+        volumeMounts:
+        - name: db
+          mountPath: /data
+        - name: litestream-config
+          mountPath: /etc
+        env:
+        - name: LITESTREAM_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_accesskey
+        - name: LITESTREAM_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_secretkey
+        ports:
+        - name: metrics
+          containerPort: 9090
       volumes:
       - name: vaultwarden-data
         persistentVolumeClaim:
@@ -106,4 +157,21 @@ spec:
   resources:
     requests:
       storage: 10Gi
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litestream-config
+data:
+  litestream.yml: |-
+    dbs:
+    - path: /data/db.sqlite3
+      replicas:
+      - type: s3
+        endpoint: http://s3.buc.sh:9000
+        region: us-east-1
+        bucket: vaultwarden
+        path: litestream
 
