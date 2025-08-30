@@ -32,7 +32,7 @@ staticClients:
   # r2.buc.sh (S3 Frontend)
   - https://r2.buc.sh/oauth2/callback
   # Grafana
-  - https://grafana.buc.sh/oauth2/callback
+  - https://grafana.buc.sh/login/generic_oauth
 
 enablePasswordDB: true
 staticPasswords:
