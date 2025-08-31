@@ -65,15 +65,15 @@ spec:
         envFrom:
         - configMapRef:
             name: vaultwarden-config
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          runAsUser: 1000
-          runAsGroup: 1000
-          runAsNonRoot: true
-          privileged: false
-          readOnlyRootFilesystem: true
+        # securityContext:
+        #   capabilities:
+        #     drop:
+        #     - ALL
+        #   runAsUser: 1000
+        #   runAsGroup: 1000
+        #   runAsNonRoot: true
+        #   privileged: false
+        #   readOnlyRootFilesystem: true
         volumeMounts:
         - name: vaultwarden-data
           mountPath: /data
