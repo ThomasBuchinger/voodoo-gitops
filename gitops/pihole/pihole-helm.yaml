@@ -76,6 +76,7 @@ spec:
       - address=/s3.buc.sh/10.0.0.19
       - address=/syncthing.buc.sh/10.0.0.21
       - address=/dex.buc.sh/10.0.0.16
+      - address=/vault.buc.sh/10.0.0.16
       customCnameEntries:
       # evergreen.buc.sh
       - cname=evergreen-console.buc.sh,evergreen.buc.sh

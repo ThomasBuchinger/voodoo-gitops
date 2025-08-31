@@ -1,0 +1,201 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vaultwarden-config
+  namespace: default
+data:
+  SIGNUPS_ALLOWED: "false"
+  # ADMIN_TOKEN: A+VjK9w+/070evyqMEhFcyvOySfdJm06vcFL0UmPMXUxyzA1dPQ8TcCkJ4ntjSl6
+  DAOMIN_URL: https://vault.buc.sh
+  USER_ATTACHMENT_LIMIT: "1"
+  ORG_ATTACHMENT_LIMIT: "1"
+  INVITATIONS_ALLOWED: "true"
+  INVITATION_ORG_NAME: "BUC Password Manager"
+  IP_HEADER: X-Forwarded-For
+  WEBSOCKET_ENABLED: 'true'
+  # LOG_LEVEL: debug
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      initContainers:
+      - name: litestream-restore
+        image: litestream/litestream:0.3.13
+        args:
+        - 'restore'
+        - '-if-db-not-exists'
+        - '-if-replica-exists'
+        - /data/db.sqlite3
+        volumeMounts:
+        - name: vaultwarden-data
+          mountPath: /data
+        - name: litestream-config
+          mountPath: /etc/litestream.yml
+          subPath: litestream.yml
+        env:
+        - name: LITESTREAM_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_accesskey
+        - name: LITESTREAM_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_secretkey
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
+
+      containers:
+      - name: vaultwarden
+        image: ghcr.io/dani-garcia/vaultwarden:1.34.3
+        envFrom:
+        - configMapRef:
+            name: vaultwarden-config
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: vaultwarden-data
+          mountPath: /data
+
+      # Litestream
+      - name: litestream
+        image: litestream/litestream:0.3.13
+        args:
+        - 'replicate'
+        volumeMounts:
+        - name: vaultwarden-data
+          mountPath: /data
+        - name: litestream-config
+          mountPath: /etc/litestream.yml
+          subPath: litestream.yml
+        env:
+        - name: LITESTREAM_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_accesskey
+        - name: LITESTREAM_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: common-secrets
+              key: s3_secretkey
+        ports:
+        - name: metrics
+          containerPort: 9090
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
+      volumes:
+      - name: vaultwarden-data
+        persistentVolumeClaim:
+          claimName: vaultwarden-pvc
+      - name: litestream-config
+        configMap:
+          name: litestream-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vaultwarden
+  namespace: default
+spec:
+  selector:
+    app: vaultwarden
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-cloudflare-dns
+spec:
+  tls:
+  - hosts:
+    - vault.buc.sh
+    secretName: cert-vault-buc-sh
+  rules:
+    - host: vault.buc.sh
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  number: 80
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litestream-config
+data:
+  litestream.yml: |-
+    dbs:
+    - path: /data/db.sqlite3
+      replicas:
+      - type: s3
+        endpoint: http://10.0.0.19:9000
+        region: us-east-1
+        bucket: vaultwarden
+        path: litestream
+
