@@ -14,7 +14,7 @@ data:
   INVITATION_ORG_NAME: "BUC Password Manager"
   IP_HEADER: X-Forwarded-For
   WEBSOCKET_ENABLED: 'true'
-  LOG_LEVEL: debug
+  # LOG_LEVEL: debug
 
 ---
 apiVersion: apps/v1
