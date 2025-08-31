@@ -14,6 +14,7 @@ data:
   INVITATION_ORG_NAME: "BUC Password Manager"
   IP_HEADER: X-Forwarded-For
   WEBSOCKET_ENABLED: 'true'
+  LOG_LEVEL: debug
 
 ---
 apiVersion: apps/v1
@@ -58,6 +59,15 @@ spec:
             secretKeyRef:
               name: common-secrets
               key: s3_secretkey
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
 
       containers:
       - name: vaultwarden
@@ -65,15 +75,15 @@ spec:
         envFrom:
         - configMapRef:
             name: vaultwarden-config
-        # securityContext:
-        #   capabilities:
-        #     drop:
-        #     - ALL
-        #   runAsUser: 1000
-        #   runAsGroup: 1000
-        #   runAsNonRoot: true
-        #   privileged: false
-        #   readOnlyRootFilesystem: true
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
         volumeMounts:
         - name: vaultwarden-data
           mountPath: /data
@@ -103,6 +113,15 @@ spec:
         ports:
         - name: metrics
           containerPort: 9090
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: true
       volumes:
       - name: vaultwarden-data
         persistentVolumeClaim:
