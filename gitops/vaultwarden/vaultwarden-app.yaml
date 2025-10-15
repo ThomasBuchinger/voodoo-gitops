@@ -36,7 +36,7 @@ spec:
     spec:
       initContainers:
       - name: litestream-restore
-        image: litestream/litestream:0.3.13
+        image: litestream/litestream:0.5.2
         args:
         - 'restore'
         - '-if-db-not-exists'
@@ -90,7 +90,7 @@ spec:
 
       # Litestream
       - name: litestream
-        image: litestream/litestream:0.3.13
+        image: litestream/litestream:0.5.2
         args:
         - 'replicate'
         volumeMounts:
