@@ -4,7 +4,7 @@ metadata:
   name: vault
 spec:
   size: 1
-  image: docker.io/hashicorp/vault:1.19
+  image: docker.io/hashicorp/vault:1.21
   bankVaultsImage: ghcr.io/bank-vaults/bank-vaults:v1.31.1
 
 
