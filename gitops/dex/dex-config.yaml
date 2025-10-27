@@ -43,6 +43,6 @@ staticPasswords:
   userID: "1"
   hash: "{{ .Env.USER_ADMIN_HASH }}"
 - email: "but@buc.sh"
-  username: "Bot"
+  username: "bot"
   userID: "2"
   hash: "{{ .Env.USER_BOT_HASH }}"
