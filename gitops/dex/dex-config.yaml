@@ -33,6 +33,8 @@ staticClients:
   - https://r2.buc.sh/oauth2/callback
   # Grafana
   - https://grafana.buc.sh/login/generic_oauth
+  # Matrix
+  - https://matrix.cloud.buc.sh/_synapse/client/oidc/callback
 
 enablePasswordDB: true
 staticPasswords:

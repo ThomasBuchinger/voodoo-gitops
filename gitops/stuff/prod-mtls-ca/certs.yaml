@@ -62,10 +62,6 @@ spec:
   renewBefore: 2160h # 90d
   usages:
   - client auth
-  # privateKey:
-  #   algorithm: ECDSA
-  #   size: 521
-  #   rotationPolicy: Always
   secretName: mtls-buc-android
   keystores:
     pkcs12:

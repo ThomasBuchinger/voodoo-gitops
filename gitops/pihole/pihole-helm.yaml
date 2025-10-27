@@ -71,6 +71,8 @@ spec:
       - address=/bastion.buc.sh/10.0.0.101
       - address=/player.buc.sh/10.0.0.19
       - address=/tv.buc.sh/10.0.0.21
+      - address=/router.iot.buc.sh/10.0.0.9
+      
 
       # Workaround
       - address=/s3.buc.sh/10.0.0.19
@@ -100,7 +102,10 @@ spec:
       - cname=homelab-console.buc.sh,homelab.buc.sh
       # nas.buc.sh
       - cname=speedtest.buc.sh,nas.buc.sh
-      
+      # router.iot.buc.sh
+      - cname=cams.iot.buc.sh,router.iot.buc.sh
+      - cname=ha.iot.buc.sh,router.iot.buc.sh
+      - cname=home.iot.buc.sh,router.iot.buc.sh
 
 
       customSettings:
