@@ -35,9 +35,12 @@ spec:
         #   mountPath: /etc/dex/tls
 
         env:
-        # HomeLA standard Admin password
+        # HomeLAB standard Admin password
         - name: USER_ADMIN_HASH
           value: $2a$10$C8QN1YJaoW/.L6bBSV/k1ucgA5Wm68JkyHPyyT8/Lke.UjwAaf73y
+        # User bot@buc.sh (See bitwarden for password)
+        - name: USER_BOT_HASH
+          value: $2y$10$RSO/L8nQn4jfmfrXjsB1TORINabwG/gqV42urytTjoC4BaSUfVN8G
         readinessProbe:
           httpGet:
             path: /healthz
