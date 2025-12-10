@@ -1,0 +1,11 @@
+resources:
+- app.yaml
+- netalertx-devices-sealed.yaml
+
+namespace: netalertx
+
+configMapGenerator:
+- name: netalertx-app-conf
+  files:
+  - app.conf
+  - my_entrypoint.sh
