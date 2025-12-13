@@ -38,6 +38,7 @@ staticClients:
   # immich
   - https://photos.buc.sh/auth/login
   - https://photos.mtls.buc.sh/auth/login
+  - app.immich:///oauth-callack
 
 enablePasswordDB: true
 staticPasswords:
