@@ -85,6 +85,7 @@ spec:
       - cname=flux.buc.sh,evergreen.buc.sh
       - cname=pihole.buc.sh,evergreen.buc.sh
       - cname=paste.buc.sh,evergreen.buc.sh
+      - cname=network.buc.sh,evergreen.buc.sh
       # prod.buc.sh
       - cname=argocd.buc.sh,prod.buc.sh
       - cname=grafana.buc.sh,prod.buc.sh

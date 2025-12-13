@@ -7,6 +7,7 @@ SECRETS = gitops/stuff/prod/prod-secretids-sealed.yaml \
 					gitops/stuff/prod/syncthing-secrets-sealed.yaml \
 					gitops/stuff/prod-mtls-ca/mtls-buc-root-ca-sealed.yaml \
 					gitops/common/cloudflare-secrets-sealed.yaml \
+					gitops/netalertx/netalertx-devices-sealed.yaml \
 					gitops/common/common-secrets-sealed.yaml
 
 
