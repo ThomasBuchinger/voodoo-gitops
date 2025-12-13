@@ -1,7 +1,7 @@
 {
   "packages": [
     "renovate@42.24.0",
-    "fluxcd@2.7.2"
+    "fluxcd@2.7.5"
   ],
   "env": {
     "KUBECONFIG": "./kubeconfig"
