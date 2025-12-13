@@ -35,6 +35,9 @@ staticClients:
   - https://grafana.buc.sh/login/generic_oauth
   # Matrix
   - https://matrix.cloud.buc.sh/_synapse/client/oidc/callback
+  # immich
+  - https://immich.buc.sh/auth/login
+  - https://immich.mtls.buc.sh/auth/login
 
 enablePasswordDB: true
 staticPasswords:
