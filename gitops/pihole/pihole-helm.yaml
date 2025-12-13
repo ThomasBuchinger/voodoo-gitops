@@ -72,8 +72,9 @@ spec:
       - address=/player.buc.sh/10.0.0.19
       - address=/tv.buc.sh/10.0.0.21
       - address=/router.iot.buc.sh/10.0.0.9
+      - address=/cams.iot.buc.sh/10.0.0.25
+      - address=/ha.iot.buc.sh/10.0.0.24
       
-
       # Workaround
       - address=/s3.buc.sh/10.0.0.19
       - address=/syncthing.buc.sh/10.0.0.21
@@ -103,10 +104,6 @@ spec:
       - cname=homelab-console.buc.sh,homelab.buc.sh
       # nas.buc.sh
       - cname=speedtest.buc.sh,nas.buc.sh
-      # router.iot.buc.sh
-      - cname=cams.iot.buc.sh,router.iot.buc.sh
-      - cname=ha.iot.buc.sh,router.iot.buc.sh
-      - cname=home.iot.buc.sh,router.iot.buc.sh
 
 
       customSettings:
