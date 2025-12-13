@@ -207,17 +207,17 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert-immich-buc-sh
+  name: cert-photos-buc-sh
   namespace: prod
 spec:
-  secretName: cert-immich-buc-sh
+  secretName: cert-photos-buc-sh
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
     organizations:
       - buc
   dnsNames:
-    - immich.buc.sh
+    - photos.buc.sh
   issuerRef:
     name: letsencrypt-prod-cloudflare-dns
     kind: ClusterIssuer

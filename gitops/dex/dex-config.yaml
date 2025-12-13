@@ -36,8 +36,8 @@ staticClients:
   # Matrix
   - https://matrix.cloud.buc.sh/_synapse/client/oidc/callback
   # immich
-  - https://immich.buc.sh/auth/login
-  - https://immich.mtls.buc.sh/auth/login
+  - https://photos.buc.sh/auth/login
+  - https://photos.mtls.buc.sh/auth/login
 
 enablePasswordDB: true
 staticPasswords:

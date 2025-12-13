@@ -94,13 +94,12 @@ spec:
       - cname=prod-console.buc.sh,prod.buc.sh
       - cname=paperless.buc.sh,prod.buc.sh
       - cname=pdf.buc.sh,prod.buc.sh
-      - cname=push.buc.sh,prod.buc.sh
       - cname=api.buc.sh,prod.buc.sh
       - cname=envoy.buc.sh,prod.buc.sh
       - cname=files-admin.buc.sh,prod.buc.sh
       - cname=files.buc.sh,prod.buc.sh
       - cname=r2.buc.sh,prod.buc.sh
-      - cname=immich.buc.sh,prod.buc.sh
+      - cname=photos.buc.sh,prod.buc.sh
       # homelab.buc.sh
       - cname=homelab-console.buc.sh,homelab.buc.sh
       # nas.buc.sh
