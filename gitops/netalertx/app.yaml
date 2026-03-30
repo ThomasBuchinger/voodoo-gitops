@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: netalertx
-        image: ghcr.io/jokob-sk/netalertx:26.2
+        image: ghcr.io/jokob-sk/netalertx:26.3
         env:
         - name: LISTEN_ADDR
           value: "0.0.0.0"
