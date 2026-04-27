@@ -71,7 +71,7 @@ spec:
 
       containers:
       - name: vaultwarden
-        image: ghcr.io/dani-garcia/vaultwarden:1.35.7
+        image: ghcr.io/dani-garcia/vaultwarden:1.35.8
         envFrom:
         - configMapRef:
             name: vaultwarden-config
