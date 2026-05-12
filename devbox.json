@@ -1,6 +1,6 @@
 {
   "packages": [
-    "renovate@43.132.1",
+    "renovate@43.150.1",
     "fluxcd@2.8.5"
   ],
   "env": {
