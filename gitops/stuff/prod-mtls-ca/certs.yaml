@@ -72,3 +72,69 @@ spec:
     name: mtls-buc-root-ca
     kind: Issuer
     group: cert-manager.io
+
+
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: manfred-android
+  namespace: mtls
+spec:
+  isCA: false
+  commonName: manfred-android
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  emailAddresses:
+  - buc@buc.sh
+  duration: 87660h    # 3650d
+  renewBefore: 2160h # 90d
+  usages:
+  - client auth
+  secretName: mtls-manfred-android
+  keystores:
+    pkcs12:
+      create: true
+      password: "underpass-excuse-mounted"
+      profile: LegacyDES
+  issuerRef:
+    name: mtls-buc-root-ca
+    kind: Issuer
+    group: cert-manager.io
+
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: herta-android
+  namespace: mtls
+spec:
+  isCA: false
+  commonName: herta-android
+  subject:
+    organizations:
+    - BUC LAB
+    countries:
+    - AT
+  emailAddresses:
+  - buc@buc.sh
+  duration: 87660h    # 3650d
+  renewBefore: 2160h # 90d
+  usages:
+  - client auth
+  secretName: mtls-herta-android
+  keystores:
+    pkcs12:
+      create: true
+      password: "underpass-excuse-mounted"
+      profile: LegacyDES
+  issuerRef:
+    name: mtls-buc-root-ca
+    kind: Issuer
+    group: cert-manager.io
+
