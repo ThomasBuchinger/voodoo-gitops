@@ -40,7 +40,10 @@ spec:
               name: "netalertx-devices"
               optional: true
         - name: API_TOKEN
-          value: t_yXbWpPzgN3AyRlAhOlVs
+          valueFrom:
+            secretKeyRef:
+              key: API_TOKEN
+              name: "netalertx-devices"
         ports:
         - name: http
           containerPort: 20211
@@ -64,9 +67,7 @@ spec:
           exec:
             command:
             - bash
-            - -c
-            - >-
-              curl -X POST --fail --silent http://127.0.0.1:20212/devices/import -H "Authorization: Bearer $API_TOKEN" --data-raw "\"content\"\: \"$(base64 /import/devices.csv)\""
+            - /import/import.sh
           initialDelaySeconds: 1
         livenessProbe:
           httpGet:
