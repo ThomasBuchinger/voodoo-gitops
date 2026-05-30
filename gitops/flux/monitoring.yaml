@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/monitpring/node-exporter
+  path: ./gitops/monitoring/node-exporter
   prune: true
   sourceRef:
     kind: GitRepository
