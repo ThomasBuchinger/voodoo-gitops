@@ -22,8 +22,8 @@ spec:
   targetNamespace: default
   chart:
     spec:
-      chart: node-exporter
-      version: '>=3.0.0'
+      chart: prometheus-node-exporter
+      version: '>=4.55.0'
       sourceRef:
         kind: HelmRepository
         name: node-exporter
