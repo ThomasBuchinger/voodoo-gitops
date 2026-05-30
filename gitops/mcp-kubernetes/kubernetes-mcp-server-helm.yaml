@@ -5,17 +5,6 @@ metadata:
   name: kubernetes-mcp-server
   namespace: flux-system
 spec:
-  interval: 24h
-  url: oci://ghcr.io/containers/charts
-
-
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: kubernetes-mcp-server
-  namespace: flux-system
-spec:
   type: "oci"
   interval: 24h
   url: oci://ghcr.io/containers/charts
