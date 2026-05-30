@@ -41,3 +41,22 @@ subjects:
   - kind: User
     name: flux
     apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: flux-web-config
+  namespace: flux-system
+type: Opaque
+stringData:
+  config.yaml: |
+    apiVersion: web.fluxcd.controlplane.io/v1
+    kind: Config
+    spec:
+      authentication:
+        type: Anonymous
+        anonymous:
+          username: flux
+          groups:
+            - flux-admin
