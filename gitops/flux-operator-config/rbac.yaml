@@ -60,3 +60,6 @@ stringData:
           username: flux
           groups:
             - flux-admin
+      userActions:
+        audit:
+        - "*"
