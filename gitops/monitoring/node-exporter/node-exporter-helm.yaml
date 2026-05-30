@@ -8,7 +8,7 @@ metadata:
 spec:
   type: oci
   interval: 24h
-  url: oci://ghcr.io/prometheus-community/charts/prometheus-node-exporter
+  url: oci://ghcr.io/prometheus-community/charts/
 
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
