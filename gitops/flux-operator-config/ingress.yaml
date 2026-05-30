@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   rules:
-    - host: flux.10.0.0.18.nip.io
+    - host: flux.10.0.0.16.nip.io
       http:
         paths:
           - path: /
