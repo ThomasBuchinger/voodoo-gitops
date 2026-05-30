@@ -43,7 +43,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flux-operator
+  name: flux-operator-mcp
   namespace: flux-system
 spec:
   rules:
@@ -62,7 +62,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-webui-ingress
+  name: allow-mcp-ingress
   namespace: flux-system
 spec:
   podSelector:
