@@ -11,7 +11,7 @@ spec:
 
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: OCIRepository
+kind: HelmRepository
 metadata:
   name: kubernetes-mcp-server
   namespace: flux-system
