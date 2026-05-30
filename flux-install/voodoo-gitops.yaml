@@ -26,5 +26,6 @@ spec:
   sync:
     kind: GitRepository
     url: "https://github.com/thomasbuchinger/voodoo-gitops"
-    ref: main
+    name: voodoo-gitops
+    ref: refs/heads/main
     path: "./gitops/flux"
