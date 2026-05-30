@@ -8,6 +8,19 @@ spec:
   interval: 24h
   url: oci://ghcr.io/containers/charts
 
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: kubernetes-mcp-server
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: oci://ghcr.io/containers/charts
+  ref:
+    tag: 0.1.0-dev.353772b
+
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -23,7 +36,7 @@ spec:
       chart: kubernetes-mcp-server
       version: '>=0.50.0'
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: kubernetes-mcp-server
         namespace: flux-system
       interval: 5m
@@ -31,7 +44,7 @@ spec:
     config:
       list_output: yaml
     ingress:
-      enabled: false
+      enabled: true
       host: k8s-mcp.10.0.0.16.nip.io
     image:
       version: v0.0.59

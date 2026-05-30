@@ -1,26 +1,31 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
 metadata:
-  name: voodoo-gitops
+  name: flux
   namespace: flux-system
+  annotations:
+    fluxcd.controlplane.io/reconcile: "enabled"
+    fluxcd.controlplane.io/reconcileEvery: "1h"
+    fluxcd.controlplane.io/reconcileArtifactEvery: "10m"
+    fluxcd.controlplane.io/reconcileTimeout: "5m"
 spec:
-  interval: 1h
-  url: https://github.com/thomasbuchinger/voodoo-gitops
-  ref:
-    branch: main
-
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-manifests
-  namespace: flux-system
-spec:
-  interval: 15m
-  path: ./gitops/flux
-  prune: true
-  sourceRef:
+  distribution:
+    version: "2.x"
+    registry: "ghcr.io/fluxcd"
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+  cluster:
+    type: kubernetes
+    multitenant: false
+    networkPolicy: true
+    domain: "cluster.local"
+  sync:
     kind: GitRepository
-    name: voodoo-gitops
-  targetNamespace: flux-system
+    url: "https://github.com/thomasbuchinger/voodoo-gitops"
+    ref:
+      branch: main
+    path: "./gitops/flux"
