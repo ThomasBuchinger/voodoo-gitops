@@ -30,13 +30,13 @@ spec:
     config:
       inCluster: true
       inClusterContextName: evergreen
-      unsafeUseServiceAccountToken: true
-      serviceaccountTokenPat: /var/run/secrets/kubernetes.io/serviceaccount/token
+      # unsafeUseServiceAccountToken: true
+      # serviceaccountTokenPat: /var/run/secrets/kubernetes.io/serviceaccount/token
       enableHelm: true
       pluginsDir: /headlamp/plugins
       watchPlugins: true
-      # extraArgs:
-      # - --unsafe-use-service-account=token=true
+      extraArgs:
+      - --unsafe-use-service-account=token=true
       # - --serviceaccount-token-path=/var/run/secrets/kubernetes.io/serviceaccount/token
     serviceAccount:
       create: true
