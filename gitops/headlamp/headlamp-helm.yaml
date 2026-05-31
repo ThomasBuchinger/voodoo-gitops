@@ -36,7 +36,7 @@ spec:
       pluginsDir: /headlamp/plugins
       watchPlugins: true
       extraArgs:
-      - --unsafe-use-service-account=token=true
+      - -unsafe-use-service-account-token=true
       # - --serviceaccount-token-path=/var/run/secrets/kubernetes.io/serviceaccount/token
     serviceAccount:
       create: true
