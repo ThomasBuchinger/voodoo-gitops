@@ -1,9 +1,11 @@
 {
   "packages": [
     "renovate@43.150.1",
-    "fluxcd@2.8.8"
+    "fluxcd@2.8.8",
+    "opencode@latest"
   ],
   "env": {
+    "OPENCODE_CONFIG": ".agents/opencode.json",
     "KUBECONFIG": "./kubeconfig"
   },
   "shell": {

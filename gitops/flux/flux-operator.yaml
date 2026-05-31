@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: node-exporter
+  name: flux-operator-config
   namespace: flux-system
 spec:
   interval: 15m0s
-  path: ./gitops/node-exporter
+  path: ./gitops/flux-operator-config
   prune: true
   sourceRef:
     kind: GitRepository

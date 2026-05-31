@@ -1,0 +1,65 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flux-web-admin
+  namespace: flux-system
+  labels:
+    app.kubernetes.io/part-of: flux-operator
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - fluxcd.controlplane.io
+      - source.toolkit.fluxcd.io
+      - kustomize.toolkit.fluxcd.io
+      - helm.toolkit.fluxcd.io
+      - image.toolkit.fluxcd.io
+      - notification.toolkit.fluxcd.io
+    resources: ["*"]
+    verbs: ["patch", "reconcile", "suspend", "resume", "download"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets"]
+    verbs: ["patch", "restart"]
+  - apiGroups: ["batch"]
+    resources: ["cronjobs", "jobs"]
+    verbs: ["create", "restart"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flux-web-admin-binding
+  namespace: flux-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flux-web-admin
+subjects:
+  - kind: User
+    name: flux
+    apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: flux-web-config
+  namespace: flux-system
+type: Opaque
+stringData:
+  config.yaml: |
+    apiVersion: web.fluxcd.controlplane.io/v1
+    kind: Config
+    spec:
+      authentication:
+        type: Anonymous
+        anonymous:
+          username: flux
+          groups:
+            - flux-admin
+      userActions:
+        audit:
+        - "*"

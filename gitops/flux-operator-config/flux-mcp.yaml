@@ -1,0 +1,80 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: flux-operator-mcp
+  namespace: flux-system
+spec:
+  inputs:
+    - readonly: true
+      accessFrom: flux-system
+  resources:
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: OCIRepository
+      metadata:
+        name: << inputs.provider.name >>
+        namespace: << inputs.provider.namespace >>
+      spec:
+        interval: 60m
+        url: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator-mcp
+        layerSelector:
+          mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+          operation: copy
+        ref:
+          semver: "*"
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: << inputs.provider.name >>
+        namespace: << inputs.provider.namespace >>
+      spec:
+        serviceAccountName: flux-operator
+        chartRef:
+          kind: OCIRepository
+          name: << inputs.provider.name >>
+        interval: 30m
+        values:
+          transport: http # defaults to the legacy 'sse' transport
+          readonly: << inputs.readonly >>
+          networkPolicy:
+            ingress:
+              namespaces: [<< inputs.accessFrom >>]
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flux-operator-mcp
+  namespace: flux-system
+spec:
+  rules:
+  - host: flux-mcp.10.0.0.16.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: flux-operator-mcp
+            port:
+              number: 9090
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-mcp-ingress
+  namespace: flux-system
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: flux-operator-mcp
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: TCP
+      port: 9090

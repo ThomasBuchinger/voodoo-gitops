@@ -5,6 +5,7 @@ metadata:
   name: kubernetes-mcp-server
   namespace: flux-system
 spec:
+  type: "oci"
   interval: 24h
   url: oci://ghcr.io/containers/charts
 
@@ -21,7 +22,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-mcp-server
-      version: '>=0.50.0'
+      version: '>=0.1.0'
       sourceRef:
         kind: HelmRepository
         name: kubernetes-mcp-server
@@ -31,11 +32,11 @@ spec:
     config:
       list_output: yaml
     ingress:
-      enabled: false
+      enabled: true
       host: k8s-mcp.10.0.0.16.nip.io
     image:
       version: v0.0.59
-    rbac: 
+    rbac:
       extraClusterRoles:
       - name: read-only
         rules:
