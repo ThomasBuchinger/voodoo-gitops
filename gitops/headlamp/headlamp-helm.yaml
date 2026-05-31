@@ -58,10 +58,7 @@ spec:
       enabled: true
       ingressClassName: ""
       hosts:
-        - host: headlamp.10.0.0.16.nip.io
-          paths:
-            - path: /
-              pathType: Prefix
+      - host: headlamp.10.0.0.16.nip.io
     # extraManifests:
     #   - |
     #     apiVersion: rbac.authorization.k8s.io/v1
