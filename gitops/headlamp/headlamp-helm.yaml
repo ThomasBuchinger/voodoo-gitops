@@ -29,7 +29,9 @@ spec:
   values:
     config:
       inCluster: true
+      inclusterContextName: evergreen
       unsafeUseServiceAccountToken: true
+      enableHelm: true
       pluginsDir: /headlamp/plugins
       watchPlugins: true
     serviceAccount:
