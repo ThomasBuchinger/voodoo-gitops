@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: headlamp
@@ -21,17 +21,25 @@ spec:
   chart:
     spec:
       chart: headlamp
-      version: '>=1.0.0'
+      version: '>=0.42.0'
       sourceRef:
         kind: HelmRepository
         name: headlamp
         namespace: flux-system
   values:
+    image:
+      tag: nightly
     config:
       inCluster: true
-      unsafeUseServiceAccountToken: true
+      inClusterContextName: evergreen
+      # unsafeUseServiceAccountToken: true
+      # serviceaccountTokenPat: /var/run/secrets/kubernetes.io/serviceaccount/token
+      enableHelm: true
       pluginsDir: /headlamp/plugins
       watchPlugins: true
+      extraArgs:
+      - -unsafe-use-service-account-token
+      # - --serviceaccount-token-path=/var/run/secrets/kubernetes.io/serviceaccount/token
     serviceAccount:
       create: true
       name: headlamp
@@ -44,11 +52,15 @@ spec:
       configContent: |
         plugins:
           - name: cert-manager
-            source: https://artifacthub.io/packages/headlamp/headlamp-k8s/cert-manager
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
             version: "0.1.0"
           - name: flux
-            source: https://artifacthub.io/packages/headlamp/headlamp-k8s/flux
-            version: "0.6.0"
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
+            version: 0.6.0
+          # Supports only ollama /api/chat, not openai compatible
+          # - name: ai-assistant
+          #   source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
+          #   version: 0.2.0-alpha
         installOptions:
           parallel: true
           maxConcurrent: 2
@@ -58,10 +70,10 @@ spec:
       enabled: true
       ingressClassName: ""
       hosts:
-        - host: headlamp.10.0.0.16.nip.io
-          paths:
-            - path: /
-              pathType: Prefix
+      - host: headlamp.10.0.0.16.nip.io
+        paths:
+        - path: /
+          type: Prefix
     # extraManifests:
     #   - |
     #     apiVersion: rbac.authorization.k8s.io/v1
