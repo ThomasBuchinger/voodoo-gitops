@@ -27,6 +27,8 @@ spec:
         name: headlamp
         namespace: flux-system
   values:
+    image:
+      tag: nightly
     config:
       inCluster: true
       inClusterContextName: evergreen
