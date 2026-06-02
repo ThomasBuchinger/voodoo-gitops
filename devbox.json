@@ -2,7 +2,7 @@
   "packages": [
     "renovate@43.150.1",
     "fluxcd@2.8.8",
-    "opencode@latest"
+    "opencode@1.15.11"
   ],
   "env": {
     "OPENCODE_CONFIG": ".agents/opencode.json",
