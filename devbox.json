@@ -1,6 +1,6 @@
 {
   "packages": [
-    "renovate@43.150.1",
+    "renovate@43.214.1",
     "fluxcd@2.8.8",
     "opencode@1.17.7"
   ],
