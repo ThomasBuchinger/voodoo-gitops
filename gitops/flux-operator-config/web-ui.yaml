@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: manager
-        image: ghcr.io/controlplaneio-fluxcd/flux-operator:v0.52.0
+        image: ghcr.io/controlplaneio-fluxcd/flux-operator:v0.53.0
         imagePullPolicy: IfNotPresent
         args:
         - --web-server-only
