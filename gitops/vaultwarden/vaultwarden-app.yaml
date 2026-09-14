@@ -36,7 +36,7 @@ spec:
     spec:
       initContainers:
       - name: litestream-restore
-        image: litestream/litestream:0.5.11
+        image: litestream/litestream:0.5.17
         args:
         - 'restore'
         - '-if-db-not-exists'
@@ -71,7 +71,7 @@ spec:
 
       containers:
       - name: vaultwarden
-        image: ghcr.io/dani-garcia/vaultwarden:1.36.0
+        image: ghcr.io/dani-garcia/vaultwarden:1.37.3
         envFrom:
         - configMapRef:
             name: vaultwarden-config
@@ -90,7 +90,7 @@ spec:
 
       # Litestream
       - name: litestream
-        image: litestream/litestream:0.5.11
+        image: litestream/litestream:0.5.17
         args:
         - 'replicate'
         volumeMounts:
