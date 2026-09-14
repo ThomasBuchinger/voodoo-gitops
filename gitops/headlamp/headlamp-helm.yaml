@@ -53,14 +53,13 @@ spec:
         plugins:
           - name: cert-manager
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
-            version: "0.1.0"
+            version: "0.1.1"
           - name: flux
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
-            version: 0.6.0
-          # Supports only ollama /api/chat, not openai compatible
-          # - name: ai-assistant
-          #   source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-          #   version: 0.2.0-alpha
+            version: 0.7.0
+          - name: ai-assistant
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
+            version: 0.4.0-alpha
         installOptions:
           parallel: true
           maxConcurrent: 2
