@@ -58,7 +58,7 @@ spec:
     - AT
   emailAddresses:
   - buc@buc.sh
-  duration: 8766h    # 365d
+  duration: 87660h    # 3650d
   renewBefore: 2160h # 90d
   usages:
   - client auth
