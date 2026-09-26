@@ -21,8 +21,8 @@ spec:
           - name: TUNNEL_TOKEN
             valueFrom:
               secretKeyRef:
-                name: cloudflared
-                key: token
+                name: cloudflare-secrets
+                key: cf_tunnel_token
         args:
           - tunnel
           - --no-autoupdate
